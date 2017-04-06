@@ -25,10 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    connect_and_status.cpp
+    connect_and_status.cpp \
+    sliderbox.cpp
 
 HEADERS  += mainwindow.h \
-    connect_and_status.h
+    connect_and_status.h \
+    sliderbox.h
 
 FORMS    += mainwindow.ui \
     connect_and_status.ui
