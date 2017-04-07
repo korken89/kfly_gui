@@ -2,21 +2,19 @@
 #define SLIDERBOX_H
 
 #include <QWidget>
-#include <QAbstractButton>
+#include <QPushButton>
 #include <QPainter>
 #include <QMouseEvent>
 #include <QCursor>
 #include <QObject>
 
-class sliderbox : public QAbstractButton
+class sliderbox : public QPushButton
 {
   Q_OBJECT
 
 public:
   sliderbox(QWidget *parent);
 
-  bool isChecked() const;
-  void setState(bool value);
   void setDisabled(bool value);
   bool isDisabled() const;
 
@@ -32,8 +30,6 @@ protected:
 private:
   qint16 _height;
   qint16 _thumbsize;
-  bool _disabled;
-  bool _state;
   QColor _brush;
   QColor _thumb;
   QColor _thumbborder;

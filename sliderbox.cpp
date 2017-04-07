@@ -1,36 +1,13 @@
 #include "sliderbox.h"
 
-sliderbox::sliderbox(QWidget *parent) : QAbstractButton(parent),
+sliderbox::sliderbox(QWidget *parent) : QPushButton(parent),
                                         _height(10),
                                         _thumbsize(5),
-                                        _disabled(false),
-                                        _state(false),
                                         _brush("#009688"),
                                         _thumb("#E0E0E0"),
                                         _thumbborder("#888888")
 {
     setCheckable(true);
-}
-
-bool sliderbox::isChecked() const
-{
-  return _state;
-}
-
-void sliderbox::setState(bool value)
-{
-  _state = value;
-  repaint();
-}
-
-void sliderbox::setDisabled(bool value)
-{
-  _disabled = value;
-}
-
-bool sliderbox::isDisabled() const
-{
-  return _disabled;
 }
 
 void sliderbox::paintEvent(QPaintEvent*)
@@ -42,10 +19,10 @@ void sliderbox::paintEvent(QPaintEvent*)
   QPainterPath _primary;
   qint16 _x;
 
-  if (_state) {
+  if (isChecked()) {
       painter.setBrush(_brush);
       painter.setOpacity(0.500);
-      _x = width() - _height - 2*_thumbsize;
+      _x = width() - _height - 2 * _thumbsize;
   }
   else
   {
@@ -66,8 +43,8 @@ void sliderbox::paintEvent(QPaintEvent*)
                             height(), height()));
   painter.setBrush(_thumb);
 
-  painter.drawEllipse(QRectF(_x - (_height / 2)+1, 1,
-                             height()-2, height()-2));
+  painter.drawEllipse(QRectF(_x - (_height / 2) + 1, 1,
+                             height() - 2, height() - 2));
 
 }
 
@@ -83,7 +60,7 @@ QSize sliderbox::minimumSizeHint() const
 
 void sliderbox::mousePressEvent(QMouseEvent *e)
 {
-  if (!_disabled)
+  if (isEnabled())
   {
     if (e->buttons() & Qt::LeftButton)
     {
@@ -98,12 +75,12 @@ void sliderbox::mousePressEvent(QMouseEvent *e)
 
 void sliderbox::mouseReleaseEvent(QMouseEvent *e)
 {
-    if (!_disabled)
+    if (isEnabled())
     {
         if (e->type() == QMouseEvent::MouseButtonRelease && e->button() == Qt::LeftButton)
         {
             e->accept();
-            _state = !_state;
+            setChecked(!isChecked());
             emit toggled();
         }
         else
@@ -121,7 +98,7 @@ void sliderbox::resizeEvent(QResizeEvent *e)
 
 void sliderbox::enterEvent(QEvent *)
 {
-  if (_disabled)
+  if (!isEnabled())
     setCursor(Qt::ArrowCursor);
   else
     setCursor(Qt::PointingHandCursor);
