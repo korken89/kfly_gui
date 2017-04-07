@@ -33,9 +33,6 @@ private:
   QColor _brush;
   QColor _thumb;
   QColor _thumbborder;
-
-signals:
-  void toggled();
 };
 
 #endif // SLIDERBOX_H
