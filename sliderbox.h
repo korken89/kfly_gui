@@ -2,14 +2,44 @@
 #define SLIDERBOX_H
 
 #include <QWidget>
-#include <QCheckBox>
+#include <QAbstractButton>
 #include <QPainter>
+#include <QMouseEvent>
+#include <QCursor>
+#include <QObject>
 
-class sliderbox : public QCheckBox
+class sliderbox : public QAbstractButton
 {
+  Q_OBJECT
+
 public:
-    sliderbox(QWidget *parent);
-    void paintEvent(QPaintEvent *event) override;
+  sliderbox(QWidget *parent);
+
+  bool isChecked() const;
+  void setState(bool value);
+  void setDisabled(bool value);
+  bool isDisabled() const;
+
+protected:
+  void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+  QSize sizeHint() const Q_DECL_OVERRIDE;
+  QSize minimumSizeHint() const Q_DECL_OVERRIDE;
+  void mousePressEvent(QMouseEvent *e) Q_DECL_OVERRIDE;
+  void mouseReleaseEvent(QMouseEvent *e) Q_DECL_OVERRIDE;
+  void resizeEvent(QResizeEvent *e) Q_DECL_OVERRIDE;
+  void enterEvent(QEvent *) Q_DECL_OVERRIDE;
+
+private:
+  qint16 _height;
+  qint16 _thumbsize;
+  bool _disabled;
+  bool _state;
+  QColor _brush;
+  QColor _thumb;
+  QColor _thumbborder;
+
+signals:
+  void toggled();
 };
 
 #endif // SLIDERBOX_H

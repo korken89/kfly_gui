@@ -32,5 +32,6 @@ HEADERS  += mainwindow.h \
     connect_and_status.h \
     sliderbox.h
 
+
 FORMS    += mainwindow.ui \
     connect_and_status.ui
