@@ -67,6 +67,9 @@
       </widget>
      </widget>
     </item>
+    <item>
+     <widget class="ui_connect" name="widget" native="true"/>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -82,6 +85,14 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>ui_connect</class>
+   <extends>QWidget</extends>
+   <header>ui_connect.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
