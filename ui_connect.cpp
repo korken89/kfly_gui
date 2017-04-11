@@ -1,14 +1,13 @@
-#include "connect_and_status.h"
-#include "ui_connect_and_status.h"
-#include <QDebug>
-#include <QtSerialPort/QSerialPort>
-#include <QtSerialPort/QSerialPortInfo>
+#include "ui_connect.h"
+#include "ui_ui_connect.h"
 
-connect_and_status::connect_and_status(QWidget *parent) :
+ui_connect::ui_connect(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::connect_and_status)
+    ui(new Ui::ui_connect)
 {
     ui->setupUi(this);
+
+    /*
     ui->boxBaud->addItem("9600");
     ui->boxBaud->addItem("19200");
     ui->boxBaud->addItem("38400");
@@ -25,10 +24,10 @@ connect_and_status::connect_and_status(QWidget *parent) :
                  << port.hasProductIdentifier() << port.hasVendorIdentifier() << port.isBusy();
 
         ui->boxPort->addItem(port.portName());
-    }
+    }*/
 }
 
-connect_and_status::~connect_and_status()
+ui_connect::~ui_connect()
 {
     delete ui;
 }
