@@ -1,0 +1,4 @@
+[submodule "kfly_comm"]
+	path = kfly_comm
+	url = git@github.com:korken89/kfly_comm.git
+	branch = master
