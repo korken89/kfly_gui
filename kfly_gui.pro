@@ -30,11 +30,13 @@ SOURCES += main.cpp \
            $$PWD/kfly_comm/src/kfly_comm.cpp \
            mainwindow.cpp \
            sliderbox.cpp \
-           ui_connect.cpp
+           ui_connect.cpp \
+    communication.cpp
 
 HEADERS  += mainwindow.h \
             sliderbox.h \
-            ui_connect.h
+            ui_connect.h \
+    communication.h
 
 
 FORMS    += mainwindow.ui \

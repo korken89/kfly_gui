@@ -14,10 +14,6 @@ class ui_connect : public QWidget
 {
     Q_OBJECT
 
-    QSerialPort _serialport;
-
-    kfly_comm::codec communication;
-
 public:
     explicit ui_connect(QWidget *parent = 0);
     ~ui_connect();
