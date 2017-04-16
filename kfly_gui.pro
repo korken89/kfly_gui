@@ -10,6 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = kfly_gui
 TEMPLATE = app
+CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
@@ -24,14 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    sliderbox.cpp \
-    ui_connect.cpp
+           mainwindow.cpp \
+           sliderbox.cpp \
+           ui_connect.cpp
 
 HEADERS  += mainwindow.h \
-    sliderbox.h \
-    ui_connect.h
+            sliderbox.h \
+            ui_connect.h
 
 
 FORMS    += mainwindow.ui \
-    ui_connect.ui
+            ui_connect.ui
