@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>915</width>
-    <height>590</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>KFly Config</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -20,13 +20,10 @@
     </item>
     <item>
      <widget class="QTabWidget" name="tabWidget">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="tab">
+      <widget class="ui_sys_info" name="tabStatus">
        <attribute name="title">
         <string>Status</string>
        </attribute>
@@ -80,7 +77,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>915</width>
+     <width>800</width>
      <height>21</height>
     </rect>
    </property>
@@ -93,6 +90,12 @@
    <class>ui_connect</class>
    <extends>QWidget</extends>
    <header>ui_connect.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ui_sys_info</class>
+   <extends>QWidget</extends>
+   <header>ui_sys_info.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

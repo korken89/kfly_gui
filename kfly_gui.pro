@@ -31,13 +31,16 @@ SOURCES += main.cpp \
            mainwindow.cpp \
            sliderbox.cpp \
            ui_connect.cpp \
-    communication.cpp
+    communication.cpp \
+    ui_sys_info.cpp
 
 HEADERS  += mainwindow.h \
             sliderbox.h \
             ui_connect.h \
-    communication.h
+    communication.h \
+    ui_sys_info.h
 
 
 FORMS    += mainwindow.ui \
-            ui_connect.ui
+            ui_connect.ui \
+    ui_sys_info.ui
