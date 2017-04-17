@@ -16,23 +16,27 @@ private:
 
     QSerialPort _serialport;
 
-    kfly_comm::codec _comm;
+    kfly_comm::codec _kfly_comm;
+
+    std::mutex _serialmutex;
 
 public:
     explicit communication(QObject *parent = 0);
     ~communication();
 
-    void openPort(QString portname, int baudrate);
+    bool openPort(const QString& portname, int baudrate);
     void closePort();
 
     void send(const std::vector<uint8_t>& message);
 
-
-private:
-
+    /* Functions registered to the KFly interface. */
+    static void regSystemInformation(kfly_comm::datagrams::SystemInformation msg);
 
 private slots:
   void parseSerialData();
+
+signals:
+  void sigSystemInformation(kfly_comm::datagrams::SystemInformation msg);
 
 };
 

@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="ui_connect" name="widget" native="true"/>
+     <widget class="ui_connect" name="widConnect" native="true"/>
     </item>
     <item>
      <widget class="QTabWidget" name="tabWidget">

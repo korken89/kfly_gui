@@ -33,3 +33,34 @@ ui_connect::~ui_connect()
 {
     delete ui;
 }
+
+
+void ui_connect::register_communication(communication *com)
+{
+    _communication = com;
+}
+
+void ui_connect::on_buttonConnect_clicked()
+{
+    if (_communication == nullptr)
+        return;
+
+    if (ui->buttonConnect->text() == "Connect")
+    {
+        auto port = ui->boxPort->itemText(ui->boxPort->currentIndex());
+        auto baud = ui->boxBaud->itemText(ui->boxBaud->currentIndex());
+
+        if (_communication->openPort(port, baud.toInt()))
+        {
+            ui->buttonConnect->setText("Disconnect");
+            qDebug() << "Opening port " << port << ", with speed " << baud.trimmed() << " baud";
+        }
+        else
+            qDebug() << "Error connecting to port " << port << ", with speed " << baud.trimmed() << " baud";
+    }
+    else
+    {
+        _communication->closePort();
+        ui->buttonConnect->setText("Connect");
+    }
+}

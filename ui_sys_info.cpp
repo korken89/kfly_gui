@@ -12,3 +12,16 @@ ui_sys_info::~ui_sys_info()
 {
     delete ui;
 }
+
+void ui_sys_info::register_communication(communication *com)
+{
+    _communication = com;
+
+    connect(com, &communication::sigSystemInformation,
+            this, &ui_sys_info::slotSystemInformation);
+}
+
+void ui_sys_info::slotSystemInformation(kfly_comm::datagrams::SystemInformation msg)
+{
+    (void)msg;
+}
