@@ -9,7 +9,8 @@ communication::communication(QObject *parent)
   _kfly_comm.register_callback(this, &communication::regPing);
   _kfly_comm.register_callback(this, &communication::regSystemInformation);
 
-  connect(&_serialport, &QSerialPort::readyRead, this, &communication::parseSerialData);
+  connect(&_serialport, &QSerialPort::readyRead,
+          this, &communication::parseSerialData);
 
 }
 
@@ -22,18 +23,21 @@ bool communication::openPort(const QString& portname, int baudrate)
 {
     closePort();
 
-    std::lock_guard<std::mutex> lock(_serialmutex);
-
     if (portname.trimmed() == "" || baudrate < 9600)
     {
-        qDebug() << "Failed to open port " << portname << ", with speed " << baudrate << " baud. Invalid arguments.";
+        qDebug() << "Failed to open port " << portname << ", with speed " <<
+                    baudrate << " baud. Invalid arguments.";
         return false;
     }
+    else
+    {
+        std::lock_guard<std::mutex> lock(_serialmutex);
 
-    _serialport.setPortName(portname);
-    _serialport.setBaudRate(baudrate);
+        _serialport.setPortName(portname);
+        _serialport.setBaudRate(baudrate);
 
-    return _serialport.open(QIODevice::ReadWrite);
+        return _serialport.open(QIODevice::ReadWrite);
+    }
 }
 
 void communication::closePort()
@@ -52,11 +56,13 @@ void communication::send(const std::vector<uint8_t>& buf)
 
     if (_serialport.isOpen())
     {
-        QByteArray data = QByteArray(reinterpret_cast<const char*>(buf.data()), buf.size());
+        QByteArray data = QByteArray(reinterpret_cast<const char*>(buf.data()),
+                                     buf.size());
         auto wr = _serialport.write(data);
 
         if (wr != static_cast<decltype(wr)>(buf.size()))
-            qDebug() << "Error occured when writing data to serial port, size: " << buf.size() << ", code: " << wr;
+            qDebug() << "Error occured when writing data to serial port, size: "
+                     << buf.size() << ", code: " << wr;
 
         _serialport.waitForBytesWritten(100);
     }
@@ -76,8 +82,9 @@ void communication::parseSerialData()
     for (auto b : inByteArray)
     {
         _kfly_comm.parse(b);
-        QString valueInHex = QString("0x%1").arg(static_cast<unsigned int>(b) & 0xff, 0, 16);
-        qDebug() << valueInHex;
+
+        qDebug() << QString("0x%1").arg(static_cast<unsigned int>(b) & 0xff,
+                                        0, 16);
     }
 }
 
@@ -87,7 +94,8 @@ void communication::regPing(kfly_comm::datagrams::Ping)
     emit sigPing();
 }
 
-void communication::regSystemInformation(kfly_comm::datagrams::SystemInformation msg)
+void communication::regSystemInformation(
+        kfly_comm::datagrams::SystemInformation msg)
 {
     qDebug() << "SysInfo SysInfo SysInfo!!!";
     emit sigSystemInformation(msg);
