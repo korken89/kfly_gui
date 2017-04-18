@@ -30,12 +30,14 @@ public:
     void send(const std::vector<uint8_t>& message);
 
     /* Functions registered to the KFly interface. */
-    static void regSystemInformation(kfly_comm::datagrams::SystemInformation msg);
+    void regPing(kfly_comm::datagrams::Ping);
+    void regSystemInformation(kfly_comm::datagrams::SystemInformation msg);
 
 private slots:
   void parseSerialData();
 
 signals:
+  void sigPing(void);
   void sigSystemInformation(kfly_comm::datagrams::SystemInformation msg);
 
 };

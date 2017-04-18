@@ -54,6 +54,9 @@ void ui_connect::on_buttonConnect_clicked()
         {
             ui->buttonConnect->setText("Disconnect");
             qDebug() << "Opening port " << port << ", with speed " << baud.trimmed() << " baud";
+
+            auto data = kfly_comm::codec::generate_command(kfly_comm::commands::Ping);
+            _communication->send(data);
         }
         else
             qDebug() << "Error connecting to port " << port << ", with speed " << baud.trimmed() << " baud";

@@ -83,7 +83,11 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="editUniqueID"/>
+    <widget class="QLineEdit" name="editUniqueID">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer_6">
@@ -112,7 +116,11 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="editVersion"/>
+    <widget class="QLineEdit" name="editVersion">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer_2">

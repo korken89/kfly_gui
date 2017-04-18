@@ -6,9 +6,11 @@
 communication::communication(QObject *parent)
     : QObject(parent)
 {
-  _kfly_comm.register_callback(regSystemInformation);
+  _kfly_comm.register_callback(this, &communication::regPing);
+  _kfly_comm.register_callback(this, &communication::regSystemInformation);
 
   connect(&_serialport, &QSerialPort::readyRead, this, &communication::parseSerialData);
+
 }
 
 communication::~communication()
@@ -50,8 +52,8 @@ void communication::send(const std::vector<uint8_t>& buf)
 
     if (_serialport.isOpen())
     {
-        //QByteArray* img = new QByteArray(reinterpret_cast<const char*>(buf.data()), buf.size());
-        auto wr = _serialport.write(reinterpret_cast<const char*>(buf.data()), buf.size());
+        QByteArray data = QByteArray(reinterpret_cast<const char*>(buf.data()), buf.size());
+        auto wr = _serialport.write(data);
 
         if (wr != static_cast<decltype(wr)>(buf.size()))
             qDebug() << "Error occured when writing data to serial port, size: " << buf.size() << ", code: " << wr;
@@ -69,15 +71,24 @@ void communication::parseSerialData()
         inByteArray = _serialport.readAll();
     }
 
+    qDebug() << "Data received!";
+
     for (auto b : inByteArray)
     {
-        QString valueInHex = QString("%1").arg(static_cast<int>(b), 0, 16);
-        qDebug() << "0x" << valueInHex;
+        _kfly_comm.parse(b);
+        QString valueInHex = QString("0x%1").arg(static_cast<unsigned int>(b) & 0xff, 0, 16);
+        qDebug() << valueInHex;
     }
 }
 
+void communication::regPing(kfly_comm::datagrams::Ping)
+{
+    qDebug() << "Ping ping ping!!!";
+    emit sigPing();
+}
 
 void communication::regSystemInformation(kfly_comm::datagrams::SystemInformation msg)
 {
-    emit regSystemInformation(msg);
+    qDebug() << "SysInfo SysInfo SysInfo!!!";
+    emit sigSystemInformation(msg);
 }
