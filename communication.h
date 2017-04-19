@@ -34,11 +34,13 @@ public:
     void regSystemInformation(kfly_comm::datagrams::SystemInformation msg);
 
 private slots:
-  void parseSerialData();
+    void parseSerialData();
+    void handleSerialError(QSerialPort::SerialPortError error);
 
 signals:
-  void sigPing(void);
-  void sigSystemInformation(kfly_comm::datagrams::SystemInformation msg);
+    void sigConnectionError(void);
+    void sigPing(void);
+    void sigSystemInformation(kfly_comm::datagrams::SystemInformation msg);
 
 };
 

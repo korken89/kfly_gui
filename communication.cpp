@@ -1,16 +1,19 @@
 #include "communication.h"
 
-#include <iomanip>
 #include <thread>
 
 communication::communication(QObject *parent)
     : QObject(parent)
 {
+  /* KFly datagram registrations */
   _kfly_comm.register_callback(this, &communication::regPing);
   _kfly_comm.register_callback(this, &communication::regSystemInformation);
 
   connect(&_serialport, &QSerialPort::readyRead,
           this, &communication::parseSerialData);
+
+  connect(&_serialport, &QSerialPort::errorOccurred,
+          this, &communication::handleSerialError);
 
 }
 
@@ -77,14 +80,23 @@ void communication::parseSerialData()
         inByteArray = _serialport.readAll();
     }
 
-    qDebug() << "Data received!";
-
     for (auto b : inByteArray)
     {
         _kfly_comm.parse(b);
 
-        qDebug() << QString("0x%1").arg(static_cast<unsigned int>(b) & 0xff,
-                                        0, 16);
+        //qDebug() << QString("0x%1").arg(static_cast<unsigned int>(b) & 0xff,
+        //                                0, 16);
+    }
+}
+
+void communication::handleSerialError(QSerialPort::SerialPortError error)
+{
+    qDebug() << "Serial error: " << _serialport.errorString();
+
+    if (error != QSerialPort::NoError)
+    {
+        emit sigConnectionError();
+        closePort();
     }
 }
 

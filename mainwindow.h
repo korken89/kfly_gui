@@ -20,6 +20,10 @@ public:
 private:
     Ui::MainWindow *ui;
     communication *comms;
+
+public slots:
+    void heartbeat();
+    void connection_lost();
 };
 
 #endif // MAINWINDOW_H

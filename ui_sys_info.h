@@ -23,7 +23,9 @@ private:
     communication *_communication;
 
 public slots:
-    void slotSystemInformation(kfly_comm::datagrams::SystemInformation msg);
+    void heartbeat();
+    void system_information(kfly_comm::datagrams::SystemInformation msg);
+
 
 };
 

@@ -21,12 +21,28 @@ public:
     ~ui_connect();
     void register_communication(communication *com);
 
-private slots:
-    void on_buttonConnect_clicked();
-
 private:
     Ui::ui_connect *ui;
     communication *_communication;
+
+    void connect_port();
+    void disconnect_port();
+
+    QTimer ping_timer;
+    int ping_counter = 0;
+    void ping_timer_event();
+
+signals:
+    void heartbeat();
+    void connection_lost();
+
+public slots:
+    void ping_received();
+    void connection_error();
+
+private slots:
+    void on_buttonConnect_clicked();
+
 
 };
 
