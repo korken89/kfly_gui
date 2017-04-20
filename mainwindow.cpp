@@ -11,7 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->widConnect->register_communication(comms);
     ui->tabStatus->register_communication(comms);
+
     ui->tabWidget->setEnabled(false);
+    ui->buttonSave->setEnabled(false);
 
     connect(ui->widConnect, &ui_connect::heartbeat,
             this, &MainWindow::heartbeat);
@@ -33,10 +35,27 @@ void MainWindow::heartbeat()
 {
     //qDebug() << "Got heartbeat!!!";
     ui->tabWidget->setEnabled(true);
+    ui->buttonSave->setEnabled(true);
 }
 
 void MainWindow::connection_lost()
 {
     qDebug() << "Got connection lost!!!";
     ui->tabWidget->setEnabled(false);
+    ui->buttonSave->setEnabled(false);
+}
+
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    event->ignore();
+
+    //if (QMessageBox::Yes == QMessageBox::question(this,
+    //                                              "Close Confirmation",
+    //                                              "Exit without saving changes?",
+    //                                              QMessageBox::Yes |
+    //                                              QMessageBox::No))
+    //{
+        event->accept();
+    //}
 }
