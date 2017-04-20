@@ -7,7 +7,8 @@ communication::communication(QObject *parent)
 {
   /* KFly datagram registrations */
   _kfly_comm.register_callback(this, &communication::regPing);
-  _kfly_comm.register_callback(this, &communication::regSystemInformation);
+  _kfly_comm.register_callback(this, &communication::regSystemStrings);
+  _kfly_comm.register_callback(this, &communication::regSystemStatus);
 
   connect(&_serialport, &QSerialPort::readyRead,
           this, &communication::parseSerialData);
@@ -67,7 +68,6 @@ void communication::send(const std::vector<uint8_t>& buf)
             qDebug() << "Error occured when writing data to serial port, size: "
                      << buf.size() << ", code: " << wr;
 
-        _serialport.waitForBytesWritten(100);
     }
 }
 
@@ -102,13 +102,17 @@ void communication::handleSerialError(QSerialPort::SerialPortError error)
 
 void communication::regPing(kfly_comm::datagrams::Ping)
 {
-    qDebug() << "Ping ping ping!!!";
     emit sigPing();
 }
 
-void communication::regSystemInformation(
-        kfly_comm::datagrams::SystemInformation msg)
+void communication::regSystemStrings(
+        kfly_comm::datagrams::SystemStrings msg)
 {
-    qDebug() << "SysInfo SysInfo SysInfo!!!";
-    emit sigSystemInformation(msg);
+    emit sigSystemStrings(msg);
+}
+
+void communication::regSystemStatus(
+        kfly_comm::datagrams::SystemStatus msg)
+{
+    emit sigSystemStatus(msg);
 }

@@ -31,7 +31,8 @@ public:
 
     /* Functions registered to the KFly interface. */
     void regPing(kfly_comm::datagrams::Ping);
-    void regSystemInformation(kfly_comm::datagrams::SystemInformation msg);
+    void regSystemStrings(kfly_comm::datagrams::SystemStrings msg);
+    void regSystemStatus(kfly_comm::datagrams::SystemStatus msg);
 
 private slots:
     void parseSerialData();
@@ -40,7 +41,8 @@ private slots:
 signals:
     void sigConnectionError(void);
     void sigPing(void);
-    void sigSystemInformation(kfly_comm::datagrams::SystemInformation msg);
+    void sigSystemStrings(kfly_comm::datagrams::SystemStrings msg);
+    void sigSystemStatus(kfly_comm::datagrams::SystemStatus msg);
 
 };
 

@@ -145,7 +145,7 @@
        <item>
         <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>Flight Time</string>
+          <string>Flight Time (s)</string>
          </property>
          <property name="indent">
           <number>5</number>
@@ -162,7 +162,7 @@
        <item>
         <widget class="QLabel" name="label_6">
          <property name="text">
-          <string>Up Time</string>
+          <string>Up Time (s)</string>
          </property>
          <property name="indent">
           <number>5</number>
@@ -179,7 +179,7 @@
        <item>
         <widget class="QLabel" name="label_7">
          <property name="text">
-          <string>Battery Voltage</string>
+          <string>Battery Voltage (V)</string>
          </property>
          <property name="indent">
           <number>5</number>
@@ -207,11 +207,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QProgressBar" name="progressCPU">
-         <property name="value">
-          <number>0</number>
-         </property>
-        </widget>
+        <widget class="QProgressBar" name="progressCPU"/>
        </item>
       </layout>
      </item>
