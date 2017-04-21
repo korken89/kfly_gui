@@ -32,15 +32,21 @@ SOURCES += main.cpp \
            sliderbox.cpp \
            ui_connect.cpp \
     communication.cpp \
-    ui_sys_info.cpp
+    ui_sys_info.cpp \
+    ui_rc_input.cpp \
+    ui_rc_input_channel.cpp
 
 HEADERS  += mainwindow.h \
             sliderbox.h \
             ui_connect.h \
     communication.h \
-    ui_sys_info.h
+    ui_sys_info.h \
+    ui_rc_input.h \
+    ui_rc_input_channel.h
 
 
 FORMS    += mainwindow.ui \
             ui_connect.ui \
-    ui_sys_info.ui
+    ui_sys_info.ui \
+    ui_rc_input.ui \
+    ui_rc_input_channel.ui

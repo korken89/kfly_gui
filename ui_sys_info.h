@@ -21,11 +21,9 @@ public:
 private:
     Ui::ui_sys_info *ui;
     communication *_communication;
-    QTimer status_timer;
 
 public slots:
     void heartbeat();
-    void status_timer_timeout();
     void system_strings(kfly_comm::datagrams::SystemStrings msg);
     void system_status(kfly_comm::datagrams::SystemStatus msg);
 

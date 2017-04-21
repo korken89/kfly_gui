@@ -46,6 +46,8 @@ bool communication::openPort(const QString& portname, int baudrate)
 
 void communication::closePort()
 {
+    unsubscribe_all();
+
     std::lock_guard<std::mutex> lock(_serialmutex);
 
     if (_serialport.isOpen())
@@ -68,7 +70,46 @@ void communication::send(const std::vector<uint8_t>& buf)
             qDebug() << "Error occured when writing data to serial port, size: "
                      << buf.size() << ", code: " << wr;
 
+        _serialport.waitForBytesWritten(100);
     }
+}
+
+void communication::subscribe(kfly_comm::commands cmd, unsigned int dt_ms)
+{
+    if (dt_ms < 5)
+        return;
+    else
+    {
+        kfly_comm::datagrams::ManageSubscription sub;
+        sub.cmd = cmd;
+        sub.delta_ms = dt_ms;
+        sub.subscribe = true;
+        sub.port = kfly_comm::enums::Ports::PORT_SAME;
+
+        send(kfly_comm::codec::generate_packet(sub));
+    }
+}
+
+void communication::unsubscribe(kfly_comm::commands cmd)
+{
+    kfly_comm::datagrams::ManageSubscription sub;
+    sub.cmd = cmd;
+    sub.delta_ms = 0;
+    sub.subscribe = false;
+    sub.port = kfly_comm::enums::Ports::PORT_SAME;
+
+    send(kfly_comm::codec::generate_packet(sub));
+}
+
+void communication::unsubscribe_all()
+{
+    kfly_comm::datagrams::ManageSubscription sub;
+    sub.cmd = kfly_comm::commands::None;
+    sub.delta_ms = 0xffffffff; // Flag to unsubscribe all
+    sub.subscribe = false;
+    sub.port = kfly_comm::enums::Ports::PORT_SAME;
+
+    send(kfly_comm::codec::generate_packet(sub));
 }
 
 void communication::parseSerialData()

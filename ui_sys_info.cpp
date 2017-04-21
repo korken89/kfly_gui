@@ -17,16 +17,12 @@ void ui_sys_info::register_communication(communication *com)
 {
     _communication = com;
 
-    connect(&status_timer, &QTimer::timeout,
-            this, &ui_sys_info::status_timer_timeout);
-
     connect(_communication, &communication::sigSystemStrings,
             this, &ui_sys_info::system_strings);
 
     connect(_communication, &communication::sigSystemStatus,
             this, &ui_sys_info::system_status);
 
-    status_timer.start(200);
 }
 
 void ui_sys_info::heartbeat()
@@ -36,15 +32,7 @@ void ui_sys_info::heartbeat()
     {
         using namespace kfly_comm;
         _communication->send(codec::generate_command(commands::GetSystemStrings));
-    }
-}
-
-void ui_sys_info::status_timer_timeout()
-{
-    if (!this->isHidden())
-    {
-        using namespace kfly_comm;
-        _communication->send(codec::generate_command(commands::GetSystemStatus));
+        _communication->subscribe(kfly_comm::commands::GetSystemStatus, 200);
     }
 }
 

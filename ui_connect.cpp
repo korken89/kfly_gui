@@ -13,13 +13,19 @@ ui_connect::ui_connect(QWidget *parent) :
     connect(&ping_timer, &QTimer::timeout,
             this, &ui_connect::ping_timer_event);
 
-    ui->boxBaud->addItem("9600");
-    ui->boxBaud->addItem("19200");
     ui->boxBaud->addItem("38400");
     ui->boxBaud->addItem("57600");
     ui->boxBaud->addItem("115200");
+    ui->boxBaud->addItem("230400");
+    ui->boxBaud->addItem("460800");
+    ui->boxBaud->addItem("921600");
     ui->boxBaud->addItem("1000000");
-    ui->boxBaud->setCurrentIndex(ui->boxBaud->count() - 1);
+    ui->boxBaud->addItem("1500000");
+    ui->boxBaud->addItem("2000000");
+    ui->boxBaud->addItem("2500000");
+    ui->boxBaud->addItem("3000000");
+
+    ui->boxBaud->setCurrentIndex(6);
 
     for (QSerialPortInfo port : QSerialPortInfo::availablePorts())
     {

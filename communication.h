@@ -29,6 +29,10 @@ public:
 
     void send(const std::vector<uint8_t>& message);
 
+    void subscribe(kfly_comm::commands cmd, unsigned int dt_ms);
+    void unsubscribe(kfly_comm::commands cmd);
+    void unsubscribe_all();
+
     /* Functions registered to the KFly interface. */
     void regPing(kfly_comm::datagrams::Ping);
     void regSystemStrings(kfly_comm::datagrams::SystemStrings msg);
