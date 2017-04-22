@@ -81,7 +81,7 @@ void sliderbox::mouseReleaseEvent(QMouseEvent *e)
         {
             e->accept();
             setChecked(!isChecked());
-            emit toggled(isChecked());
+            //emit toggled(isChecked());
         }
         else
         {
