@@ -2,6 +2,9 @@
 #define UI_RC_OUTPUT_H
 
 #include <QWidget>
+#include <QDebug>
+#include <vector>
+#include "ui_rc_output_channel.h"
 
 namespace Ui {
 class ui_rc_output;
@@ -17,6 +20,10 @@ public:
 
 private:
     Ui::ui_rc_output *ui;
+    std::vector<ui_rc_output_channel *> _channels;
+
+private slots:
+    void channel_value_changed();
 };
 
 #endif // UI_RC_OUTPUT_H

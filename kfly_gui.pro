@@ -34,7 +34,9 @@ SOURCES += main.cpp \
     communication.cpp \
     ui_sys_info.cpp \
     ui_rc_input.cpp \
-    ui_rc_input_channel.cpp
+    ui_rc_input_channel.cpp \
+    ui_rc_output.cpp \
+    ui_rc_output_channel.cpp
 
 HEADERS  += mainwindow.h \
             sliderbox.h \
@@ -42,11 +44,15 @@ HEADERS  += mainwindow.h \
     communication.h \
     ui_sys_info.h \
     ui_rc_input.h \
-    ui_rc_input_channel.h
+    ui_rc_input_channel.h \
+    ui_rc_output.h \
+    ui_rc_output_channel.h
 
 
 FORMS    += mainwindow.ui \
             ui_connect.ui \
     ui_sys_info.ui \
     ui_rc_input.ui \
-    ui_rc_input_channel.ui
+    ui_rc_input_channel.ui \
+    ui_rc_output.ui \
+    ui_rc_output_channel.ui

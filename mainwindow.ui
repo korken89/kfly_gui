@@ -21,7 +21,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="ui_sys_info" name="tabStatus">
        <attribute name="title">
@@ -38,9 +38,9 @@
         <string>RC Inputs</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tabOutput">
+      <widget class="ui_rc_output" name="tabOutput">
        <attribute name="title">
-        <string>Outputs</string>
+        <string>RC Outputs</string>
        </attribute>
       </widget>
       <widget class="QWidget" name="tabMixer">
@@ -120,6 +120,12 @@
    <class>ui_rc_input</class>
    <extends>QWidget</extends>
    <header>ui_rc_input.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ui_rc_output</class>
+   <extends>QWidget</extends>
+   <header>ui_rc_output.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

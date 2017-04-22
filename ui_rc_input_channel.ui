@@ -50,7 +50,7 @@
       </size>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>ChanNo</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -66,7 +66,7 @@
    <item>
     <widget class="QSpinBox" name="spinBottom">
      <property name="minimum">
-      <number>500</number>
+      <number>0</number>
      </property>
      <property name="maximum">
       <number>2500</number>
@@ -79,7 +79,7 @@
    <item>
     <widget class="QSpinBox" name="spinCenter">
      <property name="minimum">
-      <number>500</number>
+      <number>0</number>
      </property>
      <property name="maximum">
       <number>2500</number>
@@ -92,7 +92,7 @@
    <item>
     <widget class="QSpinBox" name="spinTop">
      <property name="minimum">
-      <number>500</number>
+      <number>0</number>
      </property>
      <property name="maximum">
       <number>2500</number>

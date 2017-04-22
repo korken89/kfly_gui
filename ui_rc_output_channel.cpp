@@ -12,3 +12,8 @@ ui_rc_output_channel::~ui_rc_output_channel()
 {
     delete ui;
 }
+
+void ui_rc_output_channel::set_channel_number(int i)
+{
+    ui->labelChannel->setText(QString::number(i));
+}
