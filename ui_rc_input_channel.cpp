@@ -84,6 +84,17 @@ void ui_rc_input_channel::on_boxRole_currentTextChanged(const QString &text)
     if (text == "Disabled")
     {
         ui->barRCValue->setValue(-100);
+        ui->spinBottom->setEnabled(false);
+        ui->spinCenter->setEnabled(false);
+        ui->spinTop->setEnabled(false);
+        ui->buttonInvert->setEnabled(false);
+    }
+    else
+    {
+        ui->spinBottom->setEnabled(true);
+        ui->spinCenter->setEnabled(true);
+        ui->spinTop->setEnabled(true);
+        ui->buttonInvert->setEnabled(true);
     }
 
     emit value_changed();
