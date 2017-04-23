@@ -25,6 +25,7 @@ private:
 private slots:
     void channel_value_changed();
     void on_buttonAutoUpload_toggled(bool checked);
+    void on_boxInputType_editTextChanged(const QString &value);
 };
 
 #endif // UI_RC_INPUT_H

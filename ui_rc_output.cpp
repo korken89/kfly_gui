@@ -31,3 +31,8 @@ void ui_rc_output::channel_value_changed()
 {
     qDebug() << "val change rc out";
 }
+
+void ui_rc_output::on_buttonAutoUpload_toggled(bool checked)
+{
+    ui->buttonApplyChanges->setEnabled(!checked);
+}

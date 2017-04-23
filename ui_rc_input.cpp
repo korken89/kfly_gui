@@ -37,3 +37,8 @@ void ui_rc_input::on_buttonAutoUpload_toggled(bool checked)
 {
     ui->buttonApplyChanges->setEnabled(!checked);
 }
+
+void ui_rc_input::on_boxInputType_editTextChanged(const QString &value)
+{
+    channel_value_changed();
+}

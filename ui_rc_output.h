@@ -24,6 +24,7 @@ private:
 
 private slots:
     void channel_value_changed();
+    void on_buttonAutoUpload_toggled(bool checked);
 };
 
 #endif // UI_RC_OUTPUT_H
