@@ -37,6 +37,10 @@ public:
     void regPing(kfly_comm::datagrams::Ping);
     void regSystemStrings(kfly_comm::datagrams::SystemStrings msg);
     void regSystemStatus(kfly_comm::datagrams::SystemStatus msg);
+    void regRCInputSettings(kfly_comm::datagrams::RCInputSettings msg);
+    void regRCValues(kfly_comm::datagrams::RCValues msg);
+    void regRCOutputSettings(kfly_comm::datagrams::RCOutputSettings msg);
+    void regChannelMix(kfly_comm::datagrams::ChannelMix msg);
 
 private slots:
     void parseSerialData();
@@ -47,6 +51,10 @@ signals:
     void sigPing(void);
     void sigSystemStrings(kfly_comm::datagrams::SystemStrings msg);
     void sigSystemStatus(kfly_comm::datagrams::SystemStatus msg);
+    void sigRCInputSettings(kfly_comm::datagrams::RCInputSettings msg);
+    void sigRCValues(kfly_comm::datagrams::RCValues msg);
+    void sigRCOutputSettings(kfly_comm::datagrams::RCOutputSettings msg);
+    void sigChannelMix(kfly_comm::datagrams::ChannelMix msg);
 
 };
 

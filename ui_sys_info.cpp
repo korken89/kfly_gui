@@ -28,7 +28,7 @@ void ui_sys_info::register_communication(communication *com)
 void ui_sys_info::heartbeat()
 {
     /* Request system information on heartbeat. */
-    if (!this->isHidden())
+    if (!isHidden() && _communication != nullptr)
     {
         using namespace kfly_comm;
         _communication->send(codec::generate_command(commands::GetSystemStrings));

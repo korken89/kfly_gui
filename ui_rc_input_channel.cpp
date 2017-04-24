@@ -70,16 +70,6 @@ void ui_rc_input_channel::set_maximum(int value)
 
 void ui_rc_input_channel::on_boxRole_currentTextChanged(const QString &text)
 {
-    if (text == "Disabled" || text == "Throttle" || text == "Pitch" ||
-        text == "Roll" || text == "Yaw")
-    {
-       ui->boxType->setCurrentIndex(0);
-       ui->boxType->setEnabled(false);
-    }
-    else
-    {
-       ui->boxType->setEnabled(true);
-    }
 
     if (text == "Disabled")
     {
@@ -88,9 +78,26 @@ void ui_rc_input_channel::on_boxRole_currentTextChanged(const QString &text)
         ui->spinCenter->setEnabled(false);
         ui->spinTop->setEnabled(false);
         ui->buttonInvert->setEnabled(false);
+        ui->boxType->setEnabled(false);
+    }
+    else if (text == "Throttle" || text == "Pitch" ||
+             text == "Roll" || text == "Yaw")
+    {
+        ui->boxType->setCurrentIndex(0);
+        ui->boxType->setEnabled(false);
+        ui->spinBottom->setEnabled(true);
+        ui->spinCenter->setEnabled(true);
+        ui->spinTop->setEnabled(true);
+        ui->buttonInvert->setEnabled(true);
+    }
+    else if (text == "Arming Switch" || text == "Serial Control")
+    {
+        ui->boxType->setCurrentIndex(1);
+        ui->boxType->setEnabled(false);
     }
     else
     {
+        ui->boxType->setEnabled(true);
         ui->spinBottom->setEnabled(true);
         ui->spinCenter->setEnabled(true);
         ui->spinTop->setEnabled(true);

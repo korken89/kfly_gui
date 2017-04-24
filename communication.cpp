@@ -9,6 +9,10 @@ communication::communication(QObject *parent)
   _kfly_comm.register_callback(this, &communication::regPing);
   _kfly_comm.register_callback(this, &communication::regSystemStrings);
   _kfly_comm.register_callback(this, &communication::regSystemStatus);
+  _kfly_comm.register_callback(this, &communication::regRCInputSettings);
+  _kfly_comm.register_callback(this, &communication::regRCValues);
+  _kfly_comm.register_callback(this, &communication::regRCOutputSettings);
+  _kfly_comm.register_callback(this, &communication::regChannelMix);
 
   connect(&_serialport, &QSerialPort::readyRead,
           this, &communication::parseSerialData);
@@ -156,4 +160,24 @@ void communication::regSystemStatus(
         kfly_comm::datagrams::SystemStatus msg)
 {
     emit sigSystemStatus(msg);
+}
+
+void communication::regRCInputSettings(kfly_comm::datagrams::RCInputSettings msg)
+{
+    emit sigRCInputSettings(msg);
+}
+
+void communication::regRCValues(kfly_comm::datagrams::RCValues msg)
+{
+    emit sigRCValues(msg);
+}
+
+void communication::regRCOutputSettings(kfly_comm::datagrams::RCOutputSettings msg)
+{
+    emit sigRCOutputSettings(msg);
+}
+
+void communication::regChannelMix(kfly_comm::datagrams::ChannelMix msg)
+{
+    emit sigChannelMix(msg);
 }
