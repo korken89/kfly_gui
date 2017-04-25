@@ -39,8 +39,6 @@ bool communication::openPort(const QString& portname, int baudrate)
     }
     else
     {
-        std::lock_guard<std::mutex> lock(_serialmutex);
-
         _serialport.setPortName(portname);
         _serialport.setBaudRate(baudrate);
 
@@ -50,10 +48,6 @@ bool communication::openPort(const QString& portname, int baudrate)
 
 void communication::closePort()
 {
-    unsubscribe_all();
-
-    std::lock_guard<std::mutex> lock(_serialmutex);
-
     if (_serialport.isOpen())
     {
         _serialport.close();
@@ -118,14 +112,7 @@ void communication::unsubscribe_all()
 
 void communication::parseSerialData()
 {
-    QByteArray inByteArray;
-
-    {   /* Lock only while reading the port. */
-        std::lock_guard<std::mutex> lock(_serialmutex);
-        inByteArray = _serialport.readAll();
-    }
-
-    for (auto b : inByteArray)
+    for (auto b : _serialport.readAll())
     {
         _kfly_comm.parse(b);
 

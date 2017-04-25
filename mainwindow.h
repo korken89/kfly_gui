@@ -24,7 +24,7 @@ private:
     communication *comms;
 
 public slots:
-    void heartbeat();
+    void connection_established();
     void connection_lost();
 };
 

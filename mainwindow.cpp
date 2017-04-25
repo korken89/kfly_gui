@@ -17,13 +17,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->buttonSave->setEnabled(false);
 
     connect(ui->widConnect, &ui_connect::heartbeat,
-            this, &MainWindow::heartbeat);
+            this, &MainWindow::connection_established);
 
     connect(ui->widConnect, &ui_connect::connection_lost,
             this, &MainWindow::connection_lost);
 
-    connect(ui->widConnect, &ui_connect::heartbeat,
-            ui->tabStatus, &ui_sys_info::heartbeat);
+    connect(ui->widConnect, &ui_connect::connection_established,
+            ui->tabStatus, &ui_sys_info::connection_established);
+
+    connect(ui->widConnect, &ui_connect::connection_established,
+            ui->tabInput, &ui_rc_input::connection_established);
 }
 
 MainWindow::~MainWindow()
@@ -32,7 +35,7 @@ MainWindow::~MainWindow()
     delete comms;
 }
 
-void MainWindow::heartbeat()
+void MainWindow::connection_established()
 {
     //qDebug() << "Got heartbeat!!!";
     //ui->tabWidget->setEnabled(true);

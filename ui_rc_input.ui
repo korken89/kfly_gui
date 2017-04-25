@@ -333,13 +333,6 @@ QGroupBox::title {
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QPushButton" name="buttonResetCal">
-          <property name="text">
-           <string>Reset Calibration</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QPushButton" name="buttonStartStopCal">
           <property name="text">
            <string>Start Calibration</string>
@@ -348,6 +341,9 @@ QGroupBox::title {
         </item>
         <item>
          <widget class="QPushButton" name="buttonCenterCal">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Calibrate Centers</string>
           </property>
@@ -471,7 +467,7 @@ QGroupBox::title {
              </widget>
             </item>
             <item>
-             <widget class="QProgressBar" name="progressBar">
+             <widget class="QProgressBar" name="barRSSI">
               <property name="value">
                <number>0</number>
               </property>

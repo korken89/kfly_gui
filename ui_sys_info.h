@@ -23,7 +23,7 @@ private:
     communication *_communication;
 
 public slots:
-    void heartbeat();
+    void connection_established();
     void system_strings(kfly_comm::datagrams::SystemStrings msg);
     void system_status(kfly_comm::datagrams::SystemStatus msg);
 

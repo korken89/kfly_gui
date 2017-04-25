@@ -5,6 +5,7 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QProgressBar>
+#include "kfly_comm/kfly_comm.h"
 
 namespace Ui {
 class ui_rc_input_channel;
@@ -19,6 +20,7 @@ public:
     ~ui_rc_input_channel();
 
     void set_channel_number(int i);
+    void set_current_value(float cal_value, int raw_value);
 
     int get_minimum();
     int get_center();
@@ -27,6 +29,14 @@ public:
     void set_minimum(int value);
     void set_center(int value);
     void set_maximum(int value);
+
+    kfly_comm::enums::RCInput_Role get_role();
+    kfly_comm::enums::RCInput_Type get_type();
+    bool get_inverted();
+
+    void set_role(kfly_comm::enums::RCInput_Role role);
+    void set_type(kfly_comm::enums::RCInput_Type type);
+    void set_inverted(bool inverted);
 
 private:
     Ui::ui_rc_input_channel *ui;

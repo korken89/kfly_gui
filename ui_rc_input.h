@@ -30,8 +30,12 @@ private:
     bool _upload_settings;
     QTimer _upload_settings_timer;
 
+    bool _start_calibration;
+    bool _calibrate_centers;
     void upload_settings();
 
+public slots:
+    void connection_established();
 
 private slots:
     void rc_values(kfly_comm::datagrams::RCValues msg);
@@ -42,6 +46,8 @@ private slots:
     void on_boxInputType_editTextChanged(const QString &);
     void on_buttonApplyChanges_clicked();
     void on_boxInputType_currentTextChanged(const QString &);
+    void on_buttonStartStopCal_clicked();
+    void on_buttonCenterCal_clicked();
 };
 
 #endif // UI_RC_INPUT_H

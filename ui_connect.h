@@ -30,10 +30,12 @@ private:
 
     QTimer ping_timer;
     int ping_counter = 0;
+    bool first_ping;
     void ping_timer_event();
 
 signals:
     void heartbeat();
+    void connection_established();
     void connection_lost();
 
 public slots:

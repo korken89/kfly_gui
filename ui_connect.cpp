@@ -81,6 +81,14 @@ void ui_connect::ping_received()
 {
     ping_counter = 0;
 
+    if (first_ping)
+    {
+        first_ping = false;
+        emit connection_established();
+
+        qDebug() << "Connection established...";
+    }
+
     emit heartbeat();
 
     qDebug() << "UI connect: ping";
@@ -106,10 +114,10 @@ void ui_connect::connect_port()
 
         ping_timer.start(2000);
         ping_counter = 1;
+        first_ping = true;
 
         using namespace kfly_comm;
-        auto data = codec::generate_command(commands::Ping);
-        _communication->send(data);
+        _communication->send(codec::generate_command(commands::Ping));
     }
     else
         qDebug() << "Error connecting to port " << port <<
@@ -118,9 +126,12 @@ void ui_connect::connect_port()
 
 void ui_connect::disconnect_port()
 {
+    first_ping = false;
+
     ping_timer.stop();
     emit connection_lost();
 
+    _communication->unsubscribe_all();
     _communication->closePort();
     ui->buttonConnect->setText("Connect");
 }

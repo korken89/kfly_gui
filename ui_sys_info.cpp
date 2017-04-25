@@ -25,10 +25,10 @@ void ui_sys_info::register_communication(communication *com)
 
 }
 
-void ui_sys_info::heartbeat()
+void ui_sys_info::connection_established()
 {
-    /* Request system information on heartbeat. */
-    if (!isHidden() && _communication != nullptr)
+    /* Request system information on connection. */
+    if (_communication != nullptr)
     {
         using namespace kfly_comm;
         _communication->send(codec::generate_command(commands::GetSystemStrings));
@@ -43,10 +43,13 @@ void ui_sys_info::system_strings(kfly_comm::datagrams::SystemStrings msg)
     QString kfly_version = msg.kfly_version;
     QString uid = QByteArray(reinterpret_cast<char *>(msg.unique_id), 12).toBase64();
 
-    ui->editVehicleName->setText(vehicle_name);
-    ui->editVehicleType->setText(vehicle_type);
-    ui->editVersion->setText(kfly_version);
-    ui->editUniqueID->setText(uid);
+    if (ui->editUniqueID->text() != uid)
+    {
+        ui->editVehicleName->setText(vehicle_name);
+        ui->editVehicleType->setText(vehicle_type);
+        ui->editVersion->setText(kfly_version);
+        ui->editUniqueID->setText(uid);
+    }
 }
 
 void ui_sys_info::system_status(kfly_comm::datagrams::SystemStatus msg)
