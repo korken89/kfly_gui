@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->widConnect->register_communication(comms);
     ui->tabStatus->register_communication(comms);
     ui->tabInput->register_communication(comms);
+    ui->tabOutput->register_communication(comms);
 
     //ui->tabWidget->setEnabled(false);
     ui->buttonSave->setEnabled(false);
@@ -27,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->widConnect, &ui_connect::connection_established,
             ui->tabInput, &ui_rc_input::connection_established);
+
+    connect(ui->widConnect, &ui_connect::connection_established,
+            ui->tabOutput, &ui_rc_output::connection_established);
 }
 
 MainWindow::~MainWindow()

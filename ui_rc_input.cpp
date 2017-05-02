@@ -90,7 +90,8 @@ void ui_rc_input::upload_settings()
 
     msg.use_rssi = false;
 
-    _communication->send(kfly_comm::codec::generate_packet(msg));
+    if (_communication != nullptr)
+        _communication->send(kfly_comm::codec::generate_packet(msg));
 }
 
 void ui_rc_input::connection_established()

@@ -40,6 +40,7 @@ public:
     void regRCInputSettings(kfly_comm::datagrams::RCInputSettings msg);
     void regRCValues(kfly_comm::datagrams::RCValues msg);
     void regRCOutputSettings(kfly_comm::datagrams::RCOutputSettings msg);
+    void regControlSignals(kfly_comm::datagrams::ControlSignals msg);
     void regChannelMix(kfly_comm::datagrams::ChannelMix msg);
 
 private slots:
@@ -54,6 +55,7 @@ signals:
     void sigRCInputSettings(kfly_comm::datagrams::RCInputSettings msg);
     void sigRCValues(kfly_comm::datagrams::RCValues msg);
     void sigRCOutputSettings(kfly_comm::datagrams::RCOutputSettings msg);
+    void sigControlSignals(kfly_comm::datagrams::ControlSignals msg);
     void sigChannelMix(kfly_comm::datagrams::ChannelMix msg);
 
 };

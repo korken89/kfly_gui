@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QDebug>
 #include <vector>
+#include "communication.h"
 #include "ui_rc_output_channel.h"
 
 namespace Ui {
@@ -17,14 +18,30 @@ class ui_rc_output : public QWidget
 public:
     explicit ui_rc_output(QWidget *parent = 0);
     ~ui_rc_output();
+    void register_communication(communication *com);
+    void showEvent(QShowEvent *e) override;
+    void hideEvent(QHideEvent *e) override;
 
 private:
     Ui::ui_rc_output *ui;
+    communication *_communication;
     std::vector<ui_rc_output_channel *> _channels;
 
+    bool _upload_settings;
+    QTimer _upload_settings_timer;
+
+    void upload_settings();
+
+public slots:
+    void connection_established();
+
 private slots:
+    void rc_output_settings(kfly_comm::datagrams::RCOutputSettings msg);
+    void control_signals(kfly_comm::datagrams::ControlSignals msg);
+    void upload_settings_timer();
     void channel_value_changed();
     void on_buttonAutoUpload_toggled(bool checked);
+    void on_buttonApplyChanges_clicked();
 };
 
 #endif // UI_RC_OUTPUT_H
