@@ -13,6 +13,9 @@ ui_connect::ui_connect(QWidget *parent) :
     connect(&ping_timer, &QTimer::timeout,
             this, &ui_connect::ping_timer_event);
 
+    connect(&check_port_timer, &QTimer::timeout,
+            this, &ui_connect::check_port_timer_event);
+
     ui->boxBaud->addItem("38400");
     ui->boxBaud->addItem("57600");
     ui->boxBaud->addItem("115200");
@@ -27,16 +30,8 @@ ui_connect::ui_connect(QWidget *parent) :
 
     ui->boxBaud->setCurrentIndex(6);
 
-    for (QSerialPortInfo port : QSerialPortInfo::availablePorts())
-    {
-        qDebug() << port.portName() << port.vendorIdentifier() <<
-                    port.productIdentifier() << port.description() <<
-                    port.manufacturer() << port.serialNumber() <<
-                    port.systemLocation() << port.hasProductIdentifier() <<
-                    port.hasVendorIdentifier() << port.isBusy();
 
-        ui->boxPort->addItem(port.portName());
-    }
+    check_port_timer.start(1000);
 }
 
 ui_connect::~ui_connect()
@@ -59,7 +54,7 @@ void ui_connect::register_communication(communication *com)
 
 void ui_connect::ping_timer_event()
 {
-    if (ping_counter > 0)
+    if (ping_counter > 1)
     {
         qDebug() << "Ping timeout!";
 
@@ -74,6 +69,23 @@ void ui_connect::ping_timer_event()
         ping_counter++;
         auto data = codec::generate_command(commands::Ping);
         _communication->send(data);
+    }
+}
+
+void ui_connect::check_port_timer_event()
+{
+    for (QSerialPortInfo port : QSerialPortInfo::availablePorts())
+    {
+        if (ui->boxPort->findText(port.portName()) < 0)
+        {
+            qDebug() << port.portName() << port.vendorIdentifier() <<
+                        port.productIdentifier() << port.description() <<
+                        port.manufacturer() << port.serialNumber() <<
+                        port.systemLocation() << port.hasProductIdentifier() <<
+                        port.hasVendorIdentifier() << port.isBusy();
+
+            ui->boxPort->addItem(port.portName());
+        }
     }
 }
 

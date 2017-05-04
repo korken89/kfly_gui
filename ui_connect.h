@@ -33,6 +33,9 @@ private:
     bool first_ping;
     void ping_timer_event();
 
+    QTimer check_port_timer;
+    void check_port_timer_event();
+
 signals:
     void heartbeat();
     void connection_established();
