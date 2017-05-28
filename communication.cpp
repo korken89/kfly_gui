@@ -18,7 +18,11 @@ communication::communication(QObject *parent)
   connect(&_serialport, &QSerialPort::readyRead,
           this, &communication::parseSerialData);
 
-  connect(&_serialport, &QSerialPort::errorOccurred,
+  //connect(&_serialport, &QSerialPort::errorOccurred,
+  //        this, &communication::handleSerialError);
+  connect(&_serialport,
+          static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(
+                  &QSerialPort::error),
           this, &communication::handleSerialError);
 
 }
