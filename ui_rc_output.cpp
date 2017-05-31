@@ -145,9 +145,9 @@ void ui_rc_output::on_buttonOverrideSafeties_toggled(bool checked)
     {
         auto reply = QMessageBox::question(
             this,
-            "Propeller check",
-            "WARNING! Make sure that the propellers " \
-            "are removed! Have you done this?",
+            "Propeller removal check",
+            "WARNING! The propellers can spin! Make sure that " \
+            "the propellers are removed! Have you done this?",
             QMessageBox::Yes | QMessageBox::No);
 
         if (reply == QMessageBox::Yes)
@@ -180,4 +180,26 @@ void ui_rc_output::on_buttonOverrideSafeties_toggled(bool checked)
             _channels[i]->set_override_value(0);
         }
     }
+}
+
+void ui_rc_output::on_buttonStartStop_clicked()
+{
+    for (auto i = 0; i < 8; i++)
+    {
+        _channels[i]->set_override_value(100);
+    }
+
+    ui->buttonStartStop->setEnabled(false);
+    ui->buttonNext->setEnabled(true);
+}
+
+void ui_rc_output::on_buttonNext_clicked()
+{
+    for (auto i = 0; i < 8; i++)
+    {
+        _channels[i]->set_override_value(0);
+    }
+
+    ui->buttonStartStop->setEnabled(true);
+    ui->buttonNext->setEnabled(false);
 }

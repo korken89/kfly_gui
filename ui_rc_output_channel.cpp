@@ -63,7 +63,8 @@ bool ui_rc_output_channel::get_channel_enabled()
 
 void ui_rc_output_channel::set_bar_value(float value)
 {
-    ui->barCurrentValue->setValue((int)(value * 100));
+    if (!ui->buttonEnable->isChecked())
+        ui->barCurrentValue->setValue((int)(value * 100));
 }
 
 void ui_rc_output_channel::set_override_enabled(bool enabled)
@@ -73,7 +74,8 @@ void ui_rc_output_channel::set_override_enabled(bool enabled)
 
 void ui_rc_output_channel::set_override_value(int val)
 {
-    ui->sliderSetValue->setValue(val);
+    if (ui->buttonEnable->isChecked())
+        ui->sliderSetValue->setValue(val);
 }
 
 int ui_rc_output_channel::get_override_value()
@@ -93,5 +95,8 @@ void ui_rc_output_channel::on_boxOutputMode_currentTextChanged(const QString &)
 
 void ui_rc_output_channel::on_sliderSetValue_sliderMoved(int)
 {
+    if (!ui->buttonEnable->isChecked())
+        ui->sliderSetValue->setValue(0);
+
     emit value_changed();
 }

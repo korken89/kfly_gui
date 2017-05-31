@@ -44,6 +44,8 @@ private slots:
     void on_buttonAutoUpload_toggled(bool checked);
     void on_buttonApplyChanges_clicked();
     void on_buttonOverrideSafeties_toggled(bool checked);
+    void on_buttonStartStop_clicked();
+    void on_buttonNext_clicked();
 };
 
 #endif // UI_RC_OUTPUT_H
