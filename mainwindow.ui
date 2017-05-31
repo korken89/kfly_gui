@@ -21,7 +21,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="ui_sys_info" name="tabStatus">
        <attribute name="title">
@@ -43,7 +43,7 @@
         <string>RC Outputs</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tabMixer">
+      <widget class="ui_motor_mixer" name="tabMixer">
        <attribute name="title">
         <string>Motor Mixer</string>
        </attribute>
@@ -97,7 +97,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -126,6 +126,12 @@
    <class>ui_rc_output</class>
    <extends>QWidget</extends>
    <header>ui_rc_output.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ui_motor_mixer</class>
+   <extends>QWidget</extends>
+   <header>ui_motor_mixer.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
