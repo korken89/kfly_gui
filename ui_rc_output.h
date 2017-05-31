@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QDebug>
+#include <QMessageBox>
 #include <vector>
 #include "communication.h"
 #include "ui_rc_output_channel.h"
@@ -42,6 +43,7 @@ private slots:
     void channel_value_changed();
     void on_buttonAutoUpload_toggled(bool checked);
     void on_buttonApplyChanges_clicked();
+    void on_buttonOverrideSafeties_toggled(bool checked);
 };
 
 #endif // UI_RC_OUTPUT_H

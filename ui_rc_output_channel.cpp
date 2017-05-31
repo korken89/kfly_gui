@@ -81,7 +81,6 @@ int ui_rc_output_channel::get_override_value()
     return ui->sliderSetValue->value();
 }
 
-
 void ui_rc_output_channel::on_buttonEnable_toggled(bool)
 {
     emit value_changed();

@@ -138,3 +138,46 @@ void ui_rc_output::on_buttonApplyChanges_clicked()
 {
     upload_settings();
 }
+
+void ui_rc_output::on_buttonOverrideSafeties_toggled(bool checked)
+{
+    if (checked)
+    {
+        auto reply = QMessageBox::question(
+            this,
+            "Propeller check",
+            "WARNING! Make sure that the propellers " \
+            "are removed! Have you done this?",
+            QMessageBox::Yes | QMessageBox::No);
+
+        if (reply == QMessageBox::Yes)
+        {
+            for (auto i = 0; i < 8; i++)
+                _channels[i]->set_override_enabled(true);
+
+            ui->buttonStartStop->setEnabled(checked);
+            ui->buttonNext->setEnabled(false);
+        }
+        else
+        {
+            ui->buttonOverrideSafeties->setChecked(false);
+
+            for (auto i = 0; i < 8; i++)
+            {
+                _channels[i]->set_override_enabled(false);
+                _channels[i]->set_override_value(0);
+            }
+        }
+    }
+    else
+    {
+        ui->buttonStartStop->setEnabled(false);
+        ui->buttonNext->setEnabled(false);
+
+        for (auto i = 0; i < 8; i++)
+        {
+            _channels[i]->set_override_enabled(false);
+            _channels[i]->set_override_value(0);
+        }
+    }
+}
