@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabStatus->register_communication(comms);
     ui->tabInput->register_communication(comms);
     ui->tabOutput->register_communication(comms);
+    ui->tabMixer->register_communication(comms);
 
     //ui->tabWidget->setEnabled(false);
     ui->buttonSave->setEnabled(false);
@@ -31,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->widConnect, &ui_connect::connection_established,
             ui->tabOutput, &ui_rc_output::connection_established);
+
+    connect(ui->widConnect, &ui_connect::connection_established,
+            ui->tabMixer, &ui_motor_mixer::connection_established);
 }
 
 MainWindow::~MainWindow()

@@ -18,49 +18,34 @@
     <layout class="QVBoxLayout" name="verticalLayout_8">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>5</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>15</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_5">
          <property name="minimumSize">
           <size>
-           <width>120</width>
+           <width>80</width>
            <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>120</width>
-           <height>16777215</height>
+           <width>80</width>
+           <height>50</height>
           </size>
          </property>
          <property name="text">
-          <string> </string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Roll</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Pitch</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Yaw</string>
+          <string>Channel</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -70,7 +55,47 @@
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Throttle</string>
+          <string>Throttle Weight</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Roll Weight</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Pitch Weight</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Yaw Weight</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Offset</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -80,7 +105,11 @@
       </layout>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="layoutChannels"/>
+      <layout class="QVBoxLayout" name="layoutChannels">
+       <property name="spacing">
+        <number>20</number>
+       </property>
+      </layout>
      </item>
      <item>
       <spacer name="verticalSpacer">
