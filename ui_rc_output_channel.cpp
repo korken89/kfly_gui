@@ -63,8 +63,7 @@ bool ui_rc_output_channel::get_channel_enabled()
 
 void ui_rc_output_channel::set_bar_value(float value)
 {
-    if (!ui->buttonEnable->isChecked())
-        ui->barCurrentValue->setValue((int)(value * 100));
+    ui->barCurrentValue->setValue((int)(value * 100));
 }
 
 void ui_rc_output_channel::set_override_enabled(bool enabled)

@@ -7,6 +7,8 @@ ui_rc_output::ui_rc_output(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    _override_enabled = false;
+
     for (int i = 0; i < 8; i++)
     {
         ui_rc_output_channel *chan = new ui_rc_output_channel;
@@ -44,7 +46,7 @@ void ui_rc_output::register_communication(communication *com)
 
     connect(&_upload_settings_timer, &QTimer::timeout,
             this, &ui_rc_output::upload_settings_timer);
-    _upload_settings_timer.start(1000);
+    _upload_settings_timer.start(100);
 }
 
 void ui_rc_output::showEvent(QShowEvent *)
@@ -57,6 +59,8 @@ void ui_rc_output::hideEvent(QHideEvent *)
 {
     if (_communication != nullptr)
         _communication->unsubscribe(kfly_comm::commands::GetControlSignals);
+
+    ui->buttonOverrideSafeties->setChecked(false);
 }
 
 void ui_rc_output::upload_settings()
@@ -70,6 +74,19 @@ void ui_rc_output::upload_settings()
 
     msg.mode_bank1 = _channels[0]->get_mode();
     msg.mode_bank2 = _channels[4]->get_mode();
+
+    if (_communication != nullptr)
+        _communication->send(kfly_comm::codec::generate_packet(msg));
+}
+
+void ui_rc_output::upload_override()
+{
+    qDebug() << "uploading rc output override";
+
+    kfly_comm::datagrams::MotorOverride msg;
+
+    for (auto i = 0; i < 8; i++)
+        msg.values[i] = static_cast<float>(_channels[i]->get_override_value()) / 100.0f;
 
     if (_communication != nullptr)
         _communication->send(kfly_comm::codec::generate_packet(msg));
@@ -114,6 +131,11 @@ void ui_rc_output::upload_settings_timer()
         _upload_settings = false;
         upload_settings();
     }
+
+    if (_override_enabled)
+    {
+        upload_override();
+    }
 }
 
 void ui_rc_output::channel_value_changed()
@@ -152,6 +174,8 @@ void ui_rc_output::on_buttonOverrideSafeties_toggled(bool checked)
 
         if (reply == QMessageBox::Yes)
         {
+            _override_enabled = true;
+
             for (auto i = 0; i < 8; i++)
                 _channels[i]->set_override_enabled(true);
 
@@ -160,6 +184,8 @@ void ui_rc_output::on_buttonOverrideSafeties_toggled(bool checked)
         }
         else
         {
+            _override_enabled = false;
+
             ui->buttonOverrideSafeties->setChecked(false);
 
             for (auto i = 0; i < 8; i++)
@@ -171,6 +197,8 @@ void ui_rc_output::on_buttonOverrideSafeties_toggled(bool checked)
     }
     else
     {
+        _override_enabled = false;
+
         ui->buttonStartStop->setEnabled(false);
         ui->buttonNext->setEnabled(false);
 

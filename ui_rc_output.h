@@ -32,6 +32,8 @@ private:
     QTimer _upload_settings_timer;
 
     void upload_settings();
+    void upload_override();
+    bool _override_enabled;
 
 public slots:
     void connection_established();

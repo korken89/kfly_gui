@@ -143,7 +143,6 @@ void ui_connect::disconnect_port()
     ping_timer.stop();
     emit connection_lost();
 
-    _communication->unsubscribe_all();
     _communication->closePort();
     ui->buttonConnect->setText("Connect");
 }
@@ -156,5 +155,8 @@ void ui_connect::on_buttonConnect_clicked()
     if (ui->buttonConnect->text() == "Connect")
       connect_port();
     else
+    {
+      _communication->unsubscribe_all();
       disconnect_port();
+    }
 }
