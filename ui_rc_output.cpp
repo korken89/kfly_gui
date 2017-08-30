@@ -140,15 +140,18 @@ void ui_rc_output::upload_settings_timer()
 
 void ui_rc_output::channel_value_changed()
 {
-    qDebug() << "val change rc out";
+    if (!isHidden())
+    {
+        qDebug() << "val change rc out";
 
-    for (auto i = 1; i < 4; i++)
-        _channels[i]->set_mode(_channels[0]->get_mode());
+        for (auto i = 1; i < 4; i++)
+            _channels[i]->set_mode(_channels[0]->get_mode());
 
-    for (auto i = 5; i < 8; i++)
-        _channels[i]->set_mode(_channels[4]->get_mode());
+        for (auto i = 5; i < 8; i++)
+            _channels[i]->set_mode(_channels[4]->get_mode());
 
-    _upload_settings = true;
+        _upload_settings = true;
+    }
 }
 
 void ui_rc_output::on_buttonAutoUpload_toggled(bool checked)

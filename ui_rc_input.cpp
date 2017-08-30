@@ -179,7 +179,8 @@ void ui_rc_input::upload_settings_timer()
 
 void ui_rc_input::channel_value_changed()
 {
-    _upload_settings = true;
+    if (!isHidden())
+        _upload_settings = true;
 }
 
 void ui_rc_input::on_buttonAutoUpload_toggled(bool checked)
@@ -189,7 +190,8 @@ void ui_rc_input::on_buttonAutoUpload_toggled(bool checked)
 
 void ui_rc_input::on_boxInputType_editTextChanged(const QString &)
 {
-    _upload_settings = true;
+    if (!isHidden())
+        _upload_settings = true;
 }
 
 void ui_rc_input::on_buttonApplyChanges_clicked()
@@ -199,7 +201,8 @@ void ui_rc_input::on_buttonApplyChanges_clicked()
 
 void ui_rc_input::on_boxInputType_currentTextChanged(const QString &)
 {
-    _upload_settings = true;
+    if (!isHidden())
+        _upload_settings = true;
 }
 
 void ui_rc_input::on_buttonStartStopCal_clicked()
