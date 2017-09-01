@@ -74,7 +74,7 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>43</width>
+       <width>38</width>
        <height>20</height>
       </size>
      </property>
@@ -85,13 +85,13 @@
      <property name="minimumSize">
       <size>
        <width>270</width>
-       <height>0</height>
+       <height>73</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>300</width>
-       <height>100</height>
+       <height>73</height>
       </size>
      </property>
      <property name="font">
@@ -135,7 +135,7 @@ QGroupBox::title {
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <property name="spacing">
-         <number>3</number>
+         <number>5</number>
         </property>
         <property name="rightMargin">
          <number>10</number>
@@ -152,12 +152,15 @@ QGroupBox::title {
            <string>Auto Upload</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignCenter</set>
+           <set>Qt::AlignBottom|Qt::AlignHCenter</set>
           </property>
          </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <property name="bottomMargin">
+           <number>5</number>
+          </property>
           <item>
            <widget class="sliderbox" name="buttonAutoUpload">
             <property name="maximumSize">
@@ -203,14 +206,14 @@ QGroupBox::title {
     <widget class="QGroupBox" name="groupBox">
      <property name="minimumSize">
       <size>
-       <width>420</width>
+       <width>440</width>
        <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>440</width>
-       <height>16777215</height>
+       <width>470</width>
+       <height>73</height>
       </size>
      </property>
      <property name="font">
@@ -315,7 +318,7 @@ QGroupBox::title {
          <widget class="QPushButton" name="buttonConnect">
           <property name="minimumSize">
            <size>
-            <width>60</width>
+            <width>80</width>
             <height>45</height>
            </size>
           </property>

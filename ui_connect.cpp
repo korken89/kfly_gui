@@ -30,8 +30,7 @@ ui_connect::ui_connect(QWidget *parent) :
 
     ui->boxBaud->setCurrentIndex(6);
 
-
-    check_port_timer.start(1000);
+    check_port_timer.start(500);
 }
 
 ui_connect::~ui_connect()
@@ -139,7 +138,7 @@ void ui_connect::connect_port()
         qDebug() << "Opening port " << port <<
                     ", with speed " << baud.trimmed() << " baud";
 
-        ping_timer.start(2000);
+        ping_timer.start(500);
         ping_counter = 1;
         first_ping = true;
 
