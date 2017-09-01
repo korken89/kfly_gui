@@ -406,7 +406,7 @@ QGroupBox::title {
 }</string>
        </property>
        <property name="title">
-        <string>RC Input Settings</string>
+        <string>RC Input Detection</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
@@ -430,12 +430,9 @@ QGroupBox::title {
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="boxInputType">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
+             <widget class="QLineEdit" name="editInputType">
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
              </widget>
             </item>

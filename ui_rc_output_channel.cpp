@@ -49,6 +49,8 @@ kfly_comm::enums::RCOutput_Mode ui_rc_output_channel::get_mode()
         return RCOutput_Mode::RCOUTPUT_MODE_400HZ_PWM;
     else if (ui->boxOutputMode->currentText() == "OneShot 125")
         return RCOutput_Mode::RCOUTPUT_MODE_OPM;
+    else
+        return RCOutput_Mode::RCOUTPUT_MODE_OPM;
 }
 
 void ui_rc_output_channel::set_channel_enabled(bool enabled)

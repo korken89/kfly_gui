@@ -11,7 +11,7 @@ ui_rc_input::ui_rc_input(QWidget *parent) :
 
     // Setup the channels
 
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < 16; i++)
     {
         ui_rc_input_channel *chan = new ui_rc_input_channel;
         _channels.push_back(chan);
@@ -26,9 +26,7 @@ ui_rc_input::ui_rc_input(QWidget *parent) :
     }
 
     // Setup input settings
-    ui->boxInputType->addItem("PWM");
-    ui->boxInputType->addItem("CPPM");
-    ui->boxInputType->addItem("SBUS");
+    ui->editInputType->setText("None");
 }
 
 ui_rc_input::~ui_rc_input()
@@ -79,15 +77,6 @@ void ui_rc_input::upload_settings()
         msg.type[i] = _channels[i]->get_type();
     }
 
-    if (ui->boxInputType->currentText() == "PWM")
-        msg.mode = kfly_comm::enums::RCInput_Mode::MODE_PWM_INPUT;
-    else if (ui->boxInputType->currentText() == "CPPM")
-        msg.mode = kfly_comm::enums::RCInput_Mode::MODE_CPPM_INPUT;
-    else if (ui->boxInputType->currentText() == "SBUS") // For future use
-        msg.mode = kfly_comm::enums::RCInput_Mode::MODE_CPPM_INPUT;
-    else
-        msg.mode = kfly_comm::enums::RCInput_Mode::MODE_CPPM_INPUT;
-
     msg.use_rssi = false;
 
     if (_communication != nullptr)
@@ -115,6 +104,13 @@ void ui_rc_input::rc_values(kfly_comm::datagrams::RCValues msg)
 
     ui->buttonInputDetected->setChecked(msg.active_connection);
     ui->barRSSI->setValue(msg.rssi);
+
+    if (msg.mode == kfly_comm::enums::RCInput_Mode::MODE_SBUS_INPUT)
+        ui->editInputType->setText("SBUS");
+    else if (msg.mode == kfly_comm::enums::RCInput_Mode::MODE_CPPM_INPUT)
+        ui->editInputType->setText("CPPM");
+    else
+        ui->editInputType->setText("None");
 
     for (unsigned i = 0; i < _channels.size(); i++)
     {
@@ -161,11 +157,6 @@ void ui_rc_input::rc_input_settings(kfly_comm::datagrams::RCInputSettings msg)
          _channels[i]->set_role(msg.role[i]);
          _channels[i]->set_type(msg.type[i]);
     }
-
-    if (msg.mode == kfly_comm::enums::RCInput_Mode::MODE_PWM_INPUT)
-        ui->boxInputType->setCurrentText("PWM");
-    else if (msg.mode == kfly_comm::enums::RCInput_Mode::MODE_CPPM_INPUT)
-        ui->boxInputType->setCurrentText("CPPM");
 }
 
 void ui_rc_input::upload_settings_timer()
