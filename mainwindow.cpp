@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabMixer->register_communication(comms);
 
     //ui->tabWidget->setEnabled(false);
-    ui->buttonSave->setEnabled(false);
+    //ui->buttonSave->setEnabled(false);
 
     connect(ui->widConnect, &ui_connect::heartbeat,
             this, &MainWindow::connection_established);
@@ -47,14 +47,14 @@ void MainWindow::connection_established()
 {
     //qDebug() << "Got heartbeat!!!";
     //ui->tabWidget->setEnabled(true);
-    ui->buttonSave->setEnabled(true);
+    //ui->buttonSave->setEnabled(true);
 }
 
 void MainWindow::connection_lost()
 {
     qDebug() << "Got connection lost!!!";
     //ui->tabWidget->setEnabled(false);
-    ui->buttonSave->setEnabled(false);
+    //ui->buttonSave->setEnabled(false);
 }
 
 

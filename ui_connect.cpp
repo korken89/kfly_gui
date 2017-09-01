@@ -175,3 +175,8 @@ void ui_connect::on_buttonConnect_clicked()
       disconnect_port();
     }
 }
+
+void ui_connect::on_buttonAutoUpload_toggled(bool checked)
+{
+    ui->buttonApplyChanges->setEnabled(!checked);
+}
