@@ -42,6 +42,10 @@ public:
     void regRCOutputSettings(kfly_comm::datagrams::RCOutputSettings msg);
     void regControlSignals(kfly_comm::datagrams::ControlSignals msg);
     void regChannelMix(kfly_comm::datagrams::ChannelMix msg);
+    void regArmSettings(kfly_comm::datagrams::ArmSettings msg);
+    void regRateControllerData(kfly_comm::datagrams::RateControllerData msg);
+    void regAttitudeControllerData(kfly_comm::datagrams::AttitudeControllerData msg);
+    void regControllerLimits(kfly_comm::datagrams::ControllerLimits msg);
 
 private slots:
     void parseSerialData();
@@ -57,6 +61,10 @@ signals:
     void sigRCOutputSettings(kfly_comm::datagrams::RCOutputSettings msg);
     void sigControlSignals(kfly_comm::datagrams::ControlSignals msg);
     void sigChannelMix(kfly_comm::datagrams::ChannelMix msg);
+    void sigArmSettings(kfly_comm::datagrams::ArmSettings msg);
+    void sigRateControllerData(kfly_comm::datagrams::RateControllerData msg);
+    void sigAttitudeControllerData(kfly_comm::datagrams::AttitudeControllerData msg);
+    void sigControllerLimits(kfly_comm::datagrams::ControllerLimits msg);
 
 };
 

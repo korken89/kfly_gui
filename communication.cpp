@@ -14,6 +14,10 @@ communication::communication(QObject *parent)
   _kfly_comm.register_callback(this, &communication::regRCOutputSettings);
   _kfly_comm.register_callback(this, &communication::regControlSignals);
   _kfly_comm.register_callback(this, &communication::regChannelMix);
+  _kfly_comm.register_callback(this, &communication::regArmSettings);
+  _kfly_comm.register_callback(this, &communication::regRateControllerData);
+  _kfly_comm.register_callback(this, &communication::regAttitudeControllerData);
+  _kfly_comm.register_callback(this, &communication::regControllerLimits);
 
   connect(&_serialport, &QSerialPort::readyRead,
           this, &communication::parseSerialData);
@@ -179,4 +183,24 @@ void communication::regControlSignals(kfly_comm::datagrams::ControlSignals msg)
 void communication::regChannelMix(kfly_comm::datagrams::ChannelMix msg)
 {
     emit sigChannelMix(msg);
+}
+
+void communication::regArmSettings(kfly_comm::datagrams::ArmSettings msg)
+{
+    emit sigArmSettings(msg);
+}
+
+void communication::regRateControllerData(kfly_comm::datagrams::RateControllerData msg)
+{
+    emit sigRateControllerData(msg);
+}
+
+void communication::regAttitudeControllerData(kfly_comm::datagrams::AttitudeControllerData msg)
+{
+    emit sigAttitudeControllerData(msg);
+}
+
+void communication::regControllerLimits(kfly_comm::datagrams::ControllerLimits msg)
+{
+    emit sigControllerLimits(msg);
 }
