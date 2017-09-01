@@ -53,7 +53,7 @@
         <string>Flight Modes</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tabArming">
+      <widget class="ui_arming" name="tabArming">
        <attribute name="title">
         <string>Arming</string>
        </attribute>
@@ -218,6 +218,12 @@ QGroupBox::title {
    <class>ui_motor_mixer</class>
    <extends>QWidget</extends>
    <header>ui_motor_mixer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ui_arming</class>
+   <extends>QWidget</extends>
+   <header>ui_arming.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
