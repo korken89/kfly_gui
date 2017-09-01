@@ -30,7 +30,7 @@ ui_connect::ui_connect(QWidget *parent) :
 
     ui->boxBaud->setCurrentIndex(6);
 
-    check_port_timer.start(500);
+    check_port_timer.start(1000);
 }
 
 ui_connect::~ui_connect()
@@ -63,7 +63,7 @@ void ui_connect::ping_timer_event()
     {
         using namespace kfly_comm;
 
-        qDebug() << "Sending ping...";
+        //qDebug() << "Sending ping...";
 
         ping_counter++;
         auto data = codec::generate_command(commands::Ping);
@@ -117,7 +117,7 @@ void ui_connect::ping_received()
 
     emit heartbeat();
 
-    qDebug() << "UI connect: ping";
+    qDebug() << "got ping";
 }
 
 void ui_connect::connection_error()
