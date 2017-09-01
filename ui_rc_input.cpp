@@ -100,7 +100,7 @@ void ui_rc_input::connection_established()
 
 void ui_rc_input::rc_values(kfly_comm::datagrams::RCValues msg)
 {
-    //qDebug() << "got rc values";
+    qDebug() << "got rc values";
 
     ui->buttonInputDetected->setChecked(msg.active_connection);
     ui->barRSSI->setValue(msg.rssi);
@@ -179,21 +179,9 @@ void ui_rc_input::on_buttonAutoUpload_toggled(bool checked)
     ui->buttonApplyChanges->setEnabled(!checked);
 }
 
-void ui_rc_input::on_boxInputType_editTextChanged(const QString &)
-{
-    if (!isHidden())
-        _upload_settings = true;
-}
-
 void ui_rc_input::on_buttonApplyChanges_clicked()
 {
     upload_settings();
-}
-
-void ui_rc_input::on_boxInputType_currentTextChanged(const QString &)
-{
-    if (!isHidden())
-        _upload_settings = true;
 }
 
 void ui_rc_input::on_buttonStartStopCal_clicked()

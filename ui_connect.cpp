@@ -74,9 +74,11 @@ void ui_connect::ping_timer_event()
 
 void ui_connect::check_port_timer_event()
 {
+    QString kfly_port;
+
     for (QSerialPortInfo port : QSerialPortInfo::availablePorts())
     {
-        if (ui->boxPort->findText(port.portName()) < 0)
+        if (ui->boxPort->findText(port.systemLocation()) < 0)
         {
             qDebug() << port.portName() << port.vendorIdentifier() <<
                         port.productIdentifier() << port.description() <<
@@ -84,9 +86,20 @@ void ui_connect::check_port_timer_event()
                         port.systemLocation() << port.hasProductIdentifier() <<
                         port.hasVendorIdentifier() << port.isBusy();
 
-            ui->boxPort->addItem(port.portName());
+            ui->boxPort->addItem(port.systemLocation());
+
+            if (port.description().startsWith("KFly"))
+            {
+                qDebug() << "Detected KFly";
+                kfly_port = port.systemLocation();
+            }
         }
     }
+
+    int index = ui->boxPort->findText(kfly_port);
+
+    if ( index != -1 )
+        ui->boxPort->setCurrentIndex(index);
 }
 
 void ui_connect::ping_received()
@@ -96,6 +109,8 @@ void ui_connect::ping_received()
     if (first_ping)
     {
         first_ping = false;
+        _communication->unsubscribe_all();
+
         emit connection_established();
 
         qDebug() << "Connection established...";

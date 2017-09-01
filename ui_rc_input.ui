@@ -215,7 +215,7 @@
    <item>
     <layout class="QVBoxLayout" name="layoutChannels">
      <property name="spacing">
-      <number>20</number>
+      <number>10</number>
      </property>
     </layout>
    </item>
@@ -417,7 +417,7 @@ QGroupBox::title {
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <property name="spacing">
-             <number>0</number>
+             <number>2</number>
             </property>
             <item>
              <widget class="QLabel" name="label_10">
@@ -431,6 +431,9 @@ QGroupBox::title {
             </item>
             <item>
              <widget class="QLineEdit" name="editInputType">
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
               <property name="readOnly">
                <bool>true</bool>
               </property>

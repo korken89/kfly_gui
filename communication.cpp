@@ -46,6 +46,8 @@ bool communication::openPort(const QString& portname, int baudrate)
     {
         _serialport.setPortName(portname);
         _serialport.setBaudRate(baudrate);
+        _serialport.setParity(QSerialPort::Parity::NoParity);
+        _serialport.setStopBits(QSerialPort::StopBits::OneStop);
 
         return _serialport.open(QIODevice::ReadWrite);
     }

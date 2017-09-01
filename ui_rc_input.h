@@ -43,9 +43,7 @@ private slots:
     void upload_settings_timer();
     void channel_value_changed();
     void on_buttonAutoUpload_toggled(bool checked);
-    void on_boxInputType_editTextChanged(const QString &);
     void on_buttonApplyChanges_clicked();
-    void on_boxInputType_currentTextChanged(const QString &);
     void on_buttonStartStopCal_clicked();
     void on_buttonCenterCal_clicked();
 };
