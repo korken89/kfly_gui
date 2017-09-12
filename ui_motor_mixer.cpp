@@ -7,6 +7,8 @@ ui_motor_mixer::ui_motor_mixer(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    _auto_upload_checked = false;
+
     for (int i = 0; i < 8; i++)
     {
         ui_motor_mixer_channel *chan = new ui_motor_mixer_channel;
@@ -100,17 +102,22 @@ void ui_motor_mixer::connection_established()
     }
 }
 
+void ui_motor_mixer::auto_upload_changed(bool checked)
+{
+    _auto_upload_checked = checked;
+}
+
+void ui_motor_mixer::upload_now()
+{
+    upload_settings();
+}
+
 void ui_motor_mixer::channel_value_changed()
 {
-    if (!isHidden() && ui->buttonAutoUpload->isChecked())
+    if (!isHidden() && _auto_upload_checked)
     {
         qDebug() << "val change mix";
 
         _upload_settings = true;
     }
-}
-
-void ui_motor_mixer::on_buttonApplyChanges_clicked()
-{
-    upload_settings();
 }

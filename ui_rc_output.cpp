@@ -8,6 +8,7 @@ ui_rc_output::ui_rc_output(QWidget *parent) :
     ui->setupUi(this);
 
     _override_enabled = false;
+    _auto_upload_checked = false;
 
     for (int i = 0; i < 8; i++)
     {
@@ -105,6 +106,16 @@ void ui_rc_output::connection_established()
     }
 }
 
+void ui_rc_output::auto_upload_changed(bool checked)
+{
+    _auto_upload_checked = checked;
+}
+
+void ui_rc_output::upload_now()
+{
+    upload_settings();
+}
+
 void ui_rc_output::rc_output_settings(kfly_comm::datagrams::RCOutputSettings msg)
 {
     qDebug() << "got rc output settings";
@@ -126,7 +137,7 @@ void ui_rc_output::control_signals(kfly_comm::datagrams::ControlSignals msg)
 
 void ui_rc_output::upload_settings_timer()
 {
-    if (_upload_settings && ui->buttonAutoUpload->isChecked())
+    if (_upload_settings && _auto_upload_checked)
     {
         _upload_settings = false;
         upload_settings();
@@ -152,16 +163,6 @@ void ui_rc_output::channel_value_changed()
 
         _upload_settings = true;
     }
-}
-
-void ui_rc_output::on_buttonAutoUpload_toggled(bool checked)
-{
-    ui->buttonApplyChanges->setEnabled(!checked);
-}
-
-void ui_rc_output::on_buttonApplyChanges_clicked()
-{
-    upload_settings();
 }
 
 void ui_rc_output::on_buttonOverrideSafeties_toggled(bool checked)

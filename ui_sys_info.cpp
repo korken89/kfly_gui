@@ -6,6 +6,8 @@ ui_sys_info::ui_sys_info(QWidget *parent) :
     ui(new Ui::ui_sys_info)
 {
     ui->setupUi(this);
+
+    _auto_upload_checked = false;
 }
 
 ui_sys_info::~ui_sys_info()
@@ -34,6 +36,16 @@ void ui_sys_info::connection_established()
         _communication->send(codec::generate_command(commands::GetSystemStrings));
         _communication->subscribe(kfly_comm::commands::GetSystemStatus, 200);
     }
+}
+
+void ui_sys_info::auto_upload_changed(bool checked)
+{
+    _auto_upload_checked = checked;
+}
+
+void ui_sys_info::upload_now()
+{
+
 }
 
 void ui_sys_info::system_strings(kfly_comm::datagrams::SystemStrings msg)

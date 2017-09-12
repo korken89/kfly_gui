@@ -40,6 +40,8 @@ signals:
     void heartbeat();
     void connection_established();
     void connection_lost();
+    void auto_upload_changed(bool checked);
+    void upload_now();
 
 public slots:
     void ping_received();
@@ -50,6 +52,7 @@ private slots:
 
 
     void on_buttonAutoUpload_toggled(bool checked);
+    void on_buttonApplyChanges_clicked();
 };
 
 #endif // UI_CONNECT_H

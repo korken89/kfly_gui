@@ -27,6 +27,8 @@ private:
     Ui::ui_rc_input *ui;
     communication *_communication;
     std::vector<ui_rc_input_channel *> _channels;
+
+    bool _auto_upload_checked;
     bool _upload_settings;
     QTimer _upload_settings_timer;
 
@@ -37,13 +39,14 @@ private:
 public slots:
     void connection_established();
 
+    void auto_upload_changed(bool checked);
+    void upload_now();
+
 private slots:
     void rc_values(kfly_comm::datagrams::RCValues msg);
     void rc_input_settings(kfly_comm::datagrams::RCInputSettings msg);
     void upload_settings_timer();
     void channel_value_changed();
-    void on_buttonAutoUpload_toggled(bool checked);
-    void on_buttonApplyChanges_clicked();
     void on_buttonStartStopCal_clicked();
     void on_buttonCenterCal_clicked();
 };

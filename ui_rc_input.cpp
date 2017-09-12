@@ -8,6 +8,7 @@ ui_rc_input::ui_rc_input(QWidget *parent) :
     ui->setupUi(this);
 
     _upload_settings = false;
+    _auto_upload_checked = false;
 
     // Setup the channels
 
@@ -98,6 +99,16 @@ void ui_rc_input::connection_established()
     }
 }
 
+void ui_rc_input::auto_upload_changed(bool checked)
+{
+    _auto_upload_checked = checked;
+}
+
+void ui_rc_input::upload_now()
+{
+    upload_settings();
+}
+
 void ui_rc_input::rc_values(kfly_comm::datagrams::RCValues msg)
 {
     qDebug() << "got rc values";
@@ -161,7 +172,7 @@ void ui_rc_input::rc_input_settings(kfly_comm::datagrams::RCInputSettings msg)
 
 void ui_rc_input::upload_settings_timer()
 {
-    if (_upload_settings && ui->buttonAutoUpload->isChecked())
+    if (_upload_settings && _auto_upload_checked)
     {
         _upload_settings = false;
         upload_settings();
@@ -174,23 +185,12 @@ void ui_rc_input::channel_value_changed()
         _upload_settings = true;
 }
 
-void ui_rc_input::on_buttonAutoUpload_toggled(bool checked)
-{
-    ui->buttonApplyChanges->setEnabled(!checked);
-}
-
-void ui_rc_input::on_buttonApplyChanges_clicked()
-{
-    upload_settings();
-}
-
 void ui_rc_input::on_buttonStartStopCal_clicked()
 {
     if (ui->buttonStartStopCal->text() == "Start Calibration")
     {
         ui->buttonStartStopCal->setText("Stop Calibration");
         ui->buttonCenterCal->setEnabled(true);
-        ui->buttonAutoUpload->setChecked(false);
         _start_calibration = true;
         _calibrate_centers = false;
     }

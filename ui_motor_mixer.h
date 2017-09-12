@@ -29,6 +29,7 @@ private:
     communication *_communication;
     std::vector<ui_motor_mixer_channel *> _channels;
 
+    bool _auto_upload_checked;
     bool _upload_settings;
     QTimer _upload_settings_timer;
 
@@ -37,11 +38,13 @@ private:
 public slots:
     void connection_established();
 
+    void auto_upload_changed(bool checked);
+    void upload_now();
+
 private slots:
     void rc_mixer_settings(kfly_comm::datagrams::ChannelMix msg);
     void upload_settings_timer();
     void channel_value_changed();
-    void on_buttonApplyChanges_clicked();
 };
 
 #endif // UI_MOTOR_MIXER_H

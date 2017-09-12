@@ -22,12 +22,16 @@ private:
     Ui::ui_sys_info *ui;
     communication *_communication;
 
+    bool _auto_upload_checked;
+
 public slots:
     void connection_established();
+
+    void auto_upload_changed(bool checked);
+    void upload_now();
+
     void system_strings(kfly_comm::datagrams::SystemStrings msg);
     void system_status(kfly_comm::datagrams::SystemStatus msg);
-
-
 };
 
 #endif // UI_SYS_INFO_H

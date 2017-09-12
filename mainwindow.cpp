@@ -18,23 +18,52 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->tabWidget->setEnabled(false);
     //ui->buttonSave->setEnabled(false);
 
+    // Main window connections
     connect(ui->widConnect, &ui_connect::heartbeat,
             this, &MainWindow::connection_established);
 
     connect(ui->widConnect, &ui_connect::connection_lost,
             this, &MainWindow::connection_lost);
 
+    // Status connections
     connect(ui->widConnect, &ui_connect::connection_established,
             ui->tabStatus, &ui_sys_info::connection_established);
 
+    connect(ui->widConnect, &ui_connect::auto_upload_changed,
+            ui->tabStatus, &ui_sys_info::auto_upload_changed);
+
+    connect(ui->widConnect, &ui_connect::upload_now,
+            ui->tabStatus, &ui_sys_info::upload_now);
+
+    // RC input connections
     connect(ui->widConnect, &ui_connect::connection_established,
             ui->tabInput, &ui_rc_input::connection_established);
 
+    connect(ui->widConnect, &ui_connect::auto_upload_changed,
+            ui->tabInput, &ui_rc_input::auto_upload_changed);
+
+    connect(ui->widConnect, &ui_connect::upload_now,
+            ui->tabInput, &ui_rc_input::upload_now);
+
+    // RC output connections
     connect(ui->widConnect, &ui_connect::connection_established,
             ui->tabOutput, &ui_rc_output::connection_established);
 
+    connect(ui->widConnect, &ui_connect::auto_upload_changed,
+            ui->tabOutput, &ui_rc_output::auto_upload_changed);
+
+    connect(ui->widConnect, &ui_connect::upload_now,
+            ui->tabOutput, &ui_rc_output::upload_now);
+
+    // Mixer connections
     connect(ui->widConnect, &ui_connect::connection_established,
             ui->tabMixer, &ui_motor_mixer::connection_established);
+
+    connect(ui->widConnect, &ui_connect::auto_upload_changed,
+            ui->tabMixer, &ui_motor_mixer::auto_upload_changed);
+
+    connect(ui->widConnect, &ui_connect::upload_now,
+            ui->tabMixer, &ui_motor_mixer::upload_now);
 }
 
 MainWindow::~MainWindow()
