@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabInput->register_communication(comms);
     ui->tabOutput->register_communication(comms);
     ui->tabMixer->register_communication(comms);
+    ui->tabArming->register_communication(comms);
 
     //ui->tabWidget->setEnabled(false);
     //ui->buttonSave->setEnabled(false);
