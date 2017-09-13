@@ -27,7 +27,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>7</number>
       </property>
       <widget class="ui_sys_info" name="tabStatus">
        <attribute name="title">
@@ -64,7 +64,7 @@
         <string>Arming</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tabControllers">
+      <widget class="ui_controller" name="tabControllers">
        <attribute name="title">
         <string>Controllers</string>
        </attribute>
@@ -120,6 +120,12 @@
    <class>ui_arming</class>
    <extends>QWidget</extends>
    <header>ui_arming.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ui_controller</class>
+   <extends>QWidget</extends>
+   <header>ui_controller.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -39,7 +39,8 @@ SOURCES += main.cpp \
     ui_rc_output_channel.cpp \
     ui_motor_mixer.cpp \
     ui_motor_mixer_channel.cpp \
-    ui_arming.cpp
+    ui_arming.cpp \
+    ui_controller.cpp
 
 HEADERS  += mainwindow.h \
             sliderbox.h \
@@ -52,7 +53,8 @@ HEADERS  += mainwindow.h \
     ui_rc_output_channel.h \
     ui_motor_mixer.h \
     ui_motor_mixer_channel.h \
-    ui_arming.h
+    ui_arming.h \
+    ui_controller.h
 
 
 FORMS    += mainwindow.ui \
@@ -64,4 +66,5 @@ FORMS    += mainwindow.ui \
     ui_rc_output_channel.ui \
     ui_motor_mixer.ui \
     ui_motor_mixer_channel.ui \
-    ui_arming.ui
+    ui_arming.ui \
+    ui_controller.ui
