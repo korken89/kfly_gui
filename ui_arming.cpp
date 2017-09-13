@@ -133,6 +133,8 @@ void ui_arming::upload_now()
 
 void ui_arming::arming_settings(kfly_comm::datagrams::ArmSettings msg)
 {
+    qDebug() << "got arming settings";
+
     if (msg.armed_min_throttle == 0)
     {
         ui->checkSpinWhenArmed->setChecked(false);

@@ -22,6 +22,8 @@ public:
     void hideEvent(QHideEvent *e) override;
 
 private:
+    Ui::ui_arming *ui;
+
     communication *_communication;
     bool _auto_upload_checked;
     bool _upload_settings;
@@ -44,8 +46,6 @@ private slots:
     void on_checkAutomaticDisarm_toggled(bool checked);
     void on_checkSpinWhenArmed_toggled(bool checked);
 
-private:
-    Ui::ui_arming *ui;
 };
 
 #endif // UI_ARMING_H

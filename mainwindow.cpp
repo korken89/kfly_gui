@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabOutput->register_communication(comms);
     ui->tabMixer->register_communication(comms);
     ui->tabArming->register_communication(comms);
+    ui->tabControllers->register_communication(comms);
 
     //ui->tabWidget->setEnabled(false);
     //ui->buttonSave->setEnabled(false);
@@ -65,6 +66,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->widConnect, &ui_connect::upload_now,
             ui->tabMixer, &ui_motor_mixer::upload_now);
+
+    // Controller connections
+    connect(ui->widConnect, &ui_connect::connection_established,
+            ui->tabControllers, &ui_controller::connection_established);
+
+    connect(ui->widConnect, &ui_connect::auto_upload_changed,
+            ui->tabControllers, &ui_controller::auto_upload_changed);
+
+    connect(ui->widConnect, &ui_connect::upload_now,
+            ui->tabControllers, &ui_controller::upload_now);
 }
 
 MainWindow::~MainWindow()
@@ -77,14 +88,12 @@ void MainWindow::connection_established()
 {
     //qDebug() << "Got heartbeat!!!";
     //ui->tabWidget->setEnabled(true);
-    //ui->buttonSave->setEnabled(true);
 }
 
 void MainWindow::connection_lost()
 {
     qDebug() << "Got connection lost!!!";
     //ui->tabWidget->setEnabled(false);
-    //ui->buttonSave->setEnabled(false);
 }
 
 
