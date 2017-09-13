@@ -28,6 +28,8 @@ private:
     QTimer _upload_settings_timer;
 
     void upload_settings();
+    kfly_comm::enums::Arming_Stick_Direction arming_direction_to_enum();
+    void set_arming_direction(kfly_comm::enums::Arming_Stick_Direction dir);
 
 public slots:
     void connection_established();
