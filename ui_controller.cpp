@@ -6,6 +6,10 @@ ui_controller::ui_controller(QWidget *parent) :
     ui(new Ui::ui_controller)
 {
     ui->setupUi(this);
+
+    _upload_rate_controller_settings = false;
+    _upload_attitude_controller_settings = false;
+    _upload_limit_settings = false;
 }
 
 ui_controller::~ui_controller()

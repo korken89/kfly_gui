@@ -7,6 +7,7 @@ ui_arming::ui_arming(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    _upload_settings = false;
     ui->boxArmAction->addItem("Momentary switch");
     ui->boxArmAction->addItem("Pitch min");
     ui->boxArmAction->addItem("Pitch max");
