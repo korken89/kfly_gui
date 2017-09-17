@@ -177,7 +177,7 @@ void ui_connect::on_buttonConnect_clicked()
 
 void ui_connect::on_buttonAutoUpload_toggled(bool checked)
 {
-    ui->buttonApplyChanges->setEnabled(!checked);
+    //ui->buttonApplyChanges->setEnabled(!checked);
 
     emit auto_upload_changed(checked);
 }

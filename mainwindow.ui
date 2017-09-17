@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>768</height>
+    <height>900</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>1024</width>
-    <height>768</height>
+    <height>900</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -27,14 +27,14 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>7</number>
+       <number>1</number>
       </property>
       <widget class="ui_sys_info" name="tabStatus">
        <attribute name="title">
         <string>Status</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tabSensors">
+      <widget class="ui_sensors" name="tabSensors">
        <attribute name="title">
         <string>Sensors</string>
        </attribute>
@@ -126,6 +126,12 @@
    <class>ui_controller</class>
    <extends>QWidget</extends>
    <header>ui_controller.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ui_sensors</class>
+   <extends>QWidget</extends>
+   <header>ui_sensors.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

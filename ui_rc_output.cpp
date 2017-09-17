@@ -66,7 +66,7 @@ void ui_rc_output::hideEvent(QHideEvent *)
 
 void ui_rc_output::upload_settings()
 {
-    qDebug() << "uploading rc output settings";
+    qDebug() << "rc output upload settings";
 
     kfly_comm::datagrams::RCOutputSettings msg;
 

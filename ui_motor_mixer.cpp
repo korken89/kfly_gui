@@ -75,7 +75,7 @@ void ui_motor_mixer::rc_mixer_settings(kfly_comm::datagrams::ChannelMix msg)
 
 void ui_motor_mixer::upload_settings()
 {
-    qDebug() << "uploading channel mixing settings";
+    qDebug() << "channel mixing upload settings";
 
     kfly_comm::datagrams::ChannelMix msg;
 
