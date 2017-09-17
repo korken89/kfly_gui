@@ -46,6 +46,10 @@ public:
     void regRateControllerData(kfly_comm::datagrams::RateControllerData msg);
     void regAttitudeControllerData(kfly_comm::datagrams::AttitudeControllerData msg);
     void regControllerLimits(kfly_comm::datagrams::ControllerLimits msg);
+    void regIMUCalibration(kfly_comm::datagrams::IMUCalibration msg);
+    void regRawIMUData(kfly_comm::datagrams::RawIMUData msg);
+    void regIMUData(kfly_comm::datagrams::IMUData msg);
+
 
 private slots:
     void parseSerialData();
@@ -65,6 +69,9 @@ signals:
     void sigRateControllerData(kfly_comm::datagrams::RateControllerData msg);
     void sigAttitudeControllerData(kfly_comm::datagrams::AttitudeControllerData msg);
     void sigControllerLimits(kfly_comm::datagrams::ControllerLimits msg);
+    void sigIMUCalibration(kfly_comm::datagrams::IMUCalibration msg);
+    void sigRawIMUData(kfly_comm::datagrams::RawIMUData msg);
+    void sigIMUData(kfly_comm::datagrams::IMUData msg);
 
 };
 

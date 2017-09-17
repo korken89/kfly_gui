@@ -18,6 +18,9 @@ communication::communication(QObject *parent)
   _kfly_comm.register_callback(this, &communication::regRateControllerData);
   _kfly_comm.register_callback(this, &communication::regAttitudeControllerData);
   _kfly_comm.register_callback(this, &communication::regControllerLimits);
+  _kfly_comm.register_callback(this, &communication::regIMUCalibration);
+  _kfly_comm.register_callback(this, &communication::regRawIMUData);
+  _kfly_comm.register_callback(this, &communication::regIMUData);
 
   connect(&_serialport, &QSerialPort::readyRead,
           this, &communication::parseSerialData);
@@ -203,4 +206,19 @@ void communication::regAttitudeControllerData(kfly_comm::datagrams::AttitudeCont
 void communication::regControllerLimits(kfly_comm::datagrams::ControllerLimits msg)
 {
     emit sigControllerLimits(msg);
+}
+
+void communication::regIMUCalibration(kfly_comm::datagrams::IMUCalibration msg)
+{
+    emit sigIMUCalibration(msg);
+}
+
+void communication::regRawIMUData(kfly_comm::datagrams::RawIMUData msg)
+{
+    emit sigRawIMUData(msg);
+}
+
+void communication::regIMUData(kfly_comm::datagrams::IMUData msg)
+{
+    emit sigIMUData(msg);
 }
