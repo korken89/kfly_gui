@@ -1,6 +1,7 @@
 #ifndef UI_CONTROLLER_H
 #define UI_CONTROLLER_H
 
+#include <cmath>
 #include <QWidget>
 #include <QTimer>
 #include <QDebug>
@@ -35,6 +36,9 @@ private:
     void upload_attitude_controller_settings();
     void upload_limits_settings();
 
+    double to_radians(double in);
+    double to_degrees(double in);
+
 public slots:
     void connection_established();
 
@@ -46,6 +50,27 @@ private slots:
     void attitude_controller_settings(kfly_comm::datagrams::AttitudeControllerData msg);
     void limits_settings(kfly_comm::datagrams::ControllerLimits msg);
     void upload_settings_timer();
+
+    void on_spinRateRoll_p_valueChanged(double);
+    void on_spinRateRoll_i_valueChanged(double);
+    void on_spinRatePitch_p_valueChanged(double);
+    void on_spinRatePitch_i_valueChanged(double);
+    void on_spinRateYaw_p_valueChanged(double);
+    void on_spinRateYaw_i_valueChanged(double);
+
+    void on_spinAttitudeRoll_p_valueChanged(double);
+    void on_spinAttitudeRoll_i_valueChanged(double);
+    void on_spinAttitudePitch_p_valueChanged(double);
+    void on_spinAttitudePitch_i_valueChanged(double);
+
+    void on_spinLimitRateRoll_valueChanged(int);
+    void on_spinLimitRatePitch_valueChanged(int);
+    void on_spinLimitRateYaw_valueChanged(int);
+    void on_spinLimitAttitudeRateRoll_valueChanged(int);
+    void on_spinLimitAttitudeRoll_valueChanged(int);
+    void on_spinLimitAttitudeRatePitch_valueChanged(int);
+    void on_spinLimitAttitudePitch_valueChanged(int);
+    void on_spinLimitAttitudeRateYaw_valueChanged(int);
 };
 
 #endif // UI_CONTROLLER_H

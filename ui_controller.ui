@@ -570,7 +570,14 @@ QGroupBox::title {
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinLimitRateRoll"/>
+           <widget class="QSpinBox" name="spinLimitRateRoll">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="singleStep">
+             <number>20</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -593,7 +600,14 @@ QGroupBox::title {
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinLimitRatePitch"/>
+           <widget class="QSpinBox" name="spinLimitRatePitch">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="singleStep">
+             <number>20</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -616,7 +630,14 @@ QGroupBox::title {
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinLimitRateYaw"/>
+           <widget class="QSpinBox" name="spinLimitRateYaw">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="singleStep">
+             <number>20</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -728,10 +749,21 @@ QGroupBox::title {
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinLimitAttitudeRateRoll"/>
+           <widget class="QSpinBox" name="spinLimitAttitudeRateRoll">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="singleStep">
+             <number>20</number>
+            </property>
+           </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinLimitAttitudeRoll"/>
+           <widget class="QSpinBox" name="spinLimitAttitudeRoll">
+            <property name="maximum">
+             <number>60</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -754,10 +786,21 @@ QGroupBox::title {
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinLimitAttitudeRatePitch"/>
+           <widget class="QSpinBox" name="spinLimitAttitudeRatePitch">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="singleStep">
+             <number>20</number>
+            </property>
+           </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinLimitAttitudePitch"/>
+           <widget class="QSpinBox" name="spinLimitAttitudePitch">
+            <property name="maximum">
+             <number>60</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -780,7 +823,14 @@ QGroupBox::title {
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinLimitAttitudeRateYaw"/>
+           <widget class="QSpinBox" name="spinLimitAttitudeRateYaw">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="singleStep">
+             <number>20</number>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_24">
