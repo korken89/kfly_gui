@@ -26,6 +26,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += $$PWD/kfly_comm/lib \
                $$PWD/kfly_comm/include
 
+INCLUDEPATH += /usr/include/eigen3
+
 SOURCES += main.cpp \
            $$PWD/kfly_comm/src/kfly_comm.cpp \
            mainwindow.cpp \
