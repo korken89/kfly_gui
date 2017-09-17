@@ -26,8 +26,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 INCLUDEPATH += $$PWD/kfly_comm/lib \
                $$PWD/kfly_comm/include
 
-INCLUDEPATH += /usr/include/eigen3
-
 SOURCES += main.cpp \
            $$PWD/kfly_comm/src/kfly_comm.cpp \
            mainwindow.cpp \
@@ -43,7 +41,8 @@ SOURCES += main.cpp \
     ui_motor_mixer_channel.cpp \
     ui_arming.cpp \
     ui_controller.cpp \
-    ui_sensors.cpp
+    ui_sensors.cpp \
+    imu_calibration.cpp
 
 HEADERS  += mainwindow.h \
             sliderbox.h \
@@ -58,7 +57,8 @@ HEADERS  += mainwindow.h \
     ui_motor_mixer_channel.h \
     ui_arming.h \
     ui_controller.h \
-    ui_sensors.h
+    ui_sensors.h \
+    imu_calibration.h
 
 
 FORMS    += mainwindow.ui \
