@@ -121,13 +121,13 @@ QGroupBox::title {
        <number>0</number>
       </property>
       <property name="leftMargin">
-       <number>3</number>
+       <number>6</number>
       </property>
       <property name="topMargin">
-       <number>3</number>
+       <number>6</number>
       </property>
       <property name="rightMargin">
-       <number>3</number>
+       <number>6</number>
       </property>
       <property name="bottomMargin">
        <number>3</number>
@@ -256,13 +256,13 @@ QGroupBox::title {
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <property name="leftMargin">
-       <number>3</number>
+       <number>6</number>
       </property>
       <property name="topMargin">
-       <number>3</number>
+       <number>6</number>
       </property>
       <property name="rightMargin">
-       <number>3</number>
+       <number>6</number>
       </property>
       <property name="bottomMargin">
        <number>6</number>

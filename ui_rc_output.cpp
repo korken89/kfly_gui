@@ -153,7 +153,7 @@ void ui_rc_output::channel_value_changed()
 {
     if (!isHidden())
     {
-        qDebug() << "val change rc out";
+        //qDebug() << "val change rc out";
 
         for (auto i = 1; i < 4; i++)
             _channels[i]->set_mode(_channels[0]->get_mode());

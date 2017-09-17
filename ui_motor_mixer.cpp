@@ -116,7 +116,7 @@ void ui_motor_mixer::channel_value_changed()
 {
     if (!isHidden() && _auto_upload_checked)
     {
-        qDebug() << "val change mix";
+        //qDebug() << "val change mix";
 
         _upload_settings = true;
     }
