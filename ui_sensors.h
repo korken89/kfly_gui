@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QDebug>
 #include "communication.h"
+#include "imu_calibration.h"
 
 namespace Ui {
 class ui_sensors;
@@ -28,6 +29,8 @@ private:
     bool _auto_upload_checked;
     bool _upload_settings;
     QTimer _upload_settings_timer;
+
+    calibration::gain_bias_3axis calibrator_;
 
     void upload_settings();
 
