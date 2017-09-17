@@ -46,6 +46,11 @@ private slots:
     void on_checkAutomaticDisarm_toggled(bool checked);
     void on_checkSpinWhenArmed_toggled(bool checked);
 
+    void on_boxArmAction_currentIndexChanged(int);
+    void on_spinArmThreshold_valueChanged(int);
+    void on_spinArmTime_valueChanged(double);
+    void on_spinAutomaticDisarmTime_valueChanged(int);
+    void on_spinSpinWhenArmedThrottle_valueChanged(int);
 };
 
 #endif // UI_ARMING_H

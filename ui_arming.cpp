@@ -8,6 +8,7 @@ ui_arming::ui_arming(QWidget *parent) :
     ui->setupUi(this);
 
     _upload_settings = false;
+
     ui->boxArmAction->addItem("Momentary switch");
     ui->boxArmAction->addItem("Pitch min");
     ui->boxArmAction->addItem("Pitch max");
@@ -177,9 +178,36 @@ void ui_arming::upload_settings_timer()
 void ui_arming::on_checkAutomaticDisarm_toggled(bool checked)
 {
     ui->spinAutomaticDisarmTime->setEnabled(checked);
+    _upload_settings = true;
 }
 
 void ui_arming::on_checkSpinWhenArmed_toggled(bool checked)
 {
     ui->spinSpinWhenArmedThrottle->setEnabled(checked);
+    _upload_settings = true;
+}
+
+void ui_arming::on_boxArmAction_currentIndexChanged(int)
+{
+    _upload_settings = true;
+}
+
+void ui_arming::on_spinArmThreshold_valueChanged(int)
+{
+    _upload_settings = true;
+}
+
+void ui_arming::on_spinArmTime_valueChanged(double)
+{
+    _upload_settings = true;
+}
+
+void ui_arming::on_spinAutomaticDisarmTime_valueChanged(int)
+{
+    _upload_settings = true;
+}
+
+void ui_arming::on_spinSpinWhenArmedThrottle_valueChanged(int)
+{
+    _upload_settings = true;
 }
