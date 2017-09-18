@@ -67,6 +67,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->widConnect, &ui_connect::upload_now,
             ui->tabMixer, &ui_motor_mixer::upload_now);
 
+    // Arming connections
+    connect(ui->widConnect, &ui_connect::connection_established,
+            ui->tabArming, &ui_arming::connection_established);
+
+    connect(ui->widConnect, &ui_connect::auto_upload_changed,
+            ui->tabArming, &ui_arming::auto_upload_changed);
+
+    connect(ui->widConnect, &ui_connect::upload_now,
+            ui->tabArming, &ui_arming::upload_now);
+
     // Controller connections
     connect(ui->widConnect, &ui_connect::connection_established,
             ui->tabControllers, &ui_controller::connection_established);

@@ -212,32 +212,38 @@ void ui_controller::upload_settings_timer()
 //
 void ui_controller::on_spinRateRoll_p_valueChanged(double)
 {
-    _upload_rate_controller_settings = true;
+    if (!isHidden())
+        _upload_rate_controller_settings = true;
 }
 
 void ui_controller::on_spinRateRoll_i_valueChanged(double)
 {
-    _upload_rate_controller_settings = true;
+    if (!isHidden())
+        _upload_rate_controller_settings = true;
 }
 
 void ui_controller::on_spinRatePitch_p_valueChanged(double)
 {
-    _upload_rate_controller_settings = true;
+    if (!isHidden())
+        _upload_rate_controller_settings = true;
 }
 
 void ui_controller::on_spinRatePitch_i_valueChanged(double)
 {
-    _upload_rate_controller_settings = true;
+    if (!isHidden())
+        _upload_rate_controller_settings = true;
 }
 
 void ui_controller::on_spinRateYaw_p_valueChanged(double)
 {
-    _upload_rate_controller_settings = true;
+    if (!isHidden())
+        _upload_rate_controller_settings = true;
 }
 
 void ui_controller::on_spinRateYaw_i_valueChanged(double)
 {
-    _upload_rate_controller_settings = true;
+    if (!isHidden())
+        _upload_rate_controller_settings = true;
 }
 
 
@@ -248,22 +254,26 @@ void ui_controller::on_spinRateYaw_i_valueChanged(double)
 
 void ui_controller::on_spinAttitudeRoll_p_valueChanged(double)
 {
-    _upload_attitude_controller_settings = true;
+    if (!isHidden())
+        _upload_attitude_controller_settings = true;
 }
 
 void ui_controller::on_spinAttitudeRoll_i_valueChanged(double)
 {
-    _upload_attitude_controller_settings = true;
+    if (!isHidden())
+        _upload_attitude_controller_settings = true;
 }
 
 void ui_controller::on_spinAttitudePitch_p_valueChanged(double)
 {
-    _upload_attitude_controller_settings = true;
+    if (!isHidden())
+        _upload_attitude_controller_settings = true;
 }
 
 void ui_controller::on_spinAttitudePitch_i_valueChanged(double)
 {
-    _upload_attitude_controller_settings = true;
+    if (!isHidden())
+        _upload_attitude_controller_settings = true;
 }
 
 
@@ -273,40 +283,48 @@ void ui_controller::on_spinAttitudePitch_i_valueChanged(double)
 //
 void ui_controller::on_spinLimitRateRoll_valueChanged(int)
 {
-    _upload_limit_settings = true;
+    if (!isHidden())
+        _upload_limit_settings = true;
 }
 
 void ui_controller::on_spinLimitRatePitch_valueChanged(int)
 {
-    _upload_limit_settings = true;
+    if (!isHidden())
+        _upload_limit_settings = true;
 }
 
 void ui_controller::on_spinLimitRateYaw_valueChanged(int)
 {
-    _upload_limit_settings = true;
+    if (!isHidden())
+        _upload_limit_settings = true;
 }
 
 void ui_controller::on_spinLimitAttitudeRateRoll_valueChanged(int)
 {
-    _upload_limit_settings = true;
+    if (!isHidden())
+        _upload_limit_settings = true;
 }
 
 void ui_controller::on_spinLimitAttitudeRoll_valueChanged(int)
 {
-    _upload_limit_settings = true;
+    if (!isHidden())
+        _upload_limit_settings = true;
 }
 
 void ui_controller::on_spinLimitAttitudeRatePitch_valueChanged(int)
 {
-    _upload_limit_settings = true;
+    if (!isHidden())
+        _upload_limit_settings = true;
 }
 
 void ui_controller::on_spinLimitAttitudePitch_valueChanged(int)
 {
-    _upload_limit_settings = true;
+    if (!isHidden())
+        _upload_limit_settings = true;
 }
 
 void ui_controller::on_spinLimitAttitudeRateYaw_valueChanged(int)
 {
-    _upload_limit_settings = true;
+    if (!isHidden())
+        _upload_limit_settings = true;
 }

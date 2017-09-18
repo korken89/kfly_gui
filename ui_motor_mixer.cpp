@@ -52,7 +52,7 @@ void ui_motor_mixer::hideEvent(QHideEvent *)
 
 void ui_motor_mixer::upload_settings_timer()
 {
-    if (_upload_settings)
+    if (_upload_settings && _auto_upload_checked)
     {
         _upload_settings = false;
         upload_settings();
@@ -114,7 +114,7 @@ void ui_motor_mixer::upload_now()
 
 void ui_motor_mixer::channel_value_changed()
 {
-    if (!isHidden() && _auto_upload_checked)
+    if (!isHidden())
     {
         //qDebug() << "val change mix";
 

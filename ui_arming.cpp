@@ -178,36 +178,45 @@ void ui_arming::upload_settings_timer()
 void ui_arming::on_checkAutomaticDisarm_toggled(bool checked)
 {
     ui->spinAutomaticDisarmTime->setEnabled(checked);
-    _upload_settings = true;
+
+    if (!isHidden())
+        _upload_settings = true;
 }
 
 void ui_arming::on_checkSpinWhenArmed_toggled(bool checked)
 {
     ui->spinSpinWhenArmedThrottle->setEnabled(checked);
-    _upload_settings = true;
+
+    if (!isHidden())
+        _upload_settings = true;
 }
 
 void ui_arming::on_boxArmAction_currentIndexChanged(int)
 {
-    _upload_settings = true;
+    if (!isHidden())
+        _upload_settings = true;
 }
 
 void ui_arming::on_spinArmThreshold_valueChanged(int)
 {
-    _upload_settings = true;
+    if (!isHidden())
+        _upload_settings = true;
 }
 
 void ui_arming::on_spinArmTime_valueChanged(double)
 {
-    _upload_settings = true;
+    if (!isHidden())
+        _upload_settings = true;
 }
 
 void ui_arming::on_spinAutomaticDisarmTime_valueChanged(int)
 {
-    _upload_settings = true;
+    if (!isHidden())
+        _upload_settings = true;
 }
 
 void ui_arming::on_spinSpinWhenArmedThrottle_valueChanged(int)
 {
-    _upload_settings = true;
+    if (!isHidden())
+        _upload_settings = true;
 }
