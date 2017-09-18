@@ -334,7 +334,7 @@ QGroupBox::title {
          <widget class="QPushButton" name="buttonConnect">
           <property name="minimumSize">
            <size>
-            <width>80</width>
+            <width>100</width>
             <height>45</height>
            </size>
           </property>
