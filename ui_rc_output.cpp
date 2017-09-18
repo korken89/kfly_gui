@@ -9,6 +9,7 @@ ui_rc_output::ui_rc_output(QWidget *parent) :
 
     _override_enabled = false;
     _auto_upload_checked = false;
+    _upload_settings = false;
 
     for (int i = 0; i < 8; i++)
     {

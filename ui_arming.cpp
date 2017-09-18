@@ -8,6 +8,7 @@ ui_arming::ui_arming(QWidget *parent) :
     ui->setupUi(this);
 
     _upload_settings = false;
+    _auto_upload_checked = false;
 
     ui->boxArmAction->addItem("Momentary switch");
     ui->boxArmAction->addItem("Pitch min");

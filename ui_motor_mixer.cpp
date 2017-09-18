@@ -8,6 +8,7 @@ ui_motor_mixer::ui_motor_mixer(QWidget *parent) :
     ui->setupUi(this);
 
     _auto_upload_checked = false;
+    _upload_settings = false;
 
     for (int i = 0; i < 8; i++)
     {
