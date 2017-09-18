@@ -85,6 +85,9 @@ QGroupBox::title {
            </property>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_7">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_5">
                <property name="maximumSize">
@@ -134,6 +137,9 @@ QGroupBox::title {
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_11">
                <property name="minimumSize">
@@ -157,7 +163,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit">
+              <widget class="QLineEdit" name="editAccXGain">
                <property name="text">
                 <string>0</string>
                </property>
@@ -170,7 +176,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_2">
+              <widget class="QLineEdit" name="editAccXBias">
                <property name="text">
                 <string>0</string>
                </property>
@@ -186,6 +192,9 @@ QGroupBox::title {
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_12">
                <property name="minimumSize">
@@ -209,7 +218,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_4">
+              <widget class="QLineEdit" name="editAccYGain">
                <property name="text">
                 <string>0</string>
                </property>
@@ -222,7 +231,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_3">
+              <widget class="QLineEdit" name="editAccBiasY">
                <property name="text">
                 <string>0</string>
                </property>
@@ -238,6 +247,9 @@ QGroupBox::title {
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_3">
                <property name="minimumSize">
@@ -261,7 +273,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_6">
+              <widget class="QLineEdit" name="editAccGainZ">
                <property name="text">
                 <string>0</string>
                </property>
@@ -274,7 +286,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_5">
+              <widget class="QLineEdit" name="editAccBiasZ">
                <property name="text">
                 <string>0</string>
                </property>
@@ -290,31 +302,77 @@ QGroupBox::title {
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_13">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <item>
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QLabel" name="label_19">
                <property name="minimumSize">
                 <size>
-                 <width>120</width>
+                 <width>80</width>
                  <height>0</height>
                 </size>
                </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
-                <string>Calibrate</string>
+                <string/>
                </property>
               </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_10">
+               <property name="spacing">
+                <number>3</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_16">
+                 <property name="spacing">
+                  <number>20</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QPushButton" name="buttonNextAxisAcc">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>Next axis</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="buttonCalibrateAcc">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Calibrate</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QProgressBar" name="progressAcc">
+                 <property name="value">
+                  <number>0</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -337,7 +395,7 @@ QGroupBox::title {
 }</string>
           </property>
           <property name="title">
-           <string>Magnetormeter</string>
+           <string>Magnetometer</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <property name="spacing">
@@ -354,6 +412,9 @@ QGroupBox::title {
            </property>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_10">
                <property name="maximumSize">
@@ -403,6 +464,9 @@ QGroupBox::title {
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_14">
                <property name="minimumSize">
@@ -426,7 +490,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_8">
+              <widget class="QLineEdit" name="editMagGainX">
                <property name="text">
                 <string>0</string>
                </property>
@@ -439,7 +503,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_7">
+              <widget class="QLineEdit" name="editMagBiasX">
                <property name="text">
                 <string>0</string>
                </property>
@@ -455,6 +519,9 @@ QGroupBox::title {
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_12">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_15">
                <property name="minimumSize">
@@ -478,7 +545,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_10">
+              <widget class="QLineEdit" name="editMagGainY">
                <property name="text">
                 <string>0</string>
                </property>
@@ -491,7 +558,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_9">
+              <widget class="QLineEdit" name="editMagBiasY">
                <property name="text">
                 <string>0</string>
                </property>
@@ -507,6 +574,9 @@ QGroupBox::title {
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_11">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_7">
                <property name="minimumSize">
@@ -530,7 +600,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_12">
+              <widget class="QLineEdit" name="editMagGainZ">
                <property name="text">
                 <string>0</string>
                </property>
@@ -543,7 +613,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_11">
+              <widget class="QLineEdit" name="editMagBiasZ">
                <property name="text">
                 <string>0</string>
                </property>
@@ -559,31 +629,77 @@ QGroupBox::title {
            </item>
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_14">
+             <property name="spacing">
+              <number>20</number>
+             </property>
              <item>
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QLabel" name="label_20">
                <property name="minimumSize">
                 <size>
-                 <width>120</width>
+                 <width>80</width>
                  <height>0</height>
                 </size>
                </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
-                <string>Calibrate</string>
+                <string/>
                </property>
               </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_12">
+               <property name="spacing">
+                <number>3</number>
+               </property>
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_17">
+                 <property name="spacing">
+                  <number>20</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QPushButton" name="buttonNextAxisMag">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>Next axis</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="buttonCalibrateMag">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Calibrate</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QProgressBar" name="progressMag">
+                 <property name="value">
+                  <number>0</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
