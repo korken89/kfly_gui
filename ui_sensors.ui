@@ -623,13 +623,31 @@ QGroupBox::title {
       <property name="spacing">
        <number>20</number>
       </property>
+      <property name="leftMargin">
+       <number>12</number>
+      </property>
       <property name="topMargin">
+       <number>15</number>
+      </property>
+      <property name="rightMargin">
+       <number>12</number>
+      </property>
+      <property name="bottomMargin">
        <number>12</number>
       </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_11">
+        <property name="spacing">
+         <number>6</number>
+        </property>
         <item>
          <widget class="QLabel" name="label_22">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>20</height>
+           </size>
+          </property>
           <property name="text">
            <string>Target (°C)</string>
           </property>
@@ -667,8 +685,17 @@ QGroupBox::title {
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_6">
+        <property name="spacing">
+         <number>6</number>
+        </property>
         <item>
          <widget class="QLabel" name="label_13">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>20</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -700,8 +727,17 @@ QGroupBox::title {
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_7">
+        <property name="spacing">
+         <number>6</number>
+        </property>
         <item>
          <widget class="QLabel" name="label_16">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>20</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -709,7 +745,7 @@ QGroupBox::title {
            </size>
           </property>
           <property name="text">
-           <string>IMU temperature (°C)</string>
+           <string>IMU (°C)</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -730,8 +766,17 @@ QGroupBox::title {
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_8">
+        <property name="spacing">
+         <number>6</number>
+        </property>
         <item>
          <widget class="QLabel" name="label_17">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>20</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -739,7 +784,7 @@ QGroupBox::title {
            </size>
           </property>
           <property name="text">
-           <string>Magnetometer temperature (°C)</string>
+           <string>Magnetometer (°C)</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -760,8 +805,17 @@ QGroupBox::title {
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_9">
+        <property name="spacing">
+         <number>6</number>
+        </property>
         <item>
          <widget class="QLabel" name="label_18">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>20</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>16777215</width>
@@ -769,7 +823,7 @@ QGroupBox::title {
            </size>
           </property>
           <property name="text">
-           <string>Barometer temperature (°C)</string>
+           <string>Barometer (°C)</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
