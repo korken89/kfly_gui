@@ -39,6 +39,8 @@ void ui_sensors::showEvent(QShowEvent *)
 
 void ui_sensors::hideEvent(QHideEvent *)
 {
+    if (_communication != nullptr)
+        _communication->unsubscribe(kfly_comm::commands::GetRawIMUData);
 }
 
 void ui_sensors::upload_settings()
@@ -83,9 +85,39 @@ void ui_sensors::imu_calibration(kfly_comm::datagrams::IMUCalibration msg)
 
 void ui_sensors::imu_rawdata(kfly_comm::datagrams::RawIMUData msg)
 {
-    qDebug() << "got raw imu data";
 
-    //TODO: Implement this
+    static int i = 0;
+
+    if (i++ == 100)
+    {
+        qDebug() << "got raw imu data x100";
+        i = 0;
+    }
+
+    auto state = calibrator_.add_sample(msg.accelerometer[0],
+                                        msg.accelerometer[1],
+                                        msg.accelerometer[2]);
+
+    if (state == calibration::state::GETTING_SAMPLES)
+    {
+        ui->progressAcc->setValue(calibrator_.get_axis_percent_done());
+    }
+    else
+    {
+        if (_communication != nullptr)
+            _communication->unsubscribe(kfly_comm::commands::GetRawIMUData);
+
+        if (calibrator_.axis_finished() == calibration::state::DONE)
+        {
+            ui->buttonCalibrateAcc->setText("Calibrate");
+
+            // TODO write out calibration + sanity check
+        }
+        else
+            ui->buttonNextAxisAcc->setEnabled(true);
+
+        ui->buttonNextAxisAcc->setText("Next axis");
+    }
 
 }
 
@@ -96,4 +128,38 @@ void ui_sensors::upload_settings_timer()
         _upload_settings = false;
         upload_settings();
     }
+}
+
+void ui_sensors::on_buttonCalibrateAcc_clicked()
+{
+    if (ui->buttonCalibrateAcc->text() == "Calibrate")
+    {
+        calibrator_.reset();
+        ui->buttonCalibrateAcc->setText("Abort");
+        ui->buttonNextAxisAcc->setEnabled(false);
+        ui->buttonNextAxisAcc->setText("Sampling...");
+
+        if (_communication != nullptr)
+            _communication->subscribe(kfly_comm::commands::GetRawIMUData, 6);
+    }
+    else
+    {
+        if (_communication != nullptr)
+            _communication->unsubscribe(kfly_comm::commands::GetRawIMUData);
+
+        calibrator_.reset();
+        ui->progressAcc->setValue(0);
+        ui->buttonNextAxisAcc->setText("Next axis");
+        ui->buttonNextAxisAcc->setEnabled(false);
+        ui->buttonCalibrateAcc->setText("Calibrate");
+    }
+}
+
+void ui_sensors::on_buttonNextAxisAcc_clicked()
+{
+    if (_communication != nullptr)
+        _communication->subscribe(kfly_comm::commands::GetRawIMUData, 6);
+
+    ui->buttonNextAxisAcc->setEnabled(false);
+    ui->buttonNextAxisAcc->setText("Sampling...");
 }

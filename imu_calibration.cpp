@@ -120,7 +120,6 @@ state gain_bias_3axis::add_sample(double x, double y, double z)
 
         if (samples_x_.size() == num_samples_)
             current_state_ = state::NEXT_AXIS;
-
     }
 
     return current_state_;
@@ -164,6 +163,11 @@ state gain_bias_3axis::axis_finished()
     }
 
     return current_state_;
+}
+
+int gain_bias_3axis::get_axis_percent_done()
+{
+    return (samples_x_.size() * 100 + num_samples_ / 2) / num_samples_;
 }
 
 Eigen::Vector3d gain_bias_3axis::get_gain_result()

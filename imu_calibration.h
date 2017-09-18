@@ -45,6 +45,7 @@ public:
 
     state add_sample(double x, double y, double z);
     state axis_finished();
+    int get_axis_percent_done();
 
     Eigen::Vector3d get_gain_result();
     Eigen::Vector3d get_bias_result();

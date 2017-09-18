@@ -44,6 +44,9 @@ private slots:
     void imu_calibration(kfly_comm::datagrams::IMUCalibration msg);
     void imu_rawdata(kfly_comm::datagrams::RawIMUData msg);
     void upload_settings_timer();
+
+    void on_buttonCalibrateAcc_clicked();
+    void on_buttonNextAxisAcc_clicked();
 };
 
 #endif // UI_SENSORS_H
