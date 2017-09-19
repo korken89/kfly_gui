@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>920</width>
-    <height>694</height>
+    <height>763</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,6 +90,12 @@ QGroupBox::title {
              </property>
              <item>
               <widget class="QLabel" name="label_5">
+               <property name="minimumSize">
+                <size>
+                 <width>60</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>60</width>
@@ -133,6 +139,16 @@ QGroupBox::title {
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QLabel" name="label_26">
+               <property name="text">
+                <string>Variance</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
@@ -144,7 +160,7 @@ QGroupBox::title {
               <widget class="QLabel" name="label_11">
                <property name="minimumSize">
                 <size>
-                 <width>80</width>
+                 <width>60</width>
                  <height>0</height>
                 </size>
                </property>
@@ -188,6 +204,16 @@ QGroupBox::title {
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QLineEdit" name="editAccXVariance">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
@@ -199,7 +225,7 @@ QGroupBox::title {
               <widget class="QLabel" name="label_12">
                <property name="minimumSize">
                 <size>
-                 <width>80</width>
+                 <width>60</width>
                  <height>0</height>
                 </size>
                </property>
@@ -243,6 +269,16 @@ QGroupBox::title {
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QLineEdit" name="editAccYVariance">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
@@ -254,7 +290,7 @@ QGroupBox::title {
               <widget class="QLabel" name="label_3">
                <property name="minimumSize">
                 <size>
-                 <width>80</width>
+                 <width>60</width>
                  <height>0</height>
                 </size>
                </property>
@@ -298,6 +334,78 @@ QGroupBox::title {
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QLineEdit" name="editAccZVariance">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_18">
+             <property name="spacing">
+              <number>20</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_21">
+               <property name="minimumSize">
+                <size>
+                 <width>60</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>60</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Nominal</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="editAccGainNominal">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="editAccBiasNominal">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="editAccVarianceNominal">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
@@ -309,7 +417,7 @@ QGroupBox::title {
               <widget class="QLabel" name="label_19">
                <property name="minimumSize">
                 <size>
-                 <width>80</width>
+                 <width>60</width>
                  <height>0</height>
                 </size>
                </property>
@@ -417,6 +525,12 @@ QGroupBox::title {
              </property>
              <item>
               <widget class="QLabel" name="label_10">
+               <property name="minimumSize">
+                <size>
+                 <width>60</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>60</width>
@@ -460,6 +574,16 @@ QGroupBox::title {
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QLabel" name="label_27">
+               <property name="text">
+                <string>Variance</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
@@ -471,7 +595,7 @@ QGroupBox::title {
               <widget class="QLabel" name="label_14">
                <property name="minimumSize">
                 <size>
-                 <width>80</width>
+                 <width>60</width>
                  <height>0</height>
                 </size>
                </property>
@@ -490,7 +614,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="editMagGainX">
+              <widget class="QLineEdit" name="editMagXGain">
                <property name="text">
                 <string>0</string>
                </property>
@@ -503,7 +627,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="editMagBiasX">
+              <widget class="QLineEdit" name="editMagXBias">
                <property name="text">
                 <string>0</string>
                </property>
@@ -512,6 +636,16 @@ QGroupBox::title {
                </property>
                <property name="readOnly">
                 <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="editMagXVariance">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -526,7 +660,7 @@ QGroupBox::title {
               <widget class="QLabel" name="label_15">
                <property name="minimumSize">
                 <size>
-                 <width>80</width>
+                 <width>60</width>
                  <height>0</height>
                 </size>
                </property>
@@ -545,7 +679,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="editMagGainY">
+              <widget class="QLineEdit" name="editMagYGain">
                <property name="text">
                 <string>0</string>
                </property>
@@ -558,7 +692,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="editMagBiasY">
+              <widget class="QLineEdit" name="editMagYBias">
                <property name="text">
                 <string>0</string>
                </property>
@@ -567,6 +701,16 @@ QGroupBox::title {
                </property>
                <property name="readOnly">
                 <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="editMagYVariance">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -581,7 +725,7 @@ QGroupBox::title {
               <widget class="QLabel" name="label_7">
                <property name="minimumSize">
                 <size>
-                 <width>80</width>
+                 <width>60</width>
                  <height>0</height>
                 </size>
                </property>
@@ -600,7 +744,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="editMagGainZ">
+              <widget class="QLineEdit" name="editMagZGain">
                <property name="text">
                 <string>0</string>
                </property>
@@ -613,7 +757,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="editMagBiasZ">
+              <widget class="QLineEdit" name="editMagZBias">
                <property name="text">
                 <string>0</string>
                </property>
@@ -622,6 +766,75 @@ QGroupBox::title {
                </property>
                <property name="readOnly">
                 <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="editMagZVariance">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_19">
+             <property name="spacing">
+              <number>20</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="editMagVarianceNominal">
+               <property name="minimumSize">
+                <size>
+                 <width>60</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>60</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Nominal</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="editMagGainNominal">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="editMagBiasNominal">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_8">
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -636,7 +849,7 @@ QGroupBox::title {
               <widget class="QLabel" name="label_20">
                <property name="minimumSize">
                 <size>
-                 <width>80</width>
+                 <width>60</width>
                  <height>0</height>
                 </size>
                </property>
