@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
-#include "kfly_comm/kfly_comm.h"
 #include "communication.h"
 
 namespace Ui {

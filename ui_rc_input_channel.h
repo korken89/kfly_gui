@@ -5,7 +5,7 @@
 #include <QComboBox>
 #include <QSpinBox>
 #include <QProgressBar>
-#include "kfly_comm/kfly_comm.h"
+#include "communication.h"
 
 namespace Ui {
 class ui_rc_input_channel;

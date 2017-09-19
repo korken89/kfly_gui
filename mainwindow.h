@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <QMessageBox>
-#include <communication.h>
+#include "communication.h"
 
 namespace Ui {
 class MainWindow;

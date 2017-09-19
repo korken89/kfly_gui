@@ -6,7 +6,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 #include <vector>
-#include "kfly_comm/kfly_comm.h"
+#include "kfly_comm/kfly_comm.hpp"
 
 class communication : public QObject
 {
