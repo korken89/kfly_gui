@@ -27,7 +27,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="ui_sys_info" name="tabStatus">
        <attribute name="title">
@@ -67,6 +67,11 @@
       <widget class="ui_controller" name="tabControllers">
        <attribute name="title">
         <string>Controllers</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabDeveloper">
+       <attribute name="title">
+        <string>Developer Options</string>
        </attribute>
       </widget>
      </widget>
