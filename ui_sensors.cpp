@@ -4,7 +4,7 @@
 ui_sensors::ui_sensors(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ui_sensors),
-    calibrator_(1000)
+    calibrator_(100)
 {
     ui->setupUi(this);
 
@@ -49,10 +49,21 @@ void ui_sensors::upload_settings()
 
     kfly_comm::datagrams::IMUCalibration msg;
 
-    // TODO: Implement this
+    auto gain = calibrator_.get_gain_result();
+    auto bias = calibrator_.get_bias_result();
 
-    // if (_communication != nullptr)
-    //     _communication->send(kfly_comm::codec::generate_packet(msg));
+    for (int i = 0; i < 3; i++)
+    {
+        msg.accelerometer_gain[i] = gain[i];
+        msg.accelerometer_bias[i] = bias[i];
+        msg.magnetometer_gain[i] = 1;
+        msg.magnetometer_bias[i] = 0;
+    }
+
+    msg.timestamp = QDateTime::currentDateTime().toTime_t();
+
+    if (_communication != nullptr)
+        _communication->send(kfly_comm::codec::generate_packet(msg));
 }
 
 void ui_sensors::connection_established()
@@ -79,7 +90,55 @@ void ui_sensors::imu_calibration(kfly_comm::datagrams::IMUCalibration msg)
 {
     qDebug() << "got imu calibration";
 
-    //TODO: Implement this
+    QString txt = QString::number(1.0 / msg.accelerometer_gain[0], 'g', 6);
+    ui->editAccXGain->setText(txt);
+
+    txt = QString::number(1.0 / msg.accelerometer_gain[1], 'g', 6);
+    ui->editAccYGain->setText(txt);
+
+    txt = QString::number(1.0 / msg.accelerometer_gain[2], 'g', 6);
+    ui->editAccZGain->setText(txt);
+
+    txt = QString::number(msg.accelerometer_bias[0], 'g', 6);
+    ui->editAccXBias->setText(txt);
+
+    txt = QString::number(msg.accelerometer_bias[1], 'g', 6);
+    ui->editAccYBias->setText(txt);
+
+    txt = QString::number(msg.accelerometer_bias[2], 'g', 6);
+    ui->editAccZBias->setText(txt);
+
+    ui->editAccXVariance->setText("N/A");
+    ui->editAccYVariance->setText("N/A");
+    ui->editAccZVariance->setText("N/A");
+
+
+
+    txt = QString::number(1.0 / msg.magnetometer_gain[0], 'g', 6);
+    ui->editMagXGain->setText(txt);
+
+    txt = QString::number(1.0 / msg.magnetometer_gain[1], 'g', 6);
+    ui->editMagYGain->setText(txt);
+
+    txt = QString::number(1.0 / msg.magnetometer_gain[2], 'g', 6);
+    ui->editMagZGain->setText(txt);
+
+    txt = QString::number(msg.magnetometer_bias[0], 'g', 6);
+    ui->editMagXBias->setText(txt);
+
+    txt = QString::number(msg.magnetometer_bias[1], 'g', 6);
+    ui->editMagYBias->setText(txt);
+
+    txt = QString::number(msg.magnetometer_bias[2], 'g', 6);
+    ui->editMagZBias->setText(txt);
+
+    ui->editMagXVariance->setText("N/A");
+    ui->editMagYVariance->setText("N/A");
+    ui->editMagZVariance->setText("N/A");
+
+
+    if (msg.timestamp == 0)
+        qDebug() << "Warning! IMU not calibrated";
 
 }
 
@@ -112,6 +171,91 @@ void ui_sensors::imu_rawdata(kfly_comm::datagrams::RawIMUData msg)
             ui->buttonCalibrateAcc->setText("Calibrate");
 
             // TODO write out calibration + sanity check
+            auto gain = calibrator_.get_gain_result();
+            auto bias = calibrator_.get_bias_result();
+            auto var = calibrator_.get_variance();
+
+            double nom_gain = 1.0 / ui->editAccGainNominal->text().toDouble();
+            double nom_var = ui->editAccVarianceNominal->text().toDouble();
+
+            bool gain_sane = true;
+            bool bias_sane = true;
+            bool var_sane = true;
+
+            for (int i = 0; i < 3; i++)
+            {
+                // 10 % of 1g bounds on gain and bias
+                gain_sane = gain_sane && (std::abs(gain[i] - nom_gain) < nom_gain * 0.1);
+                bias_sane = bias_sane && (std::abs(bias[i]) < 1.0 / nom_gain * 0.1);
+
+                // 3x bounds on variance
+                var_sane = var_sane && (std::abs(var[i]) < nom_var * 3);
+            }
+
+            QString txt = QString::number(1.0 / gain[0], 'g', 6);
+            ui->editAccXGain->setText(txt);
+
+            txt = QString::number(1.0 / gain[1], 'g', 6);
+            ui->editAccYGain->setText(txt);
+
+            txt = QString::number(1.0 / gain[2], 'g', 6);
+            ui->editAccZGain->setText(txt);
+
+
+            txt = QString::number(bias[0], 'g', 6);
+            ui->editAccXBias->setText(txt);
+
+            txt = QString::number(bias[1], 'g', 6);
+            ui->editAccYBias->setText(txt);
+
+            txt = QString::number(bias[2], 'g', 6);
+            ui->editAccZBias->setText(txt);
+
+
+            txt = QString::number(var[0], 'g', 6);
+            ui->editAccXVariance->setText(txt);
+
+            txt = QString::number(var[1], 'g', 6);
+            ui->editAccYVariance->setText(txt);
+
+            txt = QString::number(var[2], 'g', 6);
+            ui->editAccZVariance->setText(txt);
+
+
+            if (gain_sane && bias_sane && var_sane)
+            {
+                _upload_settings = true;
+            }
+            else
+            {
+                if (!gain_sane)
+                {
+                    QMessageBox messageBox;
+                    messageBox.critical(0,
+                                        "Error",
+                                        "Gain is not within 10% nominal bounds.");
+                    messageBox.setFixedSize(500, 200);
+                }
+
+                if (!bias_sane)
+                {
+                    QMessageBox messageBox;
+                    messageBox.critical(0,
+                                        "Error",
+                                        "Bias is not within 10% nominal bounds.");
+                    messageBox.setFixedSize(500, 200);
+                }
+
+                if (!var_sane)
+                {
+                    QMessageBox messageBox;
+                    messageBox.critical(0,
+                                        "Error",
+                                        "Variance is not within 3x nominal bounds.");
+                    messageBox.setFixedSize(500, 200);
+                }
+
+            }
         }
         else
             ui->buttonNextAxisAcc->setEnabled(true);

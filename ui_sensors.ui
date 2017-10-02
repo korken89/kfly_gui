@@ -116,7 +116,7 @@ QGroupBox::title {
                 </size>
                </property>
                <property name="text">
-                <string>Gain</string>
+                <string>Gain (inv)</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -207,7 +207,7 @@ QGroupBox::title {
              <item>
               <widget class="QLineEdit" name="editAccXVariance">
                <property name="text">
-                <string>0</string>
+                <string>N/A</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -257,7 +257,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="editAccBiasY">
+              <widget class="QLineEdit" name="editAccYBias">
                <property name="text">
                 <string>0</string>
                </property>
@@ -272,7 +272,7 @@ QGroupBox::title {
              <item>
               <widget class="QLineEdit" name="editAccYVariance">
                <property name="text">
-                <string>0</string>
+                <string>N/A</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -309,7 +309,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="editAccGainZ">
+              <widget class="QLineEdit" name="editAccZGain">
                <property name="text">
                 <string>0</string>
                </property>
@@ -322,7 +322,7 @@ QGroupBox::title {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="editAccBiasZ">
+              <widget class="QLineEdit" name="editAccZBias">
                <property name="text">
                 <string>0</string>
                </property>
@@ -337,7 +337,7 @@ QGroupBox::title {
              <item>
               <widget class="QLineEdit" name="editAccZVariance">
                <property name="text">
-                <string>0</string>
+                <string>N/A</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -379,7 +379,7 @@ QGroupBox::title {
              <item>
               <widget class="QLineEdit" name="editAccGainNominal">
                <property name="text">
-                <string>0</string>
+                <string>2048</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -399,7 +399,7 @@ QGroupBox::title {
              <item>
               <widget class="QLineEdit" name="editAccVarianceNominal">
                <property name="text">
-                <string>0</string>
+                <string>78</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -551,7 +551,7 @@ QGroupBox::title {
                 </size>
                </property>
                <property name="text">
-                <string>Gain</string>
+                <string>Gain (inv)</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -642,7 +642,7 @@ QGroupBox::title {
              <item>
               <widget class="QLineEdit" name="editMagXVariance">
                <property name="text">
-                <string>0</string>
+                <string>N/A</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -707,7 +707,7 @@ QGroupBox::title {
              <item>
               <widget class="QLineEdit" name="editMagYVariance">
                <property name="text">
-                <string>0</string>
+                <string>N/A</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -772,7 +772,7 @@ QGroupBox::title {
              <item>
               <widget class="QLineEdit" name="editMagZVariance">
                <property name="text">
-                <string>0</string>
+                <string>N/A</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
