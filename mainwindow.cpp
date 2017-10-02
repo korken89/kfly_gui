@@ -105,6 +105,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->widConnect, &ui_connect::upload_now,
             ui->tabControllers, &ui_controller::upload_now);
+
+    // Developer Options connections
+    ui->tabDeveloper->register_communication(comms);
+
+    connect(ui->widConnect, &ui_connect::connection_established,
+            ui->tabDeveloper, &ui_developer::connection_established);
+
+    connect(ui->widConnect, &ui_connect::auto_upload_changed,
+            ui->tabDeveloper, &ui_developer::auto_upload_changed);
+
+    connect(ui->widConnect, &ui_connect::upload_now,
+            ui->tabDeveloper, &ui_developer::upload_now);
 }
 
 MainWindow::~MainWindow()
