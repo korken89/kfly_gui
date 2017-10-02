@@ -42,7 +42,8 @@ SOURCES += main.cpp \
     ui_arming.cpp \
     ui_controller.cpp \
     ui_sensors.cpp \
-    imu_calibration.cpp
+    imu_calibration.cpp \
+    ui_developer.cpp
 
 HEADERS  += mainwindow.h \
             sliderbox.h \
@@ -58,7 +59,8 @@ HEADERS  += mainwindow.h \
     ui_arming.h \
     ui_controller.h \
     ui_sensors.h \
-    imu_calibration.h
+    imu_calibration.h \
+    ui_developer.h
 
 
 FORMS    += mainwindow.ui \
@@ -72,4 +74,5 @@ FORMS    += mainwindow.ui \
     ui_motor_mixer_channel.ui \
     ui_arming.ui \
     ui_controller.ui \
-    ui_sensors.ui
+    ui_sensors.ui \
+    ui_developer.ui

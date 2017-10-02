@@ -69,7 +69,7 @@
         <string>Controllers</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tabDeveloper">
+      <widget class="ui_developer" name="tabDeveloper">
        <attribute name="title">
         <string>Developer Options</string>
        </attribute>
@@ -127,6 +127,12 @@
    <class>ui_sensors</class>
    <extends>QWidget</extends>
    <header>ui_sensors.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ui_developer</class>
+   <extends>QWidget</extends>
+   <header>ui_developer.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
