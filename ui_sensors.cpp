@@ -10,6 +10,7 @@ ui_sensors::ui_sensors(QWidget *parent) :
 
     _auto_upload_checked = false;
     _upload_settings = false;
+    _accept_measurements = false;
 }
 
 ui_sensors::~ui_sensors()
@@ -45,25 +46,28 @@ void ui_sensors::hideEvent(QHideEvent *)
 
 void ui_sensors::upload_settings()
 {
-    qDebug() << "imu calibration upload settings";
-
-    kfly_comm::datagrams::IMUCalibration msg;
-
-    auto gain = calibrator_.get_gain_result();
-    auto bias = calibrator_.get_bias_result();
-
-    for (int i = 0; i < 3; i++)
+    if (calibrator_.valid())
     {
-        msg.accelerometer_gain[i] = gain[i];
-        msg.accelerometer_bias[i] = bias[i];
-        msg.magnetometer_gain[i] = 1;
-        msg.magnetometer_bias[i] = 0;
+        qDebug() << "imu calibration upload settings";
+
+        kfly_comm::datagrams::IMUCalibration msg;
+
+        auto gain = calibrator_.get_gain_result();
+        auto bias = calibrator_.get_bias_result();
+
+        for (int i = 0; i < 3; i++)
+        {
+            msg.accelerometer_gain[i] = gain[i];
+            msg.accelerometer_bias[i] = bias[i];
+            msg.magnetometer_gain[i] = 1;
+            msg.magnetometer_bias[i] = 0;
+        }
+
+        msg.timestamp = QDateTime::currentDateTime().toTime_t();
+
+        if (_communication != nullptr)
+            _communication->send(kfly_comm::codec::generate_packet(msg));
     }
-
-    msg.timestamp = QDateTime::currentDateTime().toTime_t();
-
-    if (_communication != nullptr)
-        _communication->send(kfly_comm::codec::generate_packet(msg));
 }
 
 void ui_sensors::connection_established()
@@ -145,6 +149,9 @@ void ui_sensors::imu_calibration(kfly_comm::datagrams::IMUCalibration msg)
 void ui_sensors::imu_rawdata(kfly_comm::datagrams::RawIMUData msg)
 {
 
+    if (!_accept_measurements)
+        return;
+
     static int i = 0;
 
     if (i++ == 100)
@@ -152,6 +159,7 @@ void ui_sensors::imu_rawdata(kfly_comm::datagrams::RawIMUData msg)
         qDebug() << "got raw imu data x100";
         i = 0;
     }
+
 
     auto state = calibrator_.add_sample(msg.accelerometer[0],
                                         msg.accelerometer[1],
@@ -163,8 +171,12 @@ void ui_sensors::imu_rawdata(kfly_comm::datagrams::RawIMUData msg)
     }
     else
     {
+        _accept_measurements = false;
+
         if (_communication != nullptr)
             _communication->unsubscribe(kfly_comm::commands::GetRawIMUData);
+
+        ui->progressAcc->setValue(100);
 
         if (calibrator_.axis_finished() == calibration::state::DONE)
         {
@@ -228,31 +240,36 @@ void ui_sensors::imu_rawdata(kfly_comm::datagrams::RawIMUData msg)
             }
             else
             {
+                calibrator_.reset();
+
                 if (!gain_sane)
                 {
-                    QMessageBox messageBox;
-                    messageBox.critical(0,
-                                        "Error",
-                                        "Gain is not within 10% nominal bounds.");
-                    messageBox.setFixedSize(500, 200);
+                    QMessageBox* msgBox = new QMessageBox( this );
+                    msgBox->setAttribute( Qt::WA_DeleteOnClose ); //makes sure the msgbox is deleted automatically when closed
+                    msgBox->setStandardButtons( QMessageBox::Ok );
+                    msgBox->setWindowTitle( tr("Error") );
+                    msgBox->setText( tr("Gain is not within 10% nominal bounds.") );
+                    msgBox->open( );
                 }
 
                 if (!bias_sane)
                 {
-                    QMessageBox messageBox;
-                    messageBox.critical(0,
-                                        "Error",
-                                        "Bias is not within 10% nominal bounds.");
-                    messageBox.setFixedSize(500, 200);
+                    QMessageBox* msgBox = new QMessageBox( this );
+                    msgBox->setAttribute( Qt::WA_DeleteOnClose ); //makes sure the msgbox is deleted automatically when closed
+                    msgBox->setStandardButtons( QMessageBox::Ok );
+                    msgBox->setWindowTitle( tr("Error") );
+                    msgBox->setText( tr("Bias is not within 10% nominal bounds.") );
+                    msgBox->open( );
                 }
 
                 if (!var_sane)
                 {
-                    QMessageBox messageBox;
-                    messageBox.critical(0,
-                                        "Error",
-                                        "Variance is not within 3x nominal bounds.");
-                    messageBox.setFixedSize(500, 200);
+                    QMessageBox* msgBox = new QMessageBox( this );
+                    msgBox->setAttribute( Qt::WA_DeleteOnClose ); //makes sure the msgbox is deleted automatically when closed
+                    msgBox->setStandardButtons( QMessageBox::Ok );
+                    msgBox->setWindowTitle( tr("Error") );
+                    msgBox->setText( tr("Variance is not within 3x nominal bounds.") );
+                    msgBox->open( );
                 }
 
             }
@@ -282,6 +299,7 @@ void ui_sensors::on_buttonCalibrateAcc_clicked()
         ui->buttonCalibrateAcc->setText("Abort");
         ui->buttonNextAxisAcc->setEnabled(false);
         ui->buttonNextAxisAcc->setText("Sampling...");
+        _accept_measurements = true;
 
         if (_communication != nullptr)
             _communication->subscribe(kfly_comm::commands::GetRawIMUData, 6);
@@ -292,6 +310,7 @@ void ui_sensors::on_buttonCalibrateAcc_clicked()
             _communication->unsubscribe(kfly_comm::commands::GetRawIMUData);
 
         calibrator_.reset();
+        _accept_measurements = false;
         ui->progressAcc->setValue(0);
         ui->buttonNextAxisAcc->setText("Next axis");
         ui->buttonNextAxisAcc->setEnabled(false);
@@ -304,6 +323,7 @@ void ui_sensors::on_buttonNextAxisAcc_clicked()
     if (_communication != nullptr)
         _communication->subscribe(kfly_comm::commands::GetRawIMUData, 6);
 
+    _accept_measurements = true;
     ui->buttonNextAxisAcc->setEnabled(false);
     ui->buttonNextAxisAcc->setText("Sampling...");
 }

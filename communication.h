@@ -6,6 +6,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 #include <vector>
+#include <thread>
 #include "kfly_comm/kfly_comm.hpp"
 
 class communication : public QObject
@@ -19,6 +20,10 @@ private:
     kfly_comm::codec _kfly_comm;
 
     std::mutex _serialmutex;
+
+    std::vector<uint8_t> _transmitt_buffer;
+
+    QTimer _transmit_timer;
 
 public:
     explicit communication(QObject *parent = 0);
@@ -54,6 +59,7 @@ public:
 private slots:
     void parseSerialData();
     void handleSerialError(QSerialPort::SerialPortError error);
+    void transmit_buffer();
 
 signals:
     void sigConnectionError(void);

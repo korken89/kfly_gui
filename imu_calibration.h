@@ -52,6 +52,7 @@ public:
     Eigen::Vector3d get_variance();
 
     void reset();
+    bool valid();
 };
 
 } // end imu_calibration

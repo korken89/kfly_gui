@@ -1,11 +1,10 @@
 #include "communication.h"
 
-#include <thread>
 
 communication::communication(QObject *parent)
     : QObject(parent)
 {
-  /* KFly datagram registrations */
+  // KFly datagram registrations
   _kfly_comm.register_callback(this, &communication::regPing);
   _kfly_comm.register_callback(this, &communication::regSystemStrings);
   _kfly_comm.register_callback(this, &communication::regSystemStatus);
@@ -22,16 +21,21 @@ communication::communication(QObject *parent)
   _kfly_comm.register_callback(this, &communication::regRawIMUData);
   _kfly_comm.register_callback(this, &communication::regIMUData);
 
+  // Reserve some space for the transmit buffer
+  _transmitt_buffer.reserve(10000);
+
   connect(&_serialport, &QSerialPort::readyRead,
           this, &communication::parseSerialData);
 
-  //connect(&_serialport, &QSerialPort::errorOccurred,
-  //        this, &communication::handleSerialError);
   connect(&_serialport,
           static_cast<void (QSerialPort::*)(QSerialPort::SerialPortError)>(
                   &QSerialPort::error),
           this, &communication::handleSerialError);
 
+    connect(&_transmit_timer, &QTimer::timeout,
+            this, &communication::transmit_buffer);
+
+    _transmit_timer.start(10);
 }
 
 communication::~communication()
@@ -41,6 +45,8 @@ communication::~communication()
 
 bool communication::openPort(const QString& portname, int baudrate)
 {
+    std::lock_guard<std::mutex> lock(_serialmutex);
+
     closePort();
 
     if (portname.trimmed() == "" || baudrate < 9600)
@@ -62,28 +68,18 @@ bool communication::openPort(const QString& portname, int baudrate)
 
 void communication::closePort()
 {
+
     if (_serialport.isOpen())
     {
         _serialport.close();
     }
+    _transmitt_buffer.clear();
 }
 
 void communication::send(const std::vector<uint8_t>& buf)
 {
     std::lock_guard<std::mutex> lock(_serialmutex);
-
-    if (_serialport.isOpen())
-    {
-        QByteArray data = QByteArray(reinterpret_cast<const char*>(buf.data()),
-                                     buf.size());
-        auto wr = _serialport.write(data);
-
-        if (wr != static_cast<decltype(wr)>(buf.size()))
-            qDebug() << "Error occured when writing data to serial port, size: "
-                     << buf.size() << ", code: " << wr;
-
-        _serialport.waitForBytesWritten(100);
-    }
+    _transmitt_buffer.insert(_transmitt_buffer.end(), buf.cbegin(), buf.cend());
 }
 
 void communication::subscribe(kfly_comm::commands cmd, unsigned int dt_ms)
@@ -142,7 +138,28 @@ void communication::handleSerialError(QSerialPort::SerialPortError error)
     if (error != QSerialPort::NoError)
     {
         emit sigConnectionError();
+
+        std::lock_guard<std::mutex> lock(_serialmutex);
         closePort();
+    }
+}
+
+void communication::transmit_buffer()
+{
+    std::lock_guard<std::mutex> lock(_serialmutex);
+
+    if (_serialport.isOpen() && !_transmitt_buffer.empty())
+    {
+        auto size = _transmitt_buffer.size();
+        QByteArray data = QByteArray(reinterpret_cast<const char*>(_transmitt_buffer.data()),
+                                     size);
+        _transmitt_buffer.clear();
+
+        auto wr = _serialport.write(data);
+
+        if (wr != static_cast<decltype(wr)>(size))
+            qDebug() << "Error occured when writing data to serial port, size: "
+                     << size << ", code: " << wr;
     }
 }
 

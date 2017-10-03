@@ -31,6 +31,7 @@ private:
     bool _upload_settings;
     QTimer _upload_settings_timer;
 
+    bool _accept_measurements;
     calibration::gain_bias_3axis calibrator_;
 
     void upload_settings();

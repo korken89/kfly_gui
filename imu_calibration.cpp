@@ -202,4 +202,9 @@ void gain_bias_3axis::reset()
     axis_means_.setZero();
 }
 
+bool gain_bias_3axis::valid()
+{
+    return current_state_ == state::DONE;
+}
+
 } // end calibration
