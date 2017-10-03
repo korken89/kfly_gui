@@ -41,6 +41,7 @@ public slots:
 private slots:
     void upload_settings_timer();
 
+    void on_buttonEraseAllSettings_clicked();
 };
 
 #endif // UI_DEVELOPER_H

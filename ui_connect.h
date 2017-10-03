@@ -52,6 +52,7 @@ private slots:
 
     void on_buttonAutoUpload_toggled(bool checked);
     void on_buttonApplyChanges_clicked();
+    void on_buttonSaveToFlash_clicked();
 };
 
 #endif // UI_CONNECT_H

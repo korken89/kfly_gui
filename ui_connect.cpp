@@ -186,3 +186,12 @@ void ui_connect::on_buttonApplyChanges_clicked()
 {
     emit upload_now();
 }
+
+void ui_connect::on_buttonSaveToFlash_clicked()
+{
+    if (_communication != nullptr)
+    {
+        using namespace kfly_comm;
+        _communication->send(codec::generate_command(commands::SaveToFlash));
+    }
+}

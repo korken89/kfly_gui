@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="buttonEraseAllSettings">
      <property name="text">
       <string>Erase all settings</string>
      </property>

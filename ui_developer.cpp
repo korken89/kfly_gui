@@ -57,3 +57,12 @@ void ui_developer::upload_settings_timer()
         upload_settings();
     }
 }
+
+void ui_developer::on_buttonEraseAllSettings_clicked()
+{
+    if (_communication != nullptr)
+    {
+        using namespace kfly_comm;
+        _communication->send(codec::generate_command(commands::EraseFlash));
+    }
+}
