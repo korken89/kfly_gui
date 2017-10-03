@@ -4,7 +4,7 @@
 ui_sensors::ui_sensors(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ui_sensors),
-    calibrator_(100)
+    calibrator_(1000)
 {
     ui->setupUi(this);
 

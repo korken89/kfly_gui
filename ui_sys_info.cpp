@@ -8,6 +8,7 @@ ui_sys_info::ui_sys_info(QWidget *parent) :
     ui->setupUi(this);
 
     _auto_upload_checked = false;
+    _upload_settings = false;
 }
 
 ui_sys_info::~ui_sys_info()
@@ -25,6 +26,35 @@ void ui_sys_info::register_communication(communication *com)
     connect(_communication, &communication::sigSystemStatus,
             this, &ui_sys_info::system_status);
 
+    connect(&_upload_settings_timer, &QTimer::timeout,
+            this, &ui_sys_info::upload_settings_timer);
+
+    _upload_settings_timer.start(1000);
+
+}
+
+void ui_sys_info::showEvent(QShowEvent *)
+{
+    if (_communication != nullptr)
+        _communication->subscribe(kfly_comm::commands::GetSystemStatus, 200);
+}
+
+void ui_sys_info::hideEvent(QHideEvent *)
+{
+    if (_communication != nullptr)
+        _communication->unsubscribe(kfly_comm::commands::GetSystemStatus);
+}
+
+void ui_sys_info::upload_settings()
+{
+    qDebug() << "system strings upload";
+
+    kfly_comm::datagrams::SetDeviceStrings msg;
+    msg.SetStrings(ui->editVehicleName->text().toLatin1().data(),
+                   ui->editVehicleType->text().toLatin1().data());
+
+    if (_communication != nullptr)
+        _communication->send(kfly_comm::codec::generate_packet(msg));
 }
 
 void ui_sys_info::connection_established()
@@ -34,7 +64,9 @@ void ui_sys_info::connection_established()
     {
         using namespace kfly_comm;
         _communication->send(codec::generate_command(commands::GetSystemStrings));
-        _communication->subscribe(kfly_comm::commands::GetSystemStatus, 200);
+
+        if (!isHidden())
+            _communication->subscribe(kfly_comm::commands::GetSystemStatus, 200);
     }
 }
 
@@ -45,7 +77,7 @@ void ui_sys_info::auto_upload_changed(bool checked)
 
 void ui_sys_info::upload_now()
 {
-
+    upload_settings();
 }
 
 void ui_sys_info::system_strings(kfly_comm::datagrams::SystemStrings msg)
@@ -55,13 +87,10 @@ void ui_sys_info::system_strings(kfly_comm::datagrams::SystemStrings msg)
     QString kfly_version = msg.kfly_version;
     QString uid = QByteArray(reinterpret_cast<char *>(msg.unique_id), 12).toBase64();
 
-    if (ui->editUniqueID->text() != uid)
-    {
-        ui->editVehicleName->setText(vehicle_name);
-        ui->editVehicleType->setText(vehicle_type);
-        ui->editVersion->setText(kfly_version);
-        ui->editUniqueID->setText(uid);
-    }
+    ui->editVehicleName->setText(vehicle_name);
+    ui->editVehicleType->setText(vehicle_type);
+    ui->editVersion->setText(kfly_version);
+    ui->editUniqueID->setText(uid);
 }
 
 void ui_sys_info::system_status(kfly_comm::datagrams::SystemStatus msg)
@@ -91,4 +120,23 @@ void ui_sys_info::system_status(kfly_comm::datagrams::SystemStatus msg)
     ui->buttonSerialInterface->setChecked(msg.serial_interface_enabled);
     ui->buttonInAir->setChecked(msg.in_air);
 
+}
+
+void ui_sys_info::upload_settings_timer()
+{
+    if (_upload_settings && _auto_upload_checked)
+    {
+        _upload_settings = false;
+        upload_settings();
+    }
+}
+
+void ui_sys_info::on_editVehicleType_textChanged(const QString &)
+{
+    _upload_settings = true;
+}
+
+void ui_sys_info::on_editVehicleName_textChanged(const QString &)
+{
+    _upload_settings = true;
 }
