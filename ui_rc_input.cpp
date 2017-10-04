@@ -111,7 +111,12 @@ void ui_rc_input::upload_now()
 
 void ui_rc_input::rc_values(kfly_comm::datagrams::RCValues msg)
 {
-    qDebug() << "got rc values";
+    static int cnt = 0;
+    if (cnt++ > 10)
+    {
+        qDebug() << "got rc values x10";
+        cnt = 0;
+    }
 
     ui->buttonInputDetected->setChecked(msg.active_connection);
     ui->barRSSI->setValue(msg.rssi);

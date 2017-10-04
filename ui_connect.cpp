@@ -117,7 +117,7 @@ void ui_connect::ping_received()
 
     emit heartbeat();
 
-    qDebug() << "got ping";
+    // qDebug() << "got ping";
 }
 
 void ui_connect::connection_error()

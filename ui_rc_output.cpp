@@ -130,7 +130,12 @@ void ui_rc_output::rc_output_settings(kfly_comm::datagrams::RCOutputSettings msg
 
 void ui_rc_output::control_signals(kfly_comm::datagrams::ControlSignals msg)
 {
-    qDebug() << "got control signals";
+    static int cnt = 0;
+    if (cnt++ > 10)
+    {
+        qDebug() << "got control signals x10";
+        cnt = 0;
+    }
 
     for (auto i = 0; i < 8; i++)
         _channels[i]->set_bar_value(msg.motor_command[i]);
