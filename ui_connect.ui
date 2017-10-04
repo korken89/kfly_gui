@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1010</width>
+    <width>1001</width>
     <height>73</height>
    </rect>
   </property>
@@ -208,7 +208,7 @@ QGroupBox::title {
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
+      <enum>QSizePolicy::Maximum</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
@@ -222,7 +222,7 @@ QGroupBox::title {
     <widget class="QGroupBox" name="groupBox">
      <property name="minimumSize">
       <size>
-       <width>300</width>
+       <width>375</width>
        <height>0</height>
       </size>
      </property>
