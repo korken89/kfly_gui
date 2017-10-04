@@ -55,9 +55,9 @@ void ui_arming::upload_settings()
     kfly_comm::datagrams::ArmSettings msg;
 
     if (ui->checkSpinWhenArmed->checkState() == Qt::Checked)
-        msg.armed_min_throttle = 0;
-    else
         msg.armed_min_throttle = static_cast<float>(ui->spinSpinWhenArmedThrottle->value()) / 100.0f;
+    else
+        msg.armed_min_throttle = 0;
 
     msg.arm_stick_time = static_cast<uint8_t>(ui->spinArmTime->value() * 10 + 0.5);
 
@@ -146,7 +146,7 @@ void ui_arming::arming_settings(kfly_comm::datagrams::ArmSettings msg)
     else
     {
         ui->checkSpinWhenArmed->setChecked(true);
-        ui->spinSpinWhenArmedThrottle->setValue(msg.armed_min_throttle * 100);
+        ui->spinSpinWhenArmedThrottle->setValue(msg.armed_min_throttle * 100.0 + 0.5);
     }
 
     ui->spinArmTime->setValue(static_cast<double>(msg.arm_stick_time) / 10.0);
