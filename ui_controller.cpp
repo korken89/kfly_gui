@@ -163,13 +163,13 @@ void ui_controller::update_rate_plot()
     // Add plots
     ui->plotRate->clearGraphs();
     ui->plotRate->addGraph();
-    ui->plotRate->graph(0)->setPen(QPen(Qt::blue));
+    ui->plotRate->graph(0)->setPen(QPen(Qt::blue, 1.5));
 
     ui->plotRate->addGraph();
-    ui->plotRate->graph(1)->setPen(QPen(Qt::red));
+    ui->plotRate->graph(1)->setPen(QPen(Qt::red, 1.5));
 
     ui->plotRate->addGraph();
-    ui->plotRate->graph(2)->setPen(QPen(Qt::darkGreen));
+    ui->plotRate->graph(2)->setPen(QPen(Qt::darkGreen, 1.5));
 
     // create graph and assign data to it:
     ui->plotRate->graph(0)->setData(x, y_roll);
