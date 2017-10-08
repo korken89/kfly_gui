@@ -6,7 +6,7 @@
 
 QT       += core gui serialport
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = kfly_gui
 TEMPLATE = app
@@ -24,7 +24,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 INCLUDEPATH += $$PWD/kfly_comm/lib \
-               $$PWD/kfly_comm/include
+               $$PWD/kfly_comm/include \
+               $$PWD/qcustomplot
 
 SOURCES += main.cpp \
            $$PWD/kfly_comm/src/kfly_comm.cpp \
@@ -43,7 +44,8 @@ SOURCES += main.cpp \
     ui_controller.cpp \
     ui_sensors.cpp \
     imu_calibration.cpp \
-    ui_developer.cpp
+    ui_developer.cpp \
+    qcustomplot/qcustomplot.cpp
 
 HEADERS  += mainwindow.h \
             sliderbox.h \
@@ -60,7 +62,8 @@ HEADERS  += mainwindow.h \
     ui_controller.h \
     ui_sensors.h \
     imu_calibration.h \
-    ui_developer.h
+    ui_developer.h \
+    qcustomplot/qcustomplot.h
 
 
 FORMS    += mainwindow.ui \

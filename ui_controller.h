@@ -38,6 +38,7 @@ private:
 
     double to_radians(double in);
     double to_degrees(double in);
+    void update_rate_plot();
 
 public slots:
     void connection_established();
