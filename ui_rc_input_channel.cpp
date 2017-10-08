@@ -80,7 +80,8 @@ void ui_rc_input_channel::set_minimum(int value)
 
 void ui_rc_input_channel::set_center(int value)
 {
-    ui->spinCenter->setValue(value);
+    if (ui->boxType->currentText() != "2-state Switch")
+        ui->spinCenter->setValue(value);
 }
 
 void ui_rc_input_channel::set_maximum(int value)
