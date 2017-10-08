@@ -10,6 +10,12 @@ ui_rc_output_channel::ui_rc_output_channel(QWidget *parent) :
     ui->boxOutputMode->addItem("50 Hz PWM");
     ui->boxOutputMode->addItem("400 Hz PWM");
     ui->boxOutputMode->addItem("OneShot 125");
+    ui->boxOutputMode->addItem("OneShot 42");
+    ui->boxOutputMode->addItem("MultiShot");
+    ui->boxOutputMode->addItem("DShot 150");
+    ui->boxOutputMode->addItem("DShot 300");
+    ui->boxOutputMode->addItem("DShot 600");
+    ui->boxOutputMode->addItem("DShot 1200");
 }
 
 ui_rc_output_channel::~ui_rc_output_channel()
@@ -35,8 +41,20 @@ void ui_rc_output_channel::set_mode(kfly_comm::enums::RCOutput_Mode mode)
         ui->boxOutputMode->setCurrentText("50 Hz PWM");
     else if (mode == RCOutput_Mode::RCOUTPUT_MODE_400HZ_PWM)
         ui->boxOutputMode->setCurrentText("400 Hz PWM");
-    else if (mode == RCOutput_Mode::RCOUTPUT_MODE_OPM)
+    else if (mode == RCOutput_Mode::RCOUTPUT_MODE_ONESHOT125)
         ui->boxOutputMode->setCurrentText("OneShot 125");
+    else if (mode == RCOutput_Mode::RCOUTPUT_MODE_ONESHOT42)
+        ui->boxOutputMode->setCurrentText("OneShot 42");
+    else if (mode == RCOutput_Mode::RCOUTPUT_MODE_MULTISHOT)
+        ui->boxOutputMode->setCurrentText("MultiShot");
+    else if (mode == RCOutput_Mode::RCOUTPUT_MODE_DSHOT150)
+        ui->boxOutputMode->setCurrentText("DShot 150");
+    else if (mode == RCOutput_Mode::RCOUTPUT_MODE_DSHOT300)
+        ui->boxOutputMode->setCurrentText("DShot 300");
+    else if (mode == RCOutput_Mode::RCOUTPUT_MODE_DSHOT600)
+        ui->boxOutputMode->setCurrentText("DShot 600");
+    else if (mode == RCOutput_Mode::RCOUTPUT_MODE_DSHOT1200)
+        ui->boxOutputMode->setCurrentText("DShot 1200");
 }
 
 kfly_comm::enums::RCOutput_Mode ui_rc_output_channel::get_mode()
@@ -48,9 +66,21 @@ kfly_comm::enums::RCOutput_Mode ui_rc_output_channel::get_mode()
     else if (ui->boxOutputMode->currentText() == "400 Hz PWM")
         return RCOutput_Mode::RCOUTPUT_MODE_400HZ_PWM;
     else if (ui->boxOutputMode->currentText() == "OneShot 125")
-        return RCOutput_Mode::RCOUTPUT_MODE_OPM;
+        return RCOutput_Mode::RCOUTPUT_MODE_ONESHOT125;
+    else if (ui->boxOutputMode->currentText() == "OneShot 42")
+        return RCOutput_Mode::RCOUTPUT_MODE_ONESHOT42;
+    else if (ui->boxOutputMode->currentText() == "MultiShot")
+        return RCOutput_Mode::RCOUTPUT_MODE_MULTISHOT;
+    else if (ui->boxOutputMode->currentText() == "DShot 150")
+        return RCOutput_Mode::RCOUTPUT_MODE_DSHOT150;
+    else if (ui->boxOutputMode->currentText() == "DShot 300")
+        return RCOutput_Mode::RCOUTPUT_MODE_DSHOT300;
+    else if (ui->boxOutputMode->currentText() == "DShot 600")
+        return RCOutput_Mode::RCOUTPUT_MODE_DSHOT600;
+    else if (ui->boxOutputMode->currentText() == "DShot 1200")
+        return RCOutput_Mode::RCOUTPUT_MODE_DSHOT1200;
     else
-        return RCOutput_Mode::RCOUTPUT_MODE_OPM;
+        return RCOutput_Mode::RCOUTPUT_MODE_50HZ_PWM;
 }
 
 void ui_rc_output_channel::set_channel_enabled(bool enabled)

@@ -126,6 +126,8 @@ void ui_rc_output::rc_output_settings(kfly_comm::datagrams::RCOutputSettings msg
 
     _channels[0]->set_mode(msg.mode_bank1);
     _channels[4]->set_mode(msg.mode_bank2);
+
+    channel_value_changed();
 }
 
 void ui_rc_output::control_signals(kfly_comm::datagrams::ControlSignals msg)
