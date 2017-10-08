@@ -137,7 +137,7 @@ double ui_controller::to_degrees(double in)
 void ui_controller::update_rate_plot()
 {
     // generate some data:
-    QVector<double> x(101), y_roll(101), y_pitch(101), y_yaw(101); // initialize with entries 0..100
+    QVector<double> x(101), xp(101), y_roll(101), y_pitch(101), y_yaw(101); // initialize with entries 0..100
 
     double linear_rate_roll = ui->spinCenterRateRoll->value();
     double max_rate_roll = ui->spinLimitRateRoll->value();
@@ -149,6 +149,7 @@ void ui_controller::update_rate_plot()
     for (int i=0; i<101; ++i)
     {
       x[i] = i/50.0 - 1; // x goes from -1 to 1
+      xp[i] = x[i] * 100; // x goes from -1 to 1
 
       y_roll[i] = linear_rate_roll * x[i] +
                   (max_rate_roll - linear_rate_roll) * x[i] * x[i] * x[i];
@@ -172,9 +173,9 @@ void ui_controller::update_rate_plot()
     ui->plotRate->graph(2)->setPen(QPen(Qt::darkGreen, 1.5));
 
     // create graph and assign data to it:
-    ui->plotRate->graph(0)->setData(x, y_roll);
-    ui->plotRate->graph(1)->setData(x, y_pitch);
-    ui->plotRate->graph(2)->setData(x, y_yaw);
+    ui->plotRate->graph(0)->setData(xp, y_roll);
+    ui->plotRate->graph(1)->setData(xp, y_pitch);
+    ui->plotRate->graph(2)->setData(xp, y_yaw);
 
     // names
     ui->plotRate->graph(0)->setName("Roll rate");
@@ -183,7 +184,7 @@ void ui_controller::update_rate_plot()
 
     // give the axes some labels:
 
-    ui->plotRate->xAxis->setLabel("Normalized stick input");
+    ui->plotRate->xAxis->setLabel("Stick input (%)");
     ui->plotRate->yAxis->setLabel("Rate (deg/s)");
     // set axes ranges, so we see all data:
     //double max = std::max(std::max(max_rate_roll, max_rate_pitch), max_rate_yaw);
