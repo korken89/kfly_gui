@@ -66,11 +66,11 @@ private slots:
     void on_spinLimitRateRoll_valueChanged(int);
     void on_spinLimitRatePitch_valueChanged(int);
     void on_spinLimitRateYaw_valueChanged(int);
-    void on_spinLimitAttitudeRateRoll_valueChanged(int);
+    void on_spinCenterRateRoll_valueChanged(int);
+    void on_spinCenterRatePitch_valueChanged(int);
+    void on_spinCenterRateYaw_valueChanged(int);
     void on_spinLimitAttitudeRoll_valueChanged(int);
-    void on_spinLimitAttitudeRatePitch_valueChanged(int);
     void on_spinLimitAttitudePitch_valueChanged(int);
-    void on_spinLimitAttitudeRateYaw_valueChanged(int);
 };
 
 #endif // UI_CONTROLLER_H

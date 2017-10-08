@@ -542,7 +542,23 @@ QGroupBox::title {
              </size>
             </property>
             <property name="text">
-             <string>Rate (deg/s)</string>
+             <string>Max rate (deg/s)</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_19">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Center rate (deg/s)</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -571,6 +587,16 @@ QGroupBox::title {
           </item>
           <item>
            <widget class="QSpinBox" name="spinLimitRateRoll">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="singleStep">
+             <number>20</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinCenterRateRoll">
             <property name="maximum">
              <number>10000</number>
             </property>
@@ -609,6 +635,16 @@ QGroupBox::title {
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QSpinBox" name="spinCenterRatePitch">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="singleStep">
+             <number>20</number>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -631,6 +667,16 @@ QGroupBox::title {
           </item>
           <item>
            <widget class="QSpinBox" name="spinLimitRateYaw">
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+            <property name="singleStep">
+             <number>20</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="spinCenterRateYaw">
             <property name="maximum">
              <number>10000</number>
             </property>
@@ -697,22 +743,6 @@ QGroupBox::title {
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_19">
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Rate (deg/s)</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QLabel" name="label_18">
             <property name="maximumSize">
              <size>
@@ -749,16 +779,6 @@ QGroupBox::title {
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinLimitAttitudeRateRoll">
-            <property name="maximum">
-             <number>10000</number>
-            </property>
-            <property name="singleStep">
-             <number>20</number>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QSpinBox" name="spinLimitAttitudeRoll">
             <property name="maximum">
              <number>60</number>
@@ -786,16 +806,6 @@ QGroupBox::title {
            </widget>
           </item>
           <item>
-           <widget class="QSpinBox" name="spinLimitAttitudeRatePitch">
-            <property name="maximum">
-             <number>10000</number>
-            </property>
-            <property name="singleStep">
-             <number>20</number>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QSpinBox" name="spinLimitAttitudePitch">
             <property name="maximum">
              <number>60</number>
@@ -815,20 +825,10 @@ QGroupBox::title {
              </size>
             </property>
             <property name="text">
-             <string>Yaw</string>
+             <string/>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSpinBox" name="spinLimitAttitudeRateYaw">
-            <property name="maximum">
-             <number>10000</number>
-            </property>
-            <property name="singleStep">
-             <number>20</number>
             </property>
            </widget>
           </item>

@@ -90,16 +90,16 @@ void ui_controller::upload_limits_settings()
 
     kfly_comm::datagrams::ControllerLimits msg;
 
-    msg.max_rate.roll = to_radians(ui->spinLimitRateRoll->value());
-    msg.max_rate.pitch = to_radians(ui->spinLimitRatePitch->value());
-    msg.max_rate.yaw = to_radians(ui->spinLimitRateYaw->value());
+    msg.max_rate.max_rate.roll = to_radians(ui->spinLimitRateRoll->value());
+    msg.max_rate.max_rate.pitch = to_radians(ui->spinLimitRatePitch->value());
+    msg.max_rate.max_rate.yaw = to_radians(ui->spinLimitRateYaw->value());
+
+    msg.max_rate.center_rate.roll = to_radians(ui->spinCenterRateRoll->value());
+    msg.max_rate.center_rate.pitch = to_radians(ui->spinCenterRatePitch->value());
+    msg.max_rate.center_rate.yaw = to_radians(ui->spinCenterRateYaw->value());
 
     msg.max_angle.roll = to_radians(ui->spinLimitAttitudeRoll->value());
     msg.max_angle.pitch = to_radians(ui->spinLimitAttitudePitch->value());
-
-    msg.max_rate_attitude.roll = to_radians(ui->spinLimitAttitudeRateRoll->value());
-    msg.max_rate_attitude.pitch = to_radians(ui->spinLimitAttitudeRatePitch->value());
-    msg.max_rate_attitude.yaw = to_radians(ui->spinLimitAttitudeRateYaw->value());
 
     msg.max_velocity.horizontal = 0;
     msg.max_velocity.vertical = 0;
@@ -174,16 +174,17 @@ void ui_controller::limits_settings(kfly_comm::datagrams::ControllerLimits msg)
 {
     qDebug() << "got controller limits settings";
 
-    ui->spinLimitRateRoll->setValue(to_degrees(msg.max_rate.roll) + 0.5);
-    ui->spinLimitRatePitch->setValue(to_degrees(msg.max_rate.pitch) + 0.5);
-    ui->spinLimitRateYaw->setValue(to_degrees(msg.max_rate.yaw) + 0.5);
+    ui->spinLimitRateRoll->setValue(to_degrees(msg.max_rate.max_rate.roll) + 0.5);
+    ui->spinLimitRatePitch->setValue(to_degrees(msg.max_rate.max_rate.pitch) + 0.5);
+    ui->spinLimitRateYaw->setValue(to_degrees(msg.max_rate.max_rate.yaw) + 0.5);
+
+    ui->spinCenterRateRoll->setValue(to_degrees(msg.max_rate.center_rate.roll) + 0.5);
+    ui->spinCenterRatePitch->setValue(to_degrees(msg.max_rate.center_rate.pitch) + 0.5);
+    ui->spinCenterRateYaw->setValue(to_degrees(msg.max_rate.center_rate.yaw) + 0.5);
 
     ui->spinLimitAttitudeRoll->setValue(to_degrees(msg.max_angle.roll) + 0.5);
     ui->spinLimitAttitudePitch->setValue(to_degrees(msg.max_angle.pitch) + 0.5);
 
-    ui->spinLimitAttitudeRateRoll->setValue(to_degrees(msg.max_rate_attitude.roll) + 0.5);
-    ui->spinLimitAttitudeRatePitch->setValue(to_degrees(msg.max_rate_attitude.pitch) + 0.5);
-    ui->spinLimitAttitudeRateYaw->setValue(to_degrees(msg.max_rate_attitude.yaw) + 0.5);
 
 }
 
@@ -300,7 +301,19 @@ void ui_controller::on_spinLimitRateYaw_valueChanged(int)
         _upload_limit_settings = true;
 }
 
-void ui_controller::on_spinLimitAttitudeRateRoll_valueChanged(int)
+void ui_controller::on_spinCenterRateRoll_valueChanged(int)
+{
+    if (!isHidden())
+        _upload_limit_settings = true;
+}
+
+void ui_controller::on_spinCenterRatePitch_valueChanged(int)
+{
+    if (!isHidden())
+        _upload_limit_settings = true;
+}
+
+void ui_controller::on_spinCenterRateYaw_valueChanged(int)
 {
     if (!isHidden())
         _upload_limit_settings = true;
@@ -312,19 +325,7 @@ void ui_controller::on_spinLimitAttitudeRoll_valueChanged(int)
         _upload_limit_settings = true;
 }
 
-void ui_controller::on_spinLimitAttitudeRatePitch_valueChanged(int)
-{
-    if (!isHidden())
-        _upload_limit_settings = true;
-}
-
 void ui_controller::on_spinLimitAttitudePitch_valueChanged(int)
-{
-    if (!isHidden())
-        _upload_limit_settings = true;
-}
-
-void ui_controller::on_spinLimitAttitudeRateYaw_valueChanged(int)
 {
     if (!isHidden())
         _upload_limit_settings = true;
