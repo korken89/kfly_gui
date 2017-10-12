@@ -7,12 +7,19 @@ ui_controller::ui_controller(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->spinCenterRateRoll->setValue(100);
-    ui->spinCenterRatePitch->setValue(100);
-    ui->spinCenterRateYaw->setValue(100);
+    ui->comboDtermFilterTypeRoll->addItem("1 pole (PT1)");
+    ui->comboDtermFilterTypeRoll->addItem("2 pole (biquad)");
+    ui->comboDtermFilterTypePitch->addItem("1 pole (PT1)");
+    ui->comboDtermFilterTypePitch->addItem("2 pole (biquad)");
+    ui->comboDtermFilterTypeYaw->addItem("1 pole (PT1)");
+    ui->comboDtermFilterTypeYaw->addItem("2 pole (biquad)");
 
-    ui->spinLimitRateRoll->setValue(1000);
-    ui->spinLimitRatePitch->setValue(1000);
+    ui->spinCenterRateRoll->setValue(200);
+    ui->spinCenterRatePitch->setValue(200);
+    ui->spinCenterRateYaw->setValue(200);
+
+    ui->spinLimitRateRoll->setValue(600);
+    ui->spinLimitRatePitch->setValue(600);
     ui->spinLimitRateYaw->setValue(600);
 
     ui->plotRate->plotLayout()->insertRow(0);
@@ -26,6 +33,7 @@ ui_controller::ui_controller(QWidget *parent) :
     _upload_rate_controller_settings = false;
     _upload_attitude_controller_settings = false;
     _upload_limit_settings = false;
+    _upload_filter_settings = false;
 }
 
 ui_controller::~ui_controller()
@@ -126,6 +134,35 @@ void ui_controller::upload_limits_settings()
         _communication->send(kfly_comm::codec::generate_packet(msg));
 }
 
+void ui_controller::upload_filter_settings()
+{
+    qDebug() << "controller filter upload settings";
+
+    kfly_comm::datagrams::ControlFilterSettings msg;
+
+    msg.dterm_cutoff[0] = ui->spinDtermCutoffRoll->value();
+    msg.dterm_cutoff[1] = ui->spinDtermCutoffPitch->value();
+    msg.dterm_cutoff[2] = ui->spinDtermCutoffYaw->value();
+
+    if (ui->comboDtermFilterTypeRoll->currentText().startsWith('1'))
+        msg.dterm_filter_mode[0] = kfly_comm::enums::BiquadMode::PT1;
+    else
+        msg.dterm_filter_mode[0] = kfly_comm::enums::BiquadMode::BIQUAD;
+
+    if (ui->comboDtermFilterTypePitch->currentText().startsWith('1'))
+        msg.dterm_filter_mode[1] = kfly_comm::enums::BiquadMode::PT1;
+    else
+        msg.dterm_filter_mode[1] = kfly_comm::enums::BiquadMode::BIQUAD;
+
+    if (ui->comboDtermFilterTypeYaw->currentText().startsWith('1'))
+        msg.dterm_filter_mode[2] = kfly_comm::enums::BiquadMode::PT1;
+    else
+        msg.dterm_filter_mode[2] = kfly_comm::enums::BiquadMode::BIQUAD;
+
+    if (_communication != nullptr)
+        _communication->send(kfly_comm::codec::generate_packet(msg));
+}
+
 double ui_controller::to_radians(double in)
 {
     return (in / 180.0) * M_PI;
@@ -218,6 +255,7 @@ void ui_controller::upload_now()
     upload_rate_controller_settings();
     upload_attitude_controller_settings();
     upload_limits_settings();
+    upload_filter_settings();
 }
 
 void ui_controller::rate_controller_settings(kfly_comm::datagrams::RateControllerData msg)
@@ -290,6 +328,12 @@ void ui_controller::upload_settings_timer()
     {
         _upload_limit_settings = false;
         upload_limits_settings();
+    }
+
+    if (_upload_filter_settings && _auto_upload_checked)
+    {
+        _upload_filter_settings = false;
+        upload_filter_settings();
     }
 }
 
@@ -443,4 +487,45 @@ void ui_controller::on_spinLimitAttitudePitch_valueChanged(int)
 {
     if (!isHidden())
         _upload_limit_settings = true;
+}
+
+
+//
+// Changes to control filters
+//
+
+void ui_controller::on_spinDtermCutoffRoll_valueChanged(int)
+{
+    if (!isHidden())
+        _upload_filter_settings = true;
+}
+
+void ui_controller::on_spinDtermCutoffPitch_valueChanged(int)
+{
+    if (!isHidden())
+        _upload_filter_settings = true;
+}
+
+void ui_controller::on_spinDtermCutoffYaw_valueChanged(int)
+{
+    if (!isHidden())
+        _upload_filter_settings = true;
+}
+
+void ui_controller::on_comboDtermFilterTypeRoll_currentTextChanged(const QString &)
+{
+    if (!isHidden())
+        _upload_filter_settings = true;
+}
+
+void ui_controller::on_comboDtermFilterTypePitch_currentTextChanged(const QString &)
+{
+    if (!isHidden())
+        _upload_filter_settings = true;
+}
+
+void ui_controller::on_comboDtermFilterTypeYaw_currentTextChanged(const QString &)
+{
+    if (!isHidden())
+        _upload_filter_settings = true;
 }

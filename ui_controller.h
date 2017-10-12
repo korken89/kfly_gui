@@ -30,11 +30,13 @@ private:
     bool _upload_rate_controller_settings;
     bool _upload_attitude_controller_settings;
     bool _upload_limit_settings;
+    bool _upload_filter_settings;
     QTimer _upload_settings_timer;
 
     void upload_rate_controller_settings();
     void upload_attitude_controller_settings();
     void upload_limits_settings();
+    void upload_filter_settings();
 
     double to_radians(double in);
     double to_degrees(double in);
@@ -73,6 +75,12 @@ private slots:
     void on_spinCenterRateYaw_valueChanged(int);
     void on_spinLimitAttitudeRoll_valueChanged(int);
     void on_spinLimitAttitudePitch_valueChanged(int);
+    void on_spinDtermCutoffRoll_valueChanged(int);
+    void on_spinDtermCutoffPitch_valueChanged(int);
+    void on_spinDtermCutoffYaw_valueChanged(int);
+    void on_comboDtermFilterTypeRoll_currentTextChanged(const QString &);
+    void on_comboDtermFilterTypePitch_currentTextChanged(const QString &);
+    void on_comboDtermFilterTypeYaw_currentTextChanged(const QString &);
 };
 
 #endif // UI_CONTROLLER_H
