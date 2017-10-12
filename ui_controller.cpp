@@ -46,6 +46,9 @@ void ui_controller::register_communication(communication *com)
     connect(_communication, &communication::sigControllerLimits,
             this, &ui_controller::limits_settings);
 
+    connect(_communication, &communication::sigControlFilterSettings,
+            this, &ui_controller::control_filter_settings);
+
     connect(&_upload_settings_timer, &QTimer::timeout,
             this, &ui_controller::upload_settings_timer);
 
@@ -86,10 +89,10 @@ void ui_controller::upload_attitude_controller_settings()
     kfly_comm::datagrams::AttitudeControllerData msg;
 
     msg.roll_controller.P_gain = ui->spinAttitudeRoll_p->value();
-    msg.roll_controller.I_gain = ui->spinAttitudeRoll_i->value();
+    msg.roll_controller.I_gain = 0;
 
     msg.pitch_controller.P_gain = ui->spinAttitudePitch_p->value();
-    msg.pitch_controller.I_gain = ui->spinAttitudePitch_i->value();
+    msg.pitch_controller.I_gain = 0;
 
     // TODO: For future use
     msg.yaw_controller.P_gain = 0;
@@ -152,13 +155,13 @@ void ui_controller::update_rate_plot()
       xp[i] = x[i] * 100; // x goes from -1 to 1
 
       y_roll[i] = linear_rate_roll * x[i] +
-                  (max_rate_roll - linear_rate_roll) * x[i] * x[i] * x[i];
+                  (max_rate_roll - linear_rate_roll) * x[i] * x[i] * x[i] * std::abs(x[i]);
 
       y_pitch[i] = linear_rate_pitch * x[i] +
-                   (max_rate_pitch - linear_rate_pitch) * x[i] * x[i] * x[i];
+                   (max_rate_pitch - linear_rate_pitch) * x[i] * x[i] * x[i] * std::abs(x[i]);
 
       y_yaw[i] = linear_rate_yaw * x[i] +
-                 (max_rate_yaw - linear_rate_yaw) * x[i] * x[i] * x[i];
+                 (max_rate_yaw - linear_rate_yaw) * x[i] * x[i] * x[i] * std::abs(x[i]);
     }
 
     // Add plots
@@ -237,10 +240,10 @@ void ui_controller::attitude_controller_settings(kfly_comm::datagrams::AttitudeC
     qDebug() << "got attitude controller settings";
 
     ui->spinAttitudeRoll_p->setValue(msg.roll_controller.P_gain);
-    ui->spinAttitudeRoll_i->setValue(msg.roll_controller.I_gain);
+    //ui->spinAttitudeRoll_i->setValue(msg.roll_controller.I_gain);
 
     ui->spinAttitudePitch_p->setValue(msg.pitch_controller.P_gain);
-    ui->spinAttitudePitch_i->setValue(msg.pitch_controller.I_gain);
+    //ui->spinAttitudePitch_i->setValue(msg.pitch_controller.I_gain);
 }
 
 void ui_controller::limits_settings(kfly_comm::datagrams::ControllerLimits msg)
@@ -259,6 +262,14 @@ void ui_controller::limits_settings(kfly_comm::datagrams::ControllerLimits msg)
     ui->spinLimitAttitudePitch->setValue(to_degrees(msg.max_angle.pitch) + 0.5);
 
     update_rate_plot();
+}
+
+void ui_controller::control_filter_settings(kfly_comm::datagrams::ControlFilterSettings msg)
+{
+    qDebug() << "got controller filter settings";
+
+    // TODO: implement this
+
 }
 
 void ui_controller::upload_settings_timer()

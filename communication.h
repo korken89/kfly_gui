@@ -54,6 +54,7 @@ public:
     void regIMUCalibration(kfly_comm::datagrams::IMUCalibration msg);
     void regRawIMUData(kfly_comm::datagrams::RawIMUData msg);
     void regIMUData(kfly_comm::datagrams::IMUData msg);
+    void regControlFilterSettings(kfly_comm::datagrams::ControlFilterSettings msg);
 
 
 private slots:
@@ -78,6 +79,7 @@ signals:
     void sigIMUCalibration(kfly_comm::datagrams::IMUCalibration msg);
     void sigRawIMUData(kfly_comm::datagrams::RawIMUData msg);
     void sigIMUData(kfly_comm::datagrams::IMUData msg);
+    void sigControlFilterSettings(kfly_comm::datagrams::ControlFilterSettings msg);
 
 };
 

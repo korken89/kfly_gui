@@ -20,6 +20,7 @@ communication::communication(QObject *parent)
   _kfly_comm.register_callback(this, &communication::regIMUCalibration);
   _kfly_comm.register_callback(this, &communication::regRawIMUData);
   _kfly_comm.register_callback(this, &communication::regIMUData);
+  _kfly_comm.register_callback(this, &communication::regControlFilterSettings);
 
   // Reserve some space for the transmit buffer
   _transmitt_buffer.reserve(10000);
@@ -238,4 +239,9 @@ void communication::regRawIMUData(kfly_comm::datagrams::RawIMUData msg)
 void communication::regIMUData(kfly_comm::datagrams::IMUData msg)
 {
     emit sigIMUData(msg);
+}
+
+void communication::regControlFilterSettings(kfly_comm::datagrams::ControlFilterSettings msg)
+{
+    emit sigControlFilterSettings(msg);
 }

@@ -50,6 +50,7 @@ private slots:
     void rate_controller_settings(kfly_comm::datagrams::RateControllerData msg);
     void attitude_controller_settings(kfly_comm::datagrams::AttitudeControllerData msg);
     void limits_settings(kfly_comm::datagrams::ControllerLimits msg);
+    void control_filter_settings(kfly_comm::datagrams::ControlFilterSettings msg);
     void upload_settings_timer();
 
     void on_spinRateRoll_p_valueChanged(double);
