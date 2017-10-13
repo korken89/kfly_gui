@@ -198,7 +198,7 @@ QGroupBox::title {
              </widget>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="doubleSpinBox">
+             <widget class="QDoubleSpinBox" name="spinRateRoll_d">
               <property name="decimals">
                <number>4</number>
               </property>
@@ -257,7 +257,7 @@ QGroupBox::title {
              </widget>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+             <widget class="QDoubleSpinBox" name="spinRatePitch_d">
               <property name="decimals">
                <number>4</number>
               </property>
@@ -316,7 +316,7 @@ QGroupBox::title {
              </widget>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+             <widget class="QDoubleSpinBox" name="spinRateYaw_d">
               <property name="decimals">
                <number>4</number>
               </property>

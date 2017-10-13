@@ -79,12 +79,15 @@ void ui_controller::upload_rate_controller_settings()
 
     msg.roll_controller.P_gain = ui->spinRateRoll_p->value();
     msg.roll_controller.I_gain = ui->spinRateRoll_i->value();
+    msg.roll_controller.D_gain = ui->spinRateRoll_d->value();
 
     msg.pitch_controller.P_gain = ui->spinRatePitch_p->value();
     msg.pitch_controller.I_gain = ui->spinRatePitch_i->value();
+    msg.pitch_controller.D_gain = ui->spinRatePitch_d->value();
 
     msg.yaw_controller.P_gain = ui->spinRateYaw_p->value();
     msg.yaw_controller.I_gain = ui->spinRateYaw_i->value();
+    msg.yaw_controller.D_gain = ui->spinRateYaw_d->value();
 
     if (_communication != nullptr)
         _communication->send(kfly_comm::codec::generate_packet(msg));
@@ -98,13 +101,16 @@ void ui_controller::upload_attitude_controller_settings()
 
     msg.roll_controller.P_gain = ui->spinAttitudeRoll_p->value();
     msg.roll_controller.I_gain = 0;
+    msg.roll_controller.D_gain = 0;
 
     msg.pitch_controller.P_gain = ui->spinAttitudePitch_p->value();
     msg.pitch_controller.I_gain = 0;
+    msg.pitch_controller.D_gain = 0;
 
     // TODO: For future use
     msg.yaw_controller.P_gain = 0;
     msg.yaw_controller.I_gain = 0;
+    msg.yaw_controller.D_gain = 0;
 
     if (_communication != nullptr)
         _communication->send(kfly_comm::codec::generate_packet(msg));
@@ -242,6 +248,7 @@ void ui_controller::connection_established()
         _communication->send(codec::generate_command(commands::GetRateControllerData));
         _communication->send(codec::generate_command(commands::GetAttitudeControllerData));
         _communication->send(codec::generate_command(commands::GetControllerLimits));
+        _communication->send(codec::generate_command(commands::GetControlFilters));
     }
 }
 
@@ -264,12 +271,15 @@ void ui_controller::rate_controller_settings(kfly_comm::datagrams::RateControlle
 
     ui->spinRateRoll_p->setValue(msg.roll_controller.P_gain);
     ui->spinRateRoll_i->setValue(msg.roll_controller.I_gain);
+    ui->spinRateRoll_d->setValue(msg.roll_controller.D_gain);
 
     ui->spinRatePitch_p->setValue(msg.pitch_controller.P_gain);
     ui->spinRatePitch_i->setValue(msg.pitch_controller.I_gain);
+    ui->spinRatePitch_d->setValue(msg.pitch_controller.D_gain);
 
     ui->spinRateYaw_p->setValue(msg.yaw_controller.P_gain);
     ui->spinRateYaw_i->setValue(msg.yaw_controller.I_gain);
+    ui->spinRateYaw_d->setValue(msg.yaw_controller.D_gain);
 
 }
 
@@ -278,10 +288,7 @@ void ui_controller::attitude_controller_settings(kfly_comm::datagrams::AttitudeC
     qDebug() << "got attitude controller settings";
 
     ui->spinAttitudeRoll_p->setValue(msg.roll_controller.P_gain);
-    //ui->spinAttitudeRoll_i->setValue(msg.roll_controller.I_gain);
-
     ui->spinAttitudePitch_p->setValue(msg.pitch_controller.P_gain);
-    //ui->spinAttitudePitch_i->setValue(msg.pitch_controller.I_gain);
 }
 
 void ui_controller::limits_settings(kfly_comm::datagrams::ControllerLimits msg)
@@ -306,7 +313,24 @@ void ui_controller::control_filter_settings(kfly_comm::datagrams::ControlFilterS
 {
     qDebug() << "got controller filter settings";
 
-    // TODO: implement this
+    ui->spinDtermCutoffRoll->setValue(msg.dterm_cutoff[0]);
+    ui->spinDtermCutoffPitch->setValue(msg.dterm_cutoff[1]);
+    ui->spinDtermCutoffYaw->setValue(msg.dterm_cutoff[2]);
+
+    if (msg.dterm_filter_mode[0] == kfly_comm::enums::BiquadMode::PT1)
+        ui->comboDtermFilterTypeRoll->setCurrentIndex(0);
+    else
+        ui->comboDtermFilterTypeRoll->setCurrentIndex(1);
+
+    if (msg.dterm_filter_mode[1] == kfly_comm::enums::BiquadMode::PT1)
+        ui->comboDtermFilterTypePitch->setCurrentIndex(0);
+    else
+        ui->comboDtermFilterTypePitch->setCurrentIndex(1);
+
+    if (msg.dterm_filter_mode[2] == kfly_comm::enums::BiquadMode::PT1)
+        ui->comboDtermFilterTypeYaw->setCurrentIndex(0);
+    else
+        ui->comboDtermFilterTypeYaw->setCurrentIndex(1);
 
 }
 
